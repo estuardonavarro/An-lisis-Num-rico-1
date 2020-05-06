@@ -1,221 +1,569 @@
 \documentclass[12pt]{book}
+% Importando paquetes
 \usepackage[utf8]{inputenc}
-
-
+\usepackage{mathtools}
 \usepackage{amsfonts}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
+\usepackage{bm}
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage{multirow}
+\usepackage{xfrac}
 \usepackage[T1]{fontenc}
 \usepackage[spanish]{babel}
 \usepackage[table,xcdraw]{xcolor}
-\usepackage[pages=some,scale=1,angle=0,opacity=0.2]{background}
-\newcommand\BackImage[2][scale=1]{%
-\BgThispage
-\backgroundsetup{
-  contents={\includegraphics[#1]{#2}}
-  }
-}
+\usepackage{xcolor}
+
+% Definiendo tipo de papel
+\usepackage{geometry}
+ \geometry{
+ letterpaper
+ }
+ % Definiendo encabezado y pie de página
+ \usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[LE,RO]{\thepage}
+\fancyhead[RO]{\slshape\nouppercase{\rightmark}}
+\fancyhead[LE]{\slshape\nouppercase{\leftmark}}
+% Por facilidad, se definen los conjuntos mas comunes
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\R}{\mathbb{R}}
-\newenvironment{solution}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\todo}{\textrm{ para todo }}
+\newcommand{\ssi}{\textrm{ si y solo si }}
+% Se definen operadores comunes
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+\newcommand\abs[1]{\left\lvert#1\right\rvert}
+% Se define el entorno para la solución 
+\newenvironment{solucion}
   {\renewcommand\qedsymbol{$\square$}\begin{proof}[Solución]}
   {\end{proof}}
-\newtheorem{exercise}{Ejercicio}
+% Se define la forma de cada enunciado, en este caso, de un teorema
+\newtheorem{eje}{Ejercicio}
+% Configuración para utilizar código java embebido
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{blue},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
 \begin{document}
-\thispagestyle{empty}
-\vfill
-\begin{center}
-\hrule
-\vspace{0.2cm}
-\large{\textsc{--- Universidad de San Carlos de Guatemala ---}}\\
-\large{\textsc{Escuela de Ciencias Físicas y Matemáticas}}\\
-\large{\textsc{Departamento de matemática}}\\
-\begin{large}
-\textsc{\textbf{Análisis Numérico 1}}\\
-\end{large}
-Profesor: \textit{Damian Ochoa}\\
-\vspace{0.2cm}
-\hrule
-\end{center}
-\BackImage[width=0.8\textwidth]{img}
-\vfill
-\begin{center}
-\Large{\textsc{\textbf{Tarea extra}}}\\
-%\Huge{\textsc{\textbf{IOT}}}\\
-\end{center}
-\vfill
-\begin{center}
-\hrule
-\vspace{0.07cm}
-\hrule
-\vspace{0.2cm}
-\begin{flushright}
-\begin{large}
-\textit{\textbf{Javier Estuardo Navarro Delgado}}\\
-\textit{\textbf{2015-13630}}\\
-\textit{\textbf{13 de abril de 2020}}\\
-\end{large}
+
+% Se construye la carátula
+\begin{titlepage}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} 
+
+\center 
+%----------------------------------------------------------------------------------------
+%	Sección de encabezado
+%----------------------------------------------------------------------------------------
+
+\textsc{\Large Universidad de San Carlos de Guatemala}\\[0.2cm] % Name of your university/college
+\textsc{\large Escuela de Ciencias Físicas y Matemáticas}\\[0.2cm] % Major heading such as course name
+\textsc{\large Licenciatura en Matemática Aplicada}\\[0.2cm] % Minor
+\emph{\large Curso: M705 Análisis Numérico 1}\\[1.2cm] % Minorheading such as course title
+
+%----------------------------------------------------------------------------------------
+%	Sección de titulo
+%----------------------------------------------------------------------------------------
+
+\HRule \\[0.4cm]
+{ \huge \bfseries Ejercicios de Álgebra Lineal Numérica}\\[0.4cm] % Title of your document
+\HRule \\[1.5cm]
+ 
+%----------------------------------------------------------------------------------------
+%	Sección de autor
+%----------------------------------------------------------------------------------------
+
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Autor:}\\
+Javier  Navarro \\
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Profesor:} \\
+Damián  Ochoa 
 \end{flushright}
-\vspace{0.2cm}
-\hrule
-\vspace{0.07cm}
-\hrule
-\vspace{1cm}
-\end{center}
+\end{minipage}\\[2cm]
+
+% Solo autor
+%\Large \emph{Autor:}\\
+%Javier \textsc{Navarro}\\[3cm] 
+
+
+%----------------------------------------------------------------------------------------
+%	Sección del logo
+%----------------------------------------------------------------------------------------
+
+\includegraphics[width=6cm]{img.jpg}\\[1cm] % Include a department/university logo - this will require the graphicx package
+ 
+%----------------------------------------------------------------------------------------
+%	Sección de la fecha
+%----------------------------------------------------------------------------------------
+
+{\large Guatemala, abril de 2020}\\[2cm] % Date, change the \today to a set date if you want to be precise
+
+
+
+\vfill 
+
+\end{titlepage}
+
+%----------------------------------------------------------------------------------------
+%	Sección del índice
+%----------------------------------------------------------------------------------------
+
+\thispagestyle{empty}
 \tableofcontents
+\chapter*{Introducción}
+\addcontentsline{toc}{chapter}{Introducción} \markboth{INTRODUCCIÓN}{}
+Este es un compendio de las soluciones a los ejercicios propuestos por Kerstin Hesse, en su obra Numerical Linear Algebra. Fue desarrollada como una tarea en el curso de Análisis Numérico 1, de la carrera Licenciatura en Matemática Aplicada, en la Universidad de San Carlos de Guatemala. En las soluciones se utilizan conceptos de álgebra lineal, álgebra elemental y algoritmia.
+
+
+\begin{center}
+    {\small  \bfseries La esencia de las matemáticas radica en su libertad. \\Georg Cantor.}
+\end{center}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	Sección del contenido
+%----------------------------------------------------------------------------------------
+
 \chapter{Repaso: Algo de Álgebra Lineal}
 \section{Vectores en $\R^n$ y $\C^n$}
-\exercise Indicar las propiedades de un producto interno/producto escalar para un espacio vectorial complejo V, y verificar que el producto interno euclidiano para $\C^n$ tiene estas propiedades.
-\exercise Demostrar que cualquier vector $x\in\C^n$ tiene la representación
-\[ x = \sum^n_{j=1}(\textbf{v}^*_jx)\textbf{v}_j\]
-como una combinación lineal con respecto a la base ortonormal $\textbf{v}_1, \textbf{v}_2, \dots, \textbf{v}_n$.
 
-\section{Matrices}
-\exercise Mostrar que $\C^{m\times n}$ con la habitual suma de matrices y la multiplicación escalar es un espacio vectorial complejo.
 
-\exercise Encontrar el rango y el espacio nulo de la siguiente matriz:
-\[
-A:=\begin{pmatrix}
-1 & 0 & -1 & 2\\
-0 & 1 & 3 & 1\\
--1 & 1 & 5 & 0
-\end{pmatrix}
-\]
-\begin{solution} Para obtener el rango triangularizaremos la matriz y los vectores independientes de la nueva matriz serán el rango:
+\eje Indicar las propiedades de un producto interno o escalar para un espacio vectorial complejo $V$ y verificar que el producto interno euclidiano para $\C^n$ tiene estas propiedades.
+
+\begin{solucion}
+La definición que brinda Axler, es la siguiente:\\
+Sea $V$ un espacio vectorial y se hará referencia al campo $\F$ que denotará a alguno de los siguientes conjuntos: $\R$ ó $\C$.
+Un producto interno en $V$ es una función que mapea cada par ordenado $(\textbf{u},\textbf{v})$ de elementos de $V$ a un numero 	$\langle \textbf{u},\textbf{v} \rangle \in \F$ y tiene las siguientes propiedades:
+
+\begin{itemize}
+    \item Positividad: 
+    \begin{align*}
+        \langle \textbf{v},\textbf{v} \rangle \geq 0 \todo  \textbf{v} \in V
+    \end{align*}
+    
+    \item Definición: 
+    \begin{align*}
+        \langle \textbf{v},\textbf{v} \rangle=0 \todo\textbf{v} = 0
+    \end{align*}
+    \item  Aditividad en la primer componente: 
+    \begin{align*}
+        \langle \textbf{u}+\textbf{v},\textbf{w} \rangle =\langle \textbf{u},\textbf{w} \rangle + \langle \textbf{v},\textbf{w} \rangle\todo\textbf{u},\textbf{v},\textbf{w} \in V
+    \end{align*}
+    
+    \item  Homogeneidad en la primer componente: 
+    \begin{align*}
+        \langle \lambda\textbf{u},\textbf{v} \rangle =\lambda\langle \textbf{u},\textbf{v} \rangle \todo\lambda \in \F\textrm{ y}\todo\textbf{u},\textbf{v} \in V
+    \end{align*}
+    
+    \item  Conjugado simétrico: 
+    \begin{align*}
+        \langle \textbf{u},\textbf{v} \rangle =\overline{\langle \textbf{v},\textbf{u} \rangle}\todo\textbf{u},\textbf{v} \in V
+    \end{align*}
+     
+\end{itemize}
+Solo resta demostrar que el producto euclideano, es un producto interno.\\ \\
+Sea $\lambda \in \F$, $\textbf{u}=(u_{1},u_{2},...,u_{n})$, $\textbf{v}=(v_{1},v_{2},...,v_{n})$, $\textbf{w}=(w_{1},w_{2},...,w_{n})$ donde $u_i,v_i,w_i \in \F$,  y el producto interno euclideano definido así: 
 \begin{align*}
-    \begin{pmatrix}
-    1 & 0 & -1 & 2\\
-0 & 1 & 3 & 1\\
--1 & 1 & 5 & 0
-\end{pmatrix} & \rightarrow & \begin{pmatrix}
-1 & 0 & -1 & 2\\
-0 & 1 & 3 & 1\\
-0 & 1 & 4 & 0
-\end{pmatrix} & \rightarrow & \begin{pmatrix}
-1 & 0 & -1 & 2\\
-0 & 1 & 3 & 1\\
-0 & 0 & 1 & -1
-\end{pmatrix}
+    \langle \textbf{u},\textbf{v} \rangle=u_1\overline{v_1}+u_2\overline{v_2}+...+u_n\overline{v_n}    
+\end{align*}
+ 
+\begin{enumerate}
+    \item Positividad: 
+    \begin{align*}
+        \langle \textbf{v},\textbf{v} \rangle &= v_1\overline{v_1}+v_2\overline{v_2}+...+v_n\overline{v_n} \\
+        &= |v_1|^2+|v_2|^2+...+|v_n|^2\geq 0 
+    \end{align*}
+    Esto se debe a que el módulo de un vector en $\F$ elevado al cuadrado siempre es mayor a cero.
+    
+    \item Definición: $\langle \textbf{v},\textbf{v} \rangle=0$  si y solo si $\textbf{v} = 0$. \\
+    Primero se procede a verificar la ``ida'' $(\Rightarrow)$
+    \begin{align*}
+        \langle \textbf{v},\textbf{v} \rangle &= v_1\overline{v_1}+v_2\overline{v_2}+...+v_n\overline{v_n}\\
+        \langle \textbf{v},\textbf{v} \rangle &= |v_1|^2+|v_2|^2+...+|v_n|^2\\
+        0 &= |v_1|^2+|v_2|^2+...+|v_n|^2\rightarrow |v_i|^2=0\rightarrow v_i=0 \todo 1\leq i\leq n
+    \end{align*}
+    Por lo tanto $\textbf{v}=0$, esto es cierto por los resultados del inciso anterior.\\ 
+    Luego se procede a verificar la ``vuelta''$(\Leftarrow)$
+    \begin{align*}
+        \langle \textbf{v},\textbf{v} \rangle &= v_1\overline{v_1}+v_2\overline{v_2}+...+v_n\overline{v_n}\\
+        \langle \textbf{v},\textbf{v} \rangle &= 0+0+...+0\\
+         \langle \textbf{v},\textbf{v} \rangle &=0
+    \end{align*}
+   
+    \item  Aditividad en la primer componente: 
+    \begin{align*}
+        \langle \textbf{u}+\textbf{v},\textbf{w} \rangle &= (u_1+v_1)\overline{w_1}+(u_2+v_2)\overline{w_2}+..+(u_n+v_n)\overline{w_n}\\
+        &=u_1\overline{w_1}+v_1\overline{w_1}+u_2\overline{w_2}+v_2\overline{w_2}+...+u_n\overline{w_n}+v_n\overline{w_n}\\
+        &=(u_1\overline{w_1}+u_2\overline{w_2}+...+u_n\overline{w_n})(v_1\overline{w_1}+v_2\overline{w_2}+...+v_n\overline{w_n})\\
+        &=\langle \textbf{u},\textbf{w} \rangle + \langle \textbf{v},\textbf{w} \rangle\todo\textbf{u},\textbf{v},\textbf{w} \in V
+    \end{align*}
+    
+    \item  Homogeneidad en la primer componente: 
+    \begin{align*}
+        \langle \lambda\textbf{u},\textbf{v} \rangle&=\lambda u_1\overline{v_1}+\lambda u_2\overline{v_2}+...+\lambda u_n\overline{v_n}\\
+        &=\lambda(u_1\overline{v_1}+u_2\overline{v_2}+...+u_n\overline{v_n})\\ 
+        &=\lambda\langle \textbf{u},\textbf{v} \rangle \todo\lambda \in \F\textrm{ y}\todo\textbf{u},\textbf{v} \in V
+    \end{align*}
+    
+    \item  Conjugado simétrico: 
+    \begin{align*}
+        \langle \textbf{u},\textbf{v} \rangle &=u_1\overline{v_1}+u_2\overline{v_2}+...+u_n\overline{v_n}\\
+        &=\overline{\overline{u_1\overline{v_1}}}+\overline{\overline{u_2\overline{v_2}}}+...+\overline{\overline{u_n\overline{v_n}}}\\
+        &=\overline{\overline{u_1}v_1}+\overline{\overline{u_2}v_2}+...+\overline{\overline{u_n}v_n}\\
+        &=\overline{v_1\overline{u_1}+v_2\overline{u_2}+...+v_n\overline{u_n}}\\
+        &=\overline{\langle \textbf{v},\textbf{u} \rangle} \todo\textbf{u},\textbf{v} \in V    
+    \end{align*}
+    
+\end{enumerate}
+\end{solucion}
+
+\eje Mostrar que cualquier vector $x\in\C^n$ tiene la representación
+\[ x = \sum^n_{j=1}(\bm{v^*_jx})\bm{v_j}\]
+como una combinación lineal respecto a la base ortonormal $\bm{v_1}, \bm{v_2}, \dots, \bm{v_n}$.
+
+\begin{solucion}
+Debido a que $x\in\C^n$ es posible definirlo de la siguiente forma:
+\[x=\sum_{j=1}^n a_j\bm{v_j}\]
+
+\noindent Si se elije el vector $\bm{v_k^*}$ de la base, luego:
+\begin{align*}
+    \bm{v_k^*}x&=\bm{v_k^*}\sum_{j=1}^n a_j\bm{v_j}\\
+    &=\sum_{j=1}^n a_j\bm{v_k^*} \bm{v_j}\\
+    =a_k\bm{v_k^*}\bm{v_k}&=a_k\norm{\bm{v_k}}_2^2=a_k
+\end{align*}
+\noindent entonces:
+\begin{align*}
+    \bm{v_k^*}x=a_k \rightarrow x = \sum^n_{j=1}(\bm{v^*_jx})\bm{v_j}
 \end{align*}
 
-Es fácil notar que la cuarta columna de la matriz triangular es combinación lineal de las primeras tres columnas. Así que:
-\[
-range(A)=span\left\{\begin{pmatrix}
-1\\
-0\\
-0
-\end{pmatrix}, \begin{pmatrix}
-0\\
-1\\
-0
-\end{pmatrix}, \begin{pmatrix}
--1\\
-3\\
-1
-\end{pmatrix}\right\}.
-\]
 
-Para obtener el kernell de $A$:
-\begin{gather*}
-    \begin{pmatrix}
+\end{solucion}
+\section{Matrices}
+\eje Mostrar que con la suma usual de matrices y la multiplicación por escalar, $\C^{m\times n}$ es un espacio vectorial complejo.
+\begin{solucion}
+Para demostrar que $\C^{m\times n}$ es un espacio vectorial, lo primero es demostrar que cualquier elemento de $\C^{m\times n}$ cumple con las siguientes propiedades:\\
+\begin{itemize}
+    \item \textbf{Conmutatividad en la suma:}\\
+        Sean $ A,B \in \C^{m\times n}$
+        \[
+        A=\begin{pmatrix}
+        a_{11} & \dots & a_{1n}\\
+        \vdots & \ddots & \vdots\\
+        a_{m1} & \dots & a_{mn}
+        \end{pmatrix}
+        y \hspace{0.2cm}
+        B=\begin{pmatrix}
+        b_{11} & \dots & b_{1n}\\
+        \vdots & \ddots & \vdots\\
+        b_{m1} & \dots & b_{mn}
+        \end{pmatrix}
+        \]
+        donde $a_{ij},b_{ij} \in \C$
+        \[
+        A + B =\begin{pmatrix}
+        a_{11}+b_{11}  & \dots & a_{1n}+b_{1n}\\
+        \vdots & \ddots & \vdots\\
+        a_{m1}+b_{m1} & \dots & a_{mn}+b_{mn}
+        \end{pmatrix}
+        \]
+        \[
+        B + A =\begin{pmatrix}
+        b_{11} + a_{11}  & \dots & b_{1n}+ a_{1n}\\
+        \vdots & \ddots & \vdots\\
+        b_{m1}+a_{m1} & \dots & b_{mn}+a_{mn}
+        \end{pmatrix}
+        \]\\
+        Por la conmutatividad en $\C$ entonces, $A+B=B+A$. \\
+    \item \textbf{Asociatividad en la suma:}\\
+        Sea $A, B, C \in \C^{m\times n}$,\\
+        \[(A + B) + C =\begin{pmatrix}
+        a_{11}+b_{11}  & \dots & a_{1n}+b_{1n}\\
+        \vdots & \ddots & \vdots\\
+        a_{m1}+b_{m1} & \dots & a_{mn}+b_{mn}
+        \end{pmatrix}
+        +
+        \begin{pmatrix}
+        c_{11} & \dots & c_{1n}\\
+        \vdots & \ddots & \vdots\\
+        c_{m1} & \dots & c_{mn}
+        \end{pmatrix}
+        \]\\
+        \[(A + B) + C =
+        \begin{pmatrix}
+        a_{11}+b_{11}+c_{11}  & \dots & a_{1n}+b_{1n}+c_{1n}\\
+        \vdots & \ddots & \vdots\\
+        a_{m1}+b_{m1}+c_{m1} & \dots & a_{mn}+b_{mn}+c_{mn}
+        \end{pmatrix}\]\\
+        \[A + (B + C) =\begin{pmatrix}
+        a_{11} & \dots & a_{1n}\\
+        \vdots & \ddots & \vdots\\
+        a_{m1} & \dots & a_{mn}
+        \end{pmatrix}
+        +
+        \begin{pmatrix}
+        b_{11}+c_{11} & \dots & b_{1n}+c_{1n}\\
+        \vdots & \ddots & \vdots\\
+        b_{m1}+c_{m1} & \dots & b_{mn}+c_{mn}
+        \end{pmatrix}\]\\
+        \[A + (B + C)=
+        \begin{pmatrix}
+        a_{11}+b_{11}+c_{11}  & \dots & a_{1n}+b_{1n}+c_{1n}\\
+        \vdots & \ddots & \vdots\\
+        a_{m1}+b_{m1}+c_{m1} & \dots & a_{mn}+b_{mn}+c_{mn}
+        \end{pmatrix}\]\\
+        Debido a que en los complejos existe la asociatividad en la suma, entonces $(A + B) + C=A + (B + C)$.\\
+    \item \textbf{Neutro aditivo}\\
+        Para toda $A \in \C^{m\times n}$ existe $e$ tal que $A + e = A$ donde:\\
+        \[
+        A=\begin{pmatrix}
+        a_{11} & \dots & a_{1n}\\
+        \vdots & \ddots & \vdots\\
+        a_{m1} & \dots & a_{mn}
+        \end{pmatrix}
+        \]
+        Sea $e$:
+        \[
+        e=\begin{pmatrix}
+        0 & \dots & 0\\
+        \vdots & \ddots & \vdots\\
+        0 & \dots & 0
+        \end{pmatrix}
+        \]
+        luego:
+        \[
+        A + e =\begin{pmatrix}
+        a_{11}+0  & \dots & a_{1n}+0\\
+        \vdots & \ddots & \vdots\\
+        a_{m1}+0 & \dots & a_{mn}+0
+        \end{pmatrix}=\begin{pmatrix}
+        a_{11}  & \dots & a_{1n}\\
+        \vdots & \ddots & \vdots\\
+        a_{m1} & \dots & a_{mn}
+        \end{pmatrix}=A
+        \]
+    \item \textbf{Inverso aditivo}\\
+        Esto es, para toda $ A \in \C^{m\times n}$ existe $B$, con la suma usual tal que $A+B=e$:\\
+        \[A + (-A) = \begin{pmatrix}
+        a_{11} & \dots & a_{1n}\\
+        \vdots & \ddots & \vdots\\
+        a_{m1} & \dots & a_{mn}
+        \end{pmatrix}
+        + 
+        (-1)\cdot\begin{pmatrix}
+        a_{11} & \dots & a_{1n}\\
+        \vdots & \ddots & \vdots\\
+        a_{m1} & \dots & a_{mn}
+        \end{pmatrix}\]
+        \[A + (-A) =
+        \begin{pmatrix}
+        a_{11} & \dots & a_{1n}\\
+        \vdots & \ddots & \vdots\\
+        a_{m1} & \dots & a_{mn}
+        \end{pmatrix}
+        + 
+        \begin{pmatrix}
+        -a_{11} & \dots & -a_{1n}\\
+        \vdots & \ddots & \vdots\\
+        -a_{m1} & \dots & -a_{mn}
+        \end{pmatrix}\]\\
+        \[A + (-A) = \begin{pmatrix}
+        a_{11}+(-a_{11}) & \dots & a_{1n}+(-a_{1n})\\
+        \vdots & \ddots & \vdots\\
+        a_{m1}+(-a_{m1}) & \dots & a_{mn}+(-a_{mn})
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+        0 & \dots & 0\\
+        \vdots & \ddots & \vdots\\
+        0 & \dots & 0
+        \end{pmatrix} = e\]\\
+    \item \textbf{Neutro multiplicativo}\\
+        Esto es, que para toda $\forall A \in \C^{m\times n}$ existe $I_{m\times n}$ tal que: $A\times I = A$, sea $I$ la matriz que posee en todas sus entradas cero, exceptuando la diagonal en la que sus entradas son uno. \\
+        \[A\times I = \begin{pmatrix}
+        a_{11} & \dots & a_{1n}\\
+        \vdots & \ddots & \vdots\\
+        a_{m1} & \dots & a_{mn}
+        \end{pmatrix} \times \begin{pmatrix}
+        1 & \dots & 0\\
+        \vdots & \ddots & \vdots\\
+        0 & \dots & 1
+        \end{pmatrix}=\begin{pmatrix}
+        a_{11} & \dots & a_{1n}\\
+        \vdots & \ddots & \vdots\\
+        a_{m1} & \dots & a_{mn}
+        \end{pmatrix}=A\]
+\end{itemize}
+
+\end{solucion}
+\eje Encontrar el imagen y el espacio nulo de la siguiente matriz:
+    \[
+    A:=\begin{pmatrix}
     1 & 0 & -1 & 2\\
-0 & 1 & 3 & 1\\
--1 & 1 & 5 & 0
-\end{pmatrix} \begin{pmatrix}
-w\\
-x\\
-y\\
-z
-\end{pmatrix} = \begin{pmatrix}
-0\\
-0\\
-0\\
-0
-\end{pmatrix}\\
-\Rightarrow \begin{cases}
-w-y+2z=0\\
-x+3y+z=0\\
--w+x+5y=0
-\end{cases} \Rightarrow \begin{cases}
-w=-3z\\
-x=-2y\\
-y=-z
-\end{cases}
-\end{gather*}
+    0 & 1 & 3 & 1\\
+    -1 & 1 & 5 & 0
+    \end{pmatrix}
+    \]
+\begin{solucion} Para obtener el imagen se procederá a triangular la matriz:
+    \begin{align*}
+        \begin{pmatrix}
+            1 & 0 & -1 & 2\\
+            0 & 1 & 3 & 1\\
+            -1 & 1 & 5 & 0
+        \end{pmatrix} & & \rightarrow & &\begin{pmatrix}
+            1 & 0 & -1 & 2\\
+            0 & 1 & 3 & 1\\
+            0 & 1 & 4 & 0
+        \end{pmatrix} & & \rightarrow & &\begin{pmatrix}
+            1 & 0 & -1 & 2\\
+            0 & 1 & 3 & 1\\
+            0 & 0 & 1 & -1
+            \end{pmatrix}
+    \end{align*}
+    Donde el conjunto de los vectores columna de la ultima matriz son el imagen.Se observa que la ultima columna de la matriz es combinación lineal de las primeras tres columnas. Así que:
+        \[
+        imagen(A)=span\left\{\begin{pmatrix}
+            1\\
+            0\\
+            0
+        \end{pmatrix}, \begin{pmatrix}
+            0\\
+            1\\
+            0
+        \end{pmatrix}, \begin{pmatrix}
+            -1\\
+            3\\
+            1
+        \end{pmatrix}\right\}.
+        \]
+    
+    Se procede a calcular el kernel de $A$:
+    \begin{gather*}
+        \begin{pmatrix}
+        1 & 0 & -1 & 2\\
+        0 & 1 & 3 & 1\\
+        -1 & 1 & 5 & 0
+        \end{pmatrix} 
+        \begin{pmatrix}
+            w\\
+            x\\
+            y\\
+            z
+        \end{pmatrix} 
+        = \begin{pmatrix}
+            0\\
+            0\\
+            0\\
+            0
+        \end{pmatrix}\\
+        \rightarrow 
+        \begin{cases}
+            w-y+2z=0\\
+            x+3y+z=0\\
+            -w+x+5y=0
+        \end{cases} \rightarrow \begin{cases}
+            w=-3z\\
+            x=-2y\\
+            y=-z
+        \end{cases}
+    \end{gather*}
+    
+    Sea $z=1$, entonces:
+    \[
+    ker(A)=span\left\{\begin{pmatrix}
+    -3\\
+    2\\
+    -1\\
+    1
+    \end{pmatrix}
+    \right\}.
+    \]
+\end{solucion}
 
-Si elegimos $z=1$:
-\[
-ker(A)=span\left\{\begin{pmatrix}
--3\\
-2\\
--1\\
-1
-\end{pmatrix}
-\right\}.
-\]
-\end{solution}
-
-\exercise Para una matriz $A\in\C^{m\times n}$ mostrar que el rango de $A$ es el espacio lineal abarcado por los vectores de la columna de $A$.
-\begin{solution}
-Sea $A\in\C^{m\times n}$. Sabemos que el rango de $A$ es el conjunto de todos los vectores $Ax$, donde $x\in\C^n$. Así que:
-\[
-Ax=\begin{pmatrix}
-a_{1, 1} & \dots & a_{1, n}\\
-\vdots & \ddots & \vdots\\
-a_{m, 1} & \dots & a_{m, n}
-\end{pmatrix}\begin{pmatrix}
-x_1\\
-\vdots\\
-x_n
-\end{pmatrix}=\begin{pmatrix}
-a_{1,1}x_1+a_{1,2}x_2+\dots+a_{1,n}x_n\\
-\vdots\\
-a_{m,1}x_1+a_{m,2}x_2+\dots+a_{m,n}x_n
-\end{pmatrix}
-\]
-Definanos $a_i$ como la i-ésima columna de A:
-\[
-a_i=\begin{pmatrix}
-a_{i, i}\\
-\vdots\\
-a_{m, i}
-\end{pmatrix}
-\]
+\eje Para una matriz $A\in\C^{m\times n}$ mostrar que el imagen de $A$ es el espacio lineal abarcado por los vectores de la columna de $A$.
+\begin{solucion}
+Sea $A\in\C^{m\times n}$, considerando que el imagen de $A$ es el conjunto de los vectores $Ax$, donde $x\in\C^n$:
+    \[
+        Ax=\begin{pmatrix}
+            a_{1, 1} & \dots & a_{1, n}\\
+            \vdots & \ddots & \vdots\\
+            a_{m, 1} & \dots & a_{m, n}
+        \end{pmatrix}
+        \begin{pmatrix}
+            x_1\\
+            \vdots\\
+            x_n
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            a_{1,1}x_1+\dots+a_{1,n}x_n\\
+            \vdots\\
+            a_{m,1}x_1+\dots+a_{m,n}x_n
+        \end{pmatrix}
+    \]
+Se procede a definir $a_i$ como la i-ésima columna de A:
+    \[
+        a_i=\begin{pmatrix}
+            a_{i, i}\\
+            \vdots\\
+            a_{m, i}
+        \end{pmatrix}
+    \]
 Entonces:
 \begin{align*}
     Ax&=\begin{pmatrix}
-a_{1,1}x_1+a_{1,2}x_2+\dots+a_{1,n}x_n\\
-\vdots\\
-a_{m,1}x_1+a_{m,2}x_2+\dots+a_{m,n}x_n
-\end{pmatrix}\\
-&= x_1\begin{pmatrix}
-a_{1, 1}\\
-\vdots\\
-a_{m, 1}
-\end{pmatrix} + x_2\begin{pmatrix}
-a_{1, 2}\\
-\vdots\\
-a_{m, 2}
-\end{pmatrix} + \dots + x_n\begin{pmatrix}
-a_{1, n}\\
-\vdots\\
-a_{m, n}
-\end{pmatrix}\\
-&=x_1a_1+x_2a_2+\dots+x_na_n
+    a_{1,1}x_1+a_{1,2}x_2+\dots+a_{1,n}x_n\\
+    \vdots\\
+    a_{m,1}x_1+a_{m,2}x_2+\dots+a_{m,n}x_n
+    \end{pmatrix}\\
+    &= x_1\begin{pmatrix}
+    a_{1, 1}\\
+    \vdots\\
+    a_{m, 1}
+    \end{pmatrix} + \dots + x_n\begin{pmatrix}
+    a_{1, n}\\
+    \vdots\\
+    a_{m, n}
+    \end{pmatrix}\\
+    &=x_1a_1+\dots+x_na_n
 \end{align*}
-Es decir que cada vector $Ax$ se puede representar como una combinación lineal de las columnas de A:
-\[
-range(A)=span\{a_i\}
-\]
-\end{solution}
+Es decir que todo vector $Ax$ se puede representar como una combinación lineal de las columnas de A:
+    \[
+    imagen(A)=span\{a_i\}
+    \]
+\end{solucion}
 
-\exercise ¿Cuál de las siguientes matrices cuadradas, si es que hay alguna, es simétrica o Hermitiana?
+\eje ¿Cuál de las siguientes matrices cuadradas, si es que hay alguna, es simétrica o Hermitiana?
 \begin{align*}
     A&:=\begin{pmatrix} 
     -1 & 2 & i\\
@@ -232,38 +580,53 @@ range(A)=span\{a_i\}
     \end{pmatrix}
 \end{align*}
 
-\begin{solution}
-\begin{gather*}
-    A^*=\begin{pmatrix}
-    -1 & 2 & i\\
-    2 & -i & 3\\
-    i & 3 & 1
-    \end{pmatrix}\neq A\\
-    B^*=\begin{pmatrix}
-    -1 & 2 & -i\\
-    2 & 7 & 5\\
-    i & 5 & 3
-    \end{pmatrix}=\Rightarrow Hermitiana\\
-    C^*=C\Rightarrow Sim\acute{e}trica
-\end{gather*}
-\end{solution}
+\begin{solucion}
+Se procede a calcular el conjugado transpuesto de cada una de las matrices:
+\begin{itemize}
+    \item Para la matriz $A$
+        \begin{align*}
+        A^*&=\begin{pmatrix}
+        -1 & 2 & i\\
+        2 & -i & 3\\
+        i & 3 & 1
+        \end{pmatrix}\\
+    \end{align*}
+        Se observa que $A\neq A$, por lo tanto, $A$ no es ni simétrica ni Hermitiana.
+    \item Para la matriz $B$
+        \begin{align*}
+            B^*&=\begin{pmatrix}
+            -1 & 2 & -i\\
+            2 & 7 & 5\\
+            i & 5 & 3
+            \end{pmatrix}\\
+        \end{align*}
+        Se observa que $B^*\neq B$, por lo tanto, $B$ es Hermitiana.
+    \item Para la matriz $C$, es evidente que al tener únicamente entradas reales y pocas entradas para notar que es igual a su traspuesta, se clasifica a $C$ como simétrica.
+        
+\end{itemize}
 
-\exercise Mostrar que $(AB)^T = B^TA^T$ para cualquier $A\in\R^{m\times n}$ y $B\in\R^{n\times p}$. Mostrar que $(AB)^*= B^{*} A^{*}$ para cualquier $A\in\C^{m\times n}$ y $B\in\C^{n\times p}$.
-\begin{solution}
-Sean $A=(a_{i,j})\in\R^{m\times n}$ y $B=(b_{i,j})\in\R^{n\times p}$, $(AB)^T=[(a_{i,j})(b_{i,j})]^T=(c_{i,j})^T$, donde $c_{i,j}=\sum_{k=1}^na_{i,k}b_{k,j}$ ($i=1, \dots, m; j=a, \dots, p$). Entonces,
+\end{solucion}
+
+\eje Mostrar que $(AB)^T = B^TA^T$ para cualquier $A\in\R^{m\times n}$ y $B\in\R^{n\times p}$. Mostrar que $(AB)^*= B^{*} A^{*}$ para cualquier $A\in\C^{m\times n}$ y $B\in\C^{n\times p}$.
+\begin{solucion}
+Sean $A=(a_{i,j})\in\R^{m\times n}$ y $B=(b_{i,j})\in\R^{n\times p}$, luego:
+\[(AB)^T=((a_{i,j})(b_{i,j}))^T=(c_{i,j})^T\]
+donde \[c_{i,j}=\sum_{k=1}^na_{i,k}b_{k,j} donde i=1, \dots, m y j=a, \dots, p\]
+Se procede a verificar la primera propiedad:
 \begin{align*}
-    (AB)^T&=(c_{i,j})=\left(\sum_{k=1}^na_{i,k}b_{k,j}\right)^T=\left(\sum_{k=1}^nb_{k,j}a_{i,k}\right)\\
-    &=(b_{j,i})(a_{j,i})=(b_{i,j})^T(a_{i,j})^T=B^TA^T
+    (AB)^T&=c_{i,j}=\left(\sum_{k=1}^na_{i,k}b_{k,j}\right)^T\\
+    &=\left(\sum_{k=1}^nb_{k,j}a_{i,k}\right)=(b_{j,i})(a_{j,i})\\
+    &=(b_{i,j})^T(a_{i,j})^T=B^TA^T
 \end{align*}
-También,
+Para la segunda propiedad:
 \begin{align*}
     (AB)^*&=\overline{(AB)^T}=\overline{B^TA^T}=\left(\overline{\sum_{k=1}^nb_{k,j}a_{i,k}}\right)\\
-    &=\left(\sum_{k=1}^n\overline{b_{k,j}a_{i,k}}\right)=\left(\sum_{k=1}^n\overline{b_{k,j}} \overline{a_{i,k}}\right)=\overline{B}^T \overline{A}^T\\
-    &=B^*A^*
+    &=\left(\sum_{k=1}^n\overline{b_{k,j}a_{i,k}}\right)=\left(\sum_{k=1}^n\overline{b_{k,j}} \overline{a_{i,k}}\right)\\
+    &=\overline{B}^T \overline{A}^T=B^*A^*
 \end{align*}
-\end{solution}
+\end{solucion}
 
-\exercise Calcular la traza de la matriz de $3\times3$:
+\eje Calcular la traza de la matriz de $3\times3$:
 \[
 A=\begin{pmatrix}
 \frac{3}{2} & 0 & \frac{1}{2}\\
@@ -271,37 +634,43 @@ A=\begin{pmatrix}
 \frac{1}{2} & 0 & \frac{3}{2}
 \end{pmatrix}.
 \]
-\begin{solution}
-Para esto calculemos los valores propios ($\lambda_i$, $i=1, 2, 3$) de $A$:
+\begin{solucion}
+El primer paso es calcular los valores propios ($\lambda_1,\lambda_2,\lambda_3$) de $A$:
 \begin{align*}
     det(A-\lambda I)&=0\\
     \begin{vmatrix}
-\frac{3}{2}-\lambda & 0 & \frac{1}{2}\\
-0 & 3-\lambda & 0\\
-\frac{1}{2} & 0 & \frac{3}{2}-\lambda
-\end{vmatrix} &=0\\
-\left(\frac{3}{2}-\lambda\right)^2(3-\lambda)-\frac{1}{4}(3-\lambda)&=0\\
-(3-\lambda)\left[\left(\frac{3}{2}-\lambda\right)^2-\frac{1}{4}\right]&=0\\
+        \frac{3}{2}-\lambda & 0 & \frac{1}{2}\\
+        0 & 3-\lambda & 0\\
+        \frac{1}{2} & 0 & \frac{3}{2}-\lambda
+    \end{vmatrix} &=0\\
+    \left(\frac{3}{2}-\lambda\right)^2(3-\lambda)-\frac{1}{4}(3-\lambda)&=0\\
+    (3-\lambda)\left[\left(\frac{3}{2}-\lambda\right)^2-\frac{1}{4}\right]&=0\\
 \end{align*}
-Así que:
+Un polinomio de grado tres, tiene tres raíces:
 \begin{align*}
     3-\lambda&=0 & \left(\frac{3}{2}-\lambda\right)^2-\frac{1}{4}&=0\\
-    \lambda_1&=3 & \lambda&=\frac{3}{2}\pm\frac{1}{2}\\
-    & & \lambda_2&=2\\
-    & & \lambda_3&=1
+    \lambda_1&=3 & \lambda_2=\frac{3}{2}+\frac{1}{2}=2, \lambda_3&=\frac{3}{2}-\frac{1}{2}=1\\
 \end{align*}
-Finalmente, $traza(A)=\lambda_1+\lambda_2+\lambda_3=3+2+1=6$.
-\end{solution}
+Finalmente, la $traza(A)=\lambda_1+\lambda_2+\lambda_3=3+2+1=6$.
+\end{solucion}
 
-\exercise Demostrar que la matriz A de $3\times3$ del ejercicio anterior es definida positiva.
-\begin{solution}
-Tomemos $x\in\R$, $x\neq0$:
+\eje Demostrar que la matriz simétrica:
+    \[
+        A=\begin{pmatrix}
+            \frac{3}{2} & 0 & \frac{1}{2}\\
+            0 & 3 & 0\\
+            \frac{1}{2} & 0 & \frac{3}{2}
+        \end{pmatrix}.
+    \]
+es definida positiva.
+\begin{solucion}
+Sea $x\in\R$, $x\neq0$:
 \begin{align*}
     x&=\begin{pmatrix}
     x_1\\
     x_2\\
     x_3
-    \end{pmatrix} & \Rightarrow x^TAx&=\begin{pmatrix}
+    \end{pmatrix}\Rightarrow &  x^TAx&=\begin{pmatrix}
     x_1 & x_2 & x_3
     \end{pmatrix}\begin{pmatrix}
     \frac{3}{2} & 0 & \frac{1}{2}\\
@@ -312,59 +681,85 @@ Tomemos $x\in\R$, $x\neq0$:
     x_2\\
     x_3
     \end{pmatrix}\\
-    & & &=\frac{3}{2}x^2+\frac{1}{2}xz+3y^2+\frac{1}{2}xz+\frac{3}{2}z^2\\
-    & & &=\frac{3}{2}x^2+\frac{3}{2}z^2+xz+3y^2\\
-    & & &=\frac{1}{2}[(x+y)^2]+2x^2+2z^2+6y^2]
+    & & &=\frac{1}{2}(3x_1^2+2x_1x_3+3x_3^2+6x_2^2)\\
+    & & &=\frac{1}{2}((x_1+x_3)^2+2x_1^2+2x_3^2+6x_2^2)
 \end{align*}
-Sabemos que $(x+y)^2\geq0$, $x^2\geq0$, $y^2\geq0$ y $z^2\geq0$. Así que $x^TAx>0$, y $A$ es definida positiva.
-\end{solution}
+Es evidente que la expresión anterior no puede ser negativa, por lo tanto, $A$ es definida positiva.
+\end{solucion}
 
-
-\exercise Sea $A\in\C^{n\times n}$ una matriz definida positiva. Si $C\in\C^{n\times m}$, demostrar que:
+\eje Sea $A\in\C^{n\times n}$ una matriz definida positiva. Si $C\in\C^{n\times m}$, demostrar que:
 \renewcommand{\labelenumi}{(\alph{enumi})}
 \begin{enumerate}
-    \item $C^*AC$ es definida semi-positiva.
-    \item $rank(C^*AC)= rank(C)$.
-    \item $C^*AC$ es definida positiva ssi $rank(C)=m$.
+    \item $C^*AC$ es semidefinida positiva.
+    \item $rango(C^*AC)= rango(C)$.
+    \item $C^*AC$ es definida positiva ssi $rango(C)=m$.
 \end{enumerate}
-\begin{solution}
-\renewcommand{\labelenumi}{(\alph{enumi})}
-\begin{enumerate}
-    \item Sea $x\in\C^m$, $x\neq0$. $x^*C^*ACx=y^*Ay$, donde $y\in\C^n$, $y\geq0$. Así que $C^*AC$ es semidefinida positiva.
-    \item Sea $x\in\C^m$, $C^*ACx=C^*AY$, donde $y\in\C^n$. Entonces, $C^*Ay=C^*z$, donde $z\in\C^n$. Luego,
-    \begin{align*}
-        rank(C^*AC)&=dim\left(range(C^*AC)\right)=dim\left(\{y:C^*AC=y\}\right)\\
-        &=dim\left(\{y:C^*x=y\}\right)=dim(rangeC^*)
-    \end{align*}
-    Notemos que
-    \begin{align*}
-        dim(rangeC)&=dim(rangeC^T)=dim(range\Bar{C^T}\\
-        &=dim(rangeC^*)
-    \end{align*}
-    \item
-\end{enumerate}
-\end{solution}
+
+\begin{solucion}
+A continuación resuelve cada uno de los incisos:
+\begin{itemize}
+    \item (a) Sea $x\in\C^m$, $x\neq0$, $x^*C^*ACx=y^*Ay$, donde $y=Cx$ y $y\in\C^n$, $y\geq0$. Así que $C^*AC$ es semidefinida positiva.
+        \item (b) Es obvio que $dim(imagen(C^*A))\leq n$ y por el teorema de rango-nulidad $rango(C^*A)=m-dim(kernel(C^*A))$ entonces $dim(imagen(C^*A))\leq m$. \\
+        Se infiere que: 
+        \begin{align*}
+            rango(C^*A)\leq min\{rango(C^*),rango(A)\}
+        \end{align*}
+        luego:
+        \begin{align*}
+            rango(C^*A)\leq rango(C^*)\textrm{ y } rango(C^*)=rango((C^*A)A^{-1})\leq rango(C^*A)
+        \end{align*}
+        Por lo tanto:
+        \begin{align*}
+            rango(C^*A)&=rango(C^*)
+        \end{align*}
+        Si se repite el procedimiento se concluirá que:
+        \begin{align*}
+            rango(C^*AC)=rango(C^*)=rango(C)
+        \end{align*}
+    \item (c) En el inciso a se demostró que la matriz $C^*AC$ es semidefinida positiva, no es definida positiva debido a que existe una o mas entradas en la diagonal que cumplen la igualdad en $det(C^*AC)=0$, en otras palabras la $dim(kernel(C^*A))\neq 0$, es decir, la unica forma en la que esto no suceda es si $dim(kernel(C^*A))\neq 0$ y por el teorema de rango-nulidad $rango(C^*A)=rango(C^*)=rango(C)=m$
+\end{itemize}
+\end{solucion}
+
 \section{Determinantes de matrices cuadradas}
-\exercise Calcule el determinante de la matriz de $3\times3$:
-\[
-A=\begin{pmatrix}
-\frac{3}{2} & 0 & \frac{1}{2}\\
-0 & 3 & 0\\
-\frac{1}{2} & 0 & \frac{3}{2}
-\end{pmatrix}.
-\]
-\begin{solution}
-$det(A) = ( \frac{3}{2}\times3\times\frac{3}{2})-(\frac{1}{2}\times3\times\frac{1}{2})= 6$
-\end{solution}
-\exercise Demostrar que si $A=(a_{i,j})\in \R^{n\times n}$ es definida positiva, entonces las submatrices principales superiores $A_p := (a_{i,j})_{1\leq i, j\leq p}$, $p\in\{1,2,...,n\}$, son definidas positivas.
-\exercise Demostrar que para todas la matrices cuadradas A de n$\times$n, $det(A)=det(A^T)$.
-\begin{solution}
-Consideremos dos casos: $detA=0$ y $detA\neq0$.\\
-Si $detA=0$, $A$ no es invertible. Esto implica que $A^T$ tampoco lo es. Así que $detA^T=0$. Por lo tanto, $detA^T=detA$.\\
-Ahora, si $detA\neq0$, $A$ es invertible, por lo que puede ser representada como el producto de matrices elementales: $E_1E_2\cdots E_k$. 
-\end{solution}
-\section{Matríz inversa de una matriz cuadrada}
-\exercise Mostrar que la matriz de 3 $\times$ 3: 
+\eje Calcule el determinante de la matriz de $3\times3$:
+    \[
+        A=
+        \begin{pmatrix}
+            \frac{3}{2} & 0 & \frac{1}{2}\\
+            0 & 3 & 0\\
+            \frac{1}{2} & 0 & \frac{3}{2}
+        \end{pmatrix}.
+    \]
+\begin{solucion}
+Se determinará el determinante con el método de cofactores:
+    \[
+        det(A) =  \frac{3}{2}\left(3*\frac{3}{2}-0*0\right)-0*\left(0*\frac{3}{2}-0*\frac{1}{2}\right)+\frac{1}{2}\left(0*0-3*\frac{1}{2}\right)= 6
+    \]
+\end{solucion}
+
+\eje Demostrar que si $A=(a_{i,j})\in \R^{n\times n}$ es definida positiva, entonces las submatrices superiores principales  $A_p:= (a_{i,j})_{1\leq i, j\leq p}$, $p\in\{1,2,...,n\}$, son definidas positivas.
+
+\begin{solucion}
+Sea la submatriz principal $A_k$ de la matriz definida positiva $A=(a_{i,j})\in \R^{n\times n}$. Claramente $A_k$ es simétrica. 
+Sea $\bm{x}\in \R^k$ diferente del vector nulo, y:  
+    \[\bm{y}=\begin{pmatrix}x\\0\end{pmatrix} \in \R^k\] 
+y una partición de $A$ realizada conforme a $\bm{y}$ de la siguiente forma: 
+    \[A=\begin{pmatrix}A_k & B_k\\ C_k & D_k\end{pmatrix} \in \R^k \textrm{ donde }D_k \in \R^{n-k,n-k}\]
+luego:
+
+\begin{align*}
+    0< \bm{y}^TA\bm{y}=\begin{pmatrix}\bm{x}^T & 0^T\end{pmatrix}\begin{pmatrix}A_k & B_k\\ C_k & D_k\end{pmatrix}\begin{pmatrix}\bm{x} \\ 0\end{pmatrix}=\bm{x}^TA_k\bm{y}
+\end{align*}
+
+\end{solucion}
+\newpage
+\eje Demostrar que para todas la matrices cuadradas A de n$\times$n, $det(A)=det(A^T)$.
+\begin{solucion}
+Debido a que los renglones de $A$ son las columnas de $A^T$ el cálculo del $det(A^T)$ mediante el desarrollo a lo largo del primer renglón es idéntica a la evaluación del $det(A)$ al desarrollar a lo largo de su primera columna, operación fundamentada en el teorema de la expansión de Laplace, el cuál verifica que el determinante de una matriz puede ser calculado mediante la expansión  de cualquier fila o columna.
+\end{solucion}
+
+\section{Matriz inversa de una matriz cuadrada}
+\eje Mostrar que la matriz de 3 $\times$ 3: 
 \[
 A=\begin{pmatrix}
 \frac{3}{2} & 0 & \frac{1}{2}\\
@@ -372,16 +767,3183 @@ A=\begin{pmatrix}
 \frac{1}{2} & 0 & \frac{3}{2}
 \end{pmatrix},
 \]
-es no singular. Calcule la matriz inversa $A^{-1}$ de A.
+es no singular. Calcule la matriz inversa $A^{-1}$ de $A$.
+\begin{solucion}
+Una matriz cuadrada $A$ es invertible si y solo si, $det(A)\neq 0$. Se procede a calcular mediante co-factores, el determinante de la matriz: 
+    \[det(A)=\frac{3}{2}(3*\frac{3}{2}-0*0)-0*(0*\frac{3}{2}-0*\frac{1}{2})+\frac{1}{2}(-3*\frac{1}{2})=6\]
 
-\exercise Sea $A, B\in\C^{n\times n}$ matrices invertibles. Demostrar lo siguiente:
+Se concluye que la matriz $A$ es invertible y se utiliza el método de Gauss-Jordan para su cálculo, 
+    \begin{align*}
+        (A|I)=
+        \begin{pmatrix}
+            \frac{3}{2} & 0 & \frac{1}{2}&|1&0&0\\
+            0 & 3 & 0&|0&1&0\\
+            \frac{1}{2} & 0 & \frac{3}{2}&|0&0&1
+        \end{pmatrix}\Rightarrow \begin{pmatrix}
+            1&0&0|&\frac{3}{4} & 0 & -\frac{1}{4}\\
+            0&1&0|&0 & \frac{1}{3} & 0\\
+            0&0&1|&-\frac{1}{4} & 0 & \frac{3}{4}
+        \end{pmatrix}=(I|A)
+    \end{align*}
+\end{solucion}
+\eje Sea $A, B\in\C^{n\times n}$ matrices invertibles. Demostrar lo siguiente:
 \renewcommand{\labelenumi}{(\alph{enumi})}
 \begin{enumerate}
-    \item $(AB)^{-1}=(A)^{-1}(B)^{-1}$
-    \item $rank(C^*AC)= rank(C)$.
-    \item $C^*AC$ es definida positiva ssi $rank(C)=m$.
+    \item $(AB)^{-1}=B^{-1}A^{-1}$
+    \item $(A^{-1})^{*}=(A^{*})^{-1}$. Use el resultado para concluir: $(A^{T})^{-1}=(A^{-1})^{T}$ si $A\in\R^{n\times n}$
+    \item $det(A^{-1})=(det(A))^{-1}$
+\end{enumerate}
+A continuación se demostrarán uno a uno los incisos.
+    \renewcommand{\labelenumi}{(\alph{enumi})}
+    \begin{enumerate}
+        \item $(AB)^{-1}=B^{-1}A^{-1}$
+        \begin{solucion}
+            El objetivo es demostrar que existe una matriz $X$ tal que:
+            \begin{align*}
+                (AB)X=I=X(AB)
+            \end{align*}
+            Por lo tanto, si $X$ toma el valor de $B^{-1}A^{-1}$ entonces, se debería cumplir que:
+            \begin{align*}
+                (AB)B^{-1}A^{-1}=A(BB^{-1})A^{-1}&=A(I)A^{-1}=AA^{-1}=I\\ 
+                &y\\
+                B^{-1}A^{-1}(AB)=B^{-1}(A^{-1}A)B&=B^{-1}(I)B=B^{-1}B=I
+            \end{align*}
+        \end{solucion}
+        \item $(A^{-1})^{*}=(A^{*})^{-1}$ Use el resultado para concluir $(A^{T})^{-1}=(A^{-1})^{T}$ si $A\in\R^{n\times n}$
+        \begin{solucion}
+            Por la definción de matriz inversa se debe de cumplir lo siguiente:
+            \begin{align*}
+                A^{*}X=I=XA^{*}
+            \end{align*}
+            Luego,
+            \begin{align*}
+                A^{*}(A^{-1})^{*}&=(A^{-1}A)^*=I^*=I\\ 
+                &y\\
+                (A^{-1})^{*}A^{*}&=(AA^{-1})^*=I^*=I
+            \end{align*}
+            Si $A\in\R^{n\times n}$ entonces, $A=\overline{A}$
+            Por lo tanto, $(A^{t})^{-1}=(A^{-1})^{t}$
+        \end{solucion}
+        
+        \item $det(A^{-1})=(det(A))^{-1}$
+        \begin{solucion}
+            Partiendo de la siguientes propiedades:
+            \begin{align*}
+                det(AB)&=det(A)det(B)\\
+                A^{-1}A&=I
+            \end{align*}
+            luego,
+            \begin{align*}
+                det(A^{-1}A)&=det(I)\\
+                det(A^{-1})det(A)&=1\\
+                det(A^{-1})&=(det(A))^{-1}
+            \end{align*}
+        \end{solucion}
+    \end{enumerate}
+\eje Mostrar que una matriz definitiva positiva $A\in\R^{n\times n}$ no es singular y que su matriz inversa $A^{-1}$ es también definida positiva.
+\begin{solucion}
+Si $A$ es definida positiva, entonces sus valores propios, así como su determinante son positivos, esto implica que $A$ es invertible y por lo tanto, es no singular.\\
+Debido a que $A$ es simétrica, entonces:
+\begin{align*}
+    AA^{-1}&=A^{-1}A\\   
+    I&=I^T\\
+    AA^{-1}&=\left(A^{-1}A\right)^T\\
+    AA^{-1}&=A^T\left(A^{-1}\right)^T\\
+    AA^{-1}&=A^T\left(A^{-1}\right)^T
+\end{align*}
+Luego, $A^{-1}=\left(A^{-1}\right)^T$, es decir, la inversa de $A$ también es simétrica. Ya que cada valor propio de $A^{-1}$ es de la forma $\frac{1}{\lambda}$, donde $\lambda$ es un valor propio de $A$. Como $\lambda>0$, entonces $\frac{1}{\lambda}>0$. Por lo tanto, $A^{-1}$ es definida positiva.
+\end{solucion}
+
+\eje Mostrar que la inversa de una matriz unitaria es unitaria. Usar este resultado para mostrar que las matrices unitarias en $\C^{n\times n}$ con la multiplicación matricial forman un grupo (multiplicativo).
+\begin{solucion}
+Si $U$ es una matriz unitaria en $\C^{n\times n}$, $U^*=U^{-1}$. Entonces,
+\begin{align*}
+    \left(U^*\right)^{-1}&=\left(U^{-1}\right)^{-1}=U=\left(U^*\right)^*,
+\end{align*}
+con esta manipulación queda demostrado que la inversa de una matriz unitaria es unitaria.\\
+
+Resta demostrar que las matrices unitarias en $\C^{n\times n}$ con la multiplicación matricial forman un grupo (multiplicativo). 
+\begin{itemize}
+    \item Lo primero es considerar que la multiplicación de matrices es asociativa.
+    \item Por la naturaleza de $U$ es evidente que $U\times I=U$ donde I es el elemento neutro.
+    \item Con el resultado anterior, las inversas de las matrices unitarias son también unitarias, por lo que se cumple la propiedad del inverso.
+    \item Las multiplicación de dos matrices, debe ser parte del conjunto:
+        \begin{align*}
+            \left(U_1U_2\right)^{-1}&=U_2^{-1}U_2^{-1}=U_2^*U^*_1=\left(U_1U_2\right)^*
+        \end{align*}
+        
+\end{itemize}
+q.e.d, la matrices unitarias de $n\times n$ en $\C$ es un grupo multiplicativo.
+\end{solucion}
+
+\eje Considérese la matriz $A\in\R^{3\times3}$ y el vector $b\in\R^3$ dados por
+\begin{align*}
+    A=\begin{pmatrix}
+    1 & -1 & 0\\
+    -1 & 2 & 1\\
+    0 & 1 & 3
+    \end{pmatrix} && y && b=\begin{pmatrix}
+    2\\
+    -2\\
+    4
+    \end{pmatrix}
+\end{align*}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+    \item Calcular el determinante de $A$.
+    \item ¿Es $A$ invertible? ¿Por qué?
+\end{enumerate}
+\begin{solucion}
+    Se procede a resolver uno a uno los incisos:
+    \renewcommand{\labelenumi}{(\alph{enumi})}
+    \begin{enumerate}
+        \item Se calculará el determinante con el método de co-factores
+            \begin{align*}
+                det(A)&=1*(2*3-1*1)+1*(-1*3-1*0)+0*(-1*1-2*0)\\
+                &=5-3=2
+            \end{align*}
+        \item $A$ es invertible debido a que $det(A)\neq0$.
+\end{enumerate}
+\end{solucion}
+
+
+\section{Eigenvalores y Eigenvectores de una matriz cuadrada}
+\section{Otra notación: El símbolo Landau}
+
+
+\chapter{Teoría de matrices}
+\section{El Eigensistema de una matriz cuadrada}
+\eje Calcular los valores propios y sus vectores propios correspondientes de la matriz de $3\times3$
+\[ A=\begin{pmatrix}
+\frac{3}{2} & 0 & \frac{1}{2}\\
+0 & 3 & 0\\
+\frac{1}{2} & 0 & \frac{3}{2}
+\end{pmatrix}.\]
+\begin{solucion}
+El primer paso es calcular los valores propios ($\lambda_1,\lambda_2,\lambda_3$) de $A$:
+\begin{align*}
+    det(A-\lambda I)&=0\\
+    \begin{vmatrix}
+        \frac{3}{2}-\lambda & 0 & \frac{1}{2}\\
+        0 & 3-\lambda & 0\\
+        \frac{1}{2} & 0 & \frac{3}{2}-\lambda
+    \end{vmatrix} &=0\\
+    \left(\frac{3}{2}-\lambda\right)^2(3-\lambda)-\frac{1}{4}(3-\lambda)&=0\\
+    (3-\lambda)\left[\left(\frac{3}{2}-\lambda\right)^2-\frac{1}{4}\right]&=0\\
+\end{align*}
+Un polinomio de grado tres, tiene tres raíces:
+\begin{align*}
+    3-\lambda&=0 & \left(\frac{3}{2}-\lambda\right)^2-\frac{1}{4}&=0\\
+    \lambda_1&=3 & \lambda_2=\frac{3}{2}+\frac{1}{2}=2, \lambda_3&=\frac{3}{2}-\frac{1}{2}=1\\
+\end{align*}
+Por lo tanto $\lambda_1 =3, \lambda_2=2,\lambda_3=1$. Lo siguiente es en base a los valores propios encontrados, 
+\begin{itemize}
+    \item Vector propio asociado a $\lambda_1=3$:\\
+        Sea $x=\begin{pmatrix}
+        x_1\\
+        x_2\\
+        x_3
+        \end{pmatrix}$ .\\
+        $(\lambda_1I-A)x=\left(\begin{pmatrix}
+        3 & 0 & 0\\
+        0 & 3 & 0\\
+        0 & 0 & 3
+        \end{pmatrix} - \begin{pmatrix}
+        \frac{3}{2} & 0 & \frac{1}{2}\\
+        0 & 3 & 0\\
+        \frac{1}{2} & 0 & \frac{3}{2}
+        \end{pmatrix}\right) \begin{pmatrix}
+        x_1\\
+        x_2\\
+        x_3
+        \end{pmatrix}=\begin{pmatrix}
+        \frac{3}{2} & 0 & -\frac{1}{2}\\
+        0 & 0 & 0\\
+        -\frac{1}{2} & 0 & \frac{3}{2}
+        \end{pmatrix}\begin{pmatrix}
+        x_1\\
+        x_2\\
+        x_3
+        \end{pmatrix}$\\ \\
+        $(\lambda_1I-A)x=
+        \begin{pmatrix}
+        \frac{3}{2}x_1-\frac{1}{2}x_3\\
+        0\\
+        -\frac{1}{2}x_1+\frac{3}{2}x_3
+        \end{pmatrix}=\begin{pmatrix}
+        0\\
+        0\\
+        0
+        \end{pmatrix}$
+        \begin{align*}
+            \frac{3}{2}x_1-\frac{1}{2}x_3&=0\\
+            -\frac{1}{2}x_1+\frac{3}{2}x_3&=0
+        \end{align*} 
+        Luego:
+        \begin{align*}
+            \hspace{0.5cm}\frac{3}{2}x_1-\frac{1}{2}x_3&=0\\
+            -\frac{3}{2}x_1+\frac{9}{2}x_3&=0\\
+        \end{align*} 
+        \\
+        $4x_3=0\Rightarrow x_3=0\Rightarrow x_1=0\Rightarrow x_2=c_1\Rightarrow x= \begin{pmatrix}
+        0\\
+        c_1\\
+        0
+        \end{pmatrix}= c_1\begin{pmatrix}
+        0\\
+        1\\
+        0
+        \end{pmatrix}$ donde $c_1 \neq 0$\\ 
+    \item Vector propio asociado a $\lambda_2=2$:\\
+        Sea $y=\begin{pmatrix}
+        y_1\\
+        y_2\\
+        y_3
+        \end{pmatrix}$ .\\
+        $(\lambda_2I-A)y=\left(\begin{pmatrix}
+        2 & 0 & 0\\
+        0 & 2 & 0\\
+        0 & 0 & 2
+        \end{pmatrix} - \begin{pmatrix}
+        \frac{3}{2} & 0 & \frac{1}{2}\\
+        0 & 3 & 0\\
+        \frac{1}{2} & 0 & \frac{3}{2}
+        \end{pmatrix}\right) \begin{pmatrix}
+        y_1\\
+        y_2\\
+        y_3
+        \end{pmatrix}=\begin{pmatrix}
+        \frac{1}{2} & 0 & -\frac{1}{2}\\
+        0 & -1 & 0\\
+        -\frac{1}{2} & 0 & \frac{1}{2}
+        \end{pmatrix}\begin{pmatrix}
+        y_1\\
+        y_2\\
+        y_3
+        \end{pmatrix}$\\
+        $(\lambda_2I-A)y=\begin{pmatrix}
+        \frac{1}{2}y_1-\frac{1}{2}y_3\\
+        -y_2\\
+        -\frac{1}{2}y_1+\frac{1}{2}y_3
+        \end{pmatrix}=\begin{pmatrix}
+        0\\
+        0\\
+        0
+        \end{pmatrix}$
+        \begin{align*}
+        \frac{1}{2}y_1-\frac{1}{2}y_3&=0\\
+        -y_2&=0\\
+        -\frac{1}{2}y_1+\frac{1}{2}y_3&=0
+        \end{align*}
+        \\
+        $\Rightarrow y_2 = 0, y_1=y_3\Rightarrow y=\begin{pmatrix}
+        c_2\\
+        0\\
+        c_2
+        \end{pmatrix}=c_2\begin{pmatrix}
+        1\\
+        0\\
+        1
+        \end{pmatrix}$ donde $c_2 \neq 0$\\
+    \item Vector propio asociado a $\lambda_3=1$:\\
+        Sea $z=\begin{pmatrix}
+        z_1\\
+        z_2\\
+        z_3
+        \end{pmatrix}$ .\\
+        $(\lambda_3I-A)z=\left(\begin{pmatrix}
+        1 & 0 & 0\\
+        0 & 1 & 0\\
+        0 & 0 & 1
+        \end{pmatrix} - \begin{pmatrix}
+        \frac{3}{2} & 0 & \frac{1}{2}\\
+        0 & 3 & 0\\
+        \frac{1}{2} & 0 & \frac{3}{2}
+        \end{pmatrix}\right) \begin{pmatrix}
+        z_1\\
+        z_2\\
+        z_3
+        \end{pmatrix}=\begin{pmatrix}
+        -\frac{1}{2} & 0 & -\frac{1}{2}\\
+        0 & -2 & 0\\
+        -\frac{1}{2} & 0 & -\frac{1}{2}
+        \end{pmatrix}\begin{pmatrix}
+        z_1\\
+        z_2\\
+        z_3
+        \end{pmatrix}$\\
+        $(\lambda_3I-A)z=\begin{pmatrix}
+        -\frac{1}{2}z_1-\frac{1}{2}z_3\\
+        -2z_2\\
+        -\frac{1}{2}z_1-\frac{1}{2}z_3
+        \end{pmatrix}=\begin{pmatrix}
+        0\\
+        0\\
+        0
+        \end{pmatrix}$\\
+        $\Rightarrow z_2 = 0, z_1=-z_3\Rightarrow z= \begin{pmatrix}
+        c_3\\
+        0\\
+        -c_3
+        \end{pmatrix}= c_3\begin{pmatrix}
+        1\\
+        0\\
+        -1
+    \end{pmatrix}$ donde $c_3 \neq 0$.\\
+\end{itemize}
+
+\end{solucion}
+
+\eje Considérese la matriz $A\in\R^{3\times3}$ dada por
+\[A=\begin{pmatrix}
+1 & -1 & 0\\
+-1 & 2 & 1\\
+0 & 1 & 3
+\end{pmatrix}.\]
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+    \item Calcule los eigenvalores de A.
+    \item Calcule todos los eigenvectores para los eigenvalores que sean enteros.
 \end{enumerate}
 
 
+\begin{solucion}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+    \item El primer paso es calcular los valores propios ($\lambda_1,\lambda_2,\lambda_3$) de $A$:
+        \begin{align*}
+            det(A-\lambda I)&=0\\
+            \begin{vmatrix}
+                1-\lambda & -1 & 0\\
+                -1 & 2-\lambda & 1\\
+                0 & 1 & 3-\lambda
+            \end{vmatrix} &=0\\
+            (1-\lambda)(2-\lambda)(3-\lambda)-(1-\lambda)-(3-\lambda)&=0\\
+            -\lambda^3+6\lambda^2-11\lambda+6&=0
+        \end{align*}
+        Por lo tanto $\lambda_1=3, \lambda_2=2, \lambda_3=1$.\\
+    \item Calcule todos los eigenvectores para los eigenvalores que sean enteros.
+\end{enumerate}
+
+\begin{itemize}
+    \item Vector propio asociado a $\lambda_1=3$:\\
+        Sea $x=\begin{pmatrix}
+        x_1\\
+        x_2\\
+        x_3
+        \end{pmatrix}$ .\\
+        $(\lambda_1I-A)x=\left(\begin{pmatrix}
+        3 & 0 & 0\\
+        0 & 3 & 0\\
+        0 & 0 & 3
+        \end{pmatrix} - \begin{pmatrix}
+        1 & -1 & 0\\
+        -1 & 2 & 1\\
+        0 & 1 & 3
+        \end{pmatrix}\right) \begin{pmatrix}
+        x_1\\
+        x_2\\
+        x_3
+        \end{pmatrix}=\begin{pmatrix}
+        2 & 1 & 0\\
+        1 & 2 & -1\\
+        0 & -1 & 0
+        \end{pmatrix}\begin{pmatrix}
+        x_1\\
+        x_2\\
+        x_3
+        \end{pmatrix}$\\
+        $(\lambda_1I-A)x=\begin{pmatrix}
+        2x_1+x_2\\
+        x_1+2x_2-x_3\\
+        -x_2
+        \end{pmatrix}=\begin{pmatrix}
+        0\\
+        0\\
+        0
+        \end{pmatrix}$\\
+        \begin{align*}
+            2x_1+x_2&=0\\
+            x_1+2x_2-x_3&=0\\
+            -x_2&=0
+        \end{align*} \\
+        $\Rightarrow x_2=0\Rightarrow x_1=x_3=0\Rightarrow x= \begin{pmatrix}
+        0\\
+        0\\
+        0
+        \end{pmatrix}$\\ 
+    \item Vector propio asociado a $\lambda_2=2$:\\
+        Sea $y=\begin{pmatrix}
+        y_1\\
+        y_2\\
+        y_3
+        \end{pmatrix}$ .\\
+        $(\lambda_2I-A)y=\left(\begin{pmatrix}
+        2 & 0 & 0\\
+        0 & 2 & 0\\
+        0 & 0 & 2
+        \end{pmatrix} - \begin{pmatrix}
+        1 & -1 & 0\\
+        -1 & 2 & 1\\
+        0 & 1 & 3
+        \end{pmatrix}\right) \begin{pmatrix}
+        y_1\\
+        y_2\\
+        y_3
+        \end{pmatrix}=\begin{pmatrix}
+        1 & 1 & 0\\
+        1 & 0 & -1\\
+        0 & -1 & -1
+        \end{pmatrix}\begin{pmatrix}
+        y_1\\
+        y_2\\
+        y_3
+        \end{pmatrix}$\\
+        $(\lambda_2I-A)y=\begin{pmatrix}
+        y_1+y_2\\
+        y_1-y_3\\
+        -y_2-y_3
+        \end{pmatrix}=\begin{pmatrix}
+        0\\
+        0\\
+        0
+        \end{pmatrix}$\\
+        \begin{align*}
+            y_1+y_2&=0\\
+            y_1-y_3&=0\\
+            -y_2-y_3&=0
+        \end{align*}
+        \\
+        $\Rightarrow y= \begin{pmatrix}
+        c_1\\
+        -c_1\\
+        c_1
+        \end{pmatrix} = c_1\begin{pmatrix}
+        1\\
+        -1\\
+        1
+        \end{pmatrix}$ donde $c_1 \neq 0$.\\
+    \item Vector propio asociado a $\lambda_3=1$:\\
+        Sea $z=\begin{pmatrix}
+        z_1\\
+        z_2\\
+        z_3
+        \end{pmatrix}$ .\\
+        $(\lambda_3I-A)z=\left(\begin{pmatrix}
+        1 & 0 & 0\\
+        0 & 1 & 0\\
+        0 & 0 & 1
+        \end{pmatrix} - \begin{pmatrix}
+        1 & -1 & 0\\
+        -1 & 2 & 1\\
+        0 & 1 & 3
+        \end{pmatrix}\right)\begin{pmatrix}
+        z_1\\
+        z_2\\
+        z_3
+        \end{pmatrix}=\begin{pmatrix}
+        0 & 1 & 0\\
+        1 & -1 & -1\\
+        0 & -1 & -2
+        \end{pmatrix}\begin{pmatrix}
+        z_1\\
+        z_2\\
+        z_3
+        \end{pmatrix}$\\
+        $(\lambda_3I-A)z=\begin{pmatrix}
+        z_2\\
+        z_1-z_2-z_3\\
+        -z_2-2z_3
+        \end{pmatrix}=\begin{pmatrix}
+        0\\
+        0\\
+        0
+        \end{pmatrix}$\\
+        \begin{align*}
+            z_2&=0\\
+            z_1-z_2-z_3&=0\\
+            -z_2-2z_3&=0
+        \end{align*}
+        $\Rightarrow z_2 = 0 \Rightarrow z_3=0, z_1=0\Rightarrow z= \begin{pmatrix}
+        0\\
+        0\\
+        0
+        \end{pmatrix}$ donde $c_3 \neq 0$.\\
+\end{itemize}
+
+\end{solucion}
+
+\eje Demostrar el paso de inducción en la demostración del lema 2.6.
+\begin{solucion}
+    Sean $\bm{v_1},\dots,\bm{v_{k+1}}$ los respectivos vectores propios. La hipótesis inductiva es que el conjunto $\{\bm{v_1},\dots,\bm{v_{k+1}}\}$ es linealmente independiente. Sea $a_1\bm{v_1}+\dots+a_k\bm{v_k}+a_{k+1}\bm{v_{k+1}}=0$, mostrando que $a_1=\dots=a_k=a_{k+1}=0$
+\end{solucion}
+
+\eje Para la matriz A
+    \[
+        \begin{pmatrix}
+            \frac{3}{2} & 0 & \frac{1}{2}\\
+            0 & 3 & 0\\
+            \frac{1}{2} & 0 & \frac{3}{2}
+        \end{pmatrix},
+    \]
+encontrar una matriz $S$ tal que
+    \[
+        S^{-1}AS=\begin{pmatrix}
+            \lambda_1 & 0 & 0\\
+            0 & \lambda_2 & 0\\
+            0 & 0 & \lambda_3
+        \end{pmatrix}
+    \]
+con $\lambda_1\geq\lambda_2\geq\lambda_3$. Calcular $S^{-1}$ y calcular la multiplicación $S^{-1}AS$ para verificar que se eligió $S$ correctamente.
+\begin{solucion}
+El primer paso es calcular los valores propios y vectores propios para $A$, pero este procedimiento ya se realizó en el \textbf{Ejercicio 19}, por lo que en la solución de este ejercicio se utilizarán esos resultados.
+Primero, se tomará el vector propio asociado a $\lambda=3$ el cual es $\bm{x}=\begin{pmatrix}0 & 1 & 0\end{pmatrix}^T$. Luego se procede a determinar la matriz de Householder que mapee $\bm{x}$ a $\lVert x\rVert e_1=e_1$:
+    \[
+        w_1=\frac{x-e_1}{\lVert x-e_1\rVert}=\frac{\begin{pmatrix}
+            0\\
+            1\\
+            0
+        \end{pmatrix}-\begin{pmatrix}
+            1\\
+            0\\
+            0
+        \end{pmatrix}}{\sqrt{(-1)^2+1^2}}=\frac{1}{\sqrt{2}}\begin{pmatrix}
+            -1\\
+            1\\0
+        \end{pmatrix}
+    \]
+Entonces,
+\begin{align*}
+    H(w_1)&=I-2w_1w_1^*=I-\frac{2}{\left(\sqrt{2}\right)^2}\begin{pmatrix}
+        -1\\
+        1\\
+        0
+    \end{pmatrix}\begin{pmatrix}
+        -1 & 1 & 0
+    \end{pmatrix}\\
+    &=I-\begin{pmatrix}
+        1 & -1 & 0\\
+        -1 & 1 & 0\\
+        0 & 0 & 0
+    \end{pmatrix}=\begin{pmatrix}
+        0 & 1 & 0\\
+        1 & 0 & 0\\
+        0 & 0 & 1
+    \end{pmatrix}
+\end{align*}
+Luego,
+    \[
+        H(w_1)AH(w_1)=\begin{pmatrix}
+            3 & 0 & 0\\
+            0 & \frac{3}{2} & \frac{1}{2}\\
+            0 & \frac{1}{2} & \frac{3}{2}
+        \end{pmatrix}.
+    \]
+Sea $a$ una submatriz $2\times 2$ de $A$:
+    \[
+        a=\begin{pmatrix}
+            \frac{3}{2} & \frac{1}{2}\\
+            \frac{1}{2} & \frac{3}{2}
+        \end{pmatrix}
+    \]
+En este punto, el proceso debe repetirse. Primero, encontrando sus valores propios:
+\begin{align*}
+    det(a-\Lambda I)&=0\\
+    \begin{vmatrix}
+        \frac{3}{2}-\Lambda  & \frac{1}{2}\\
+        \frac{1}{2} & \frac{3}{2}-\Lambda
+    \end{vmatrix} &=0\\
+    \left(\frac{3}{2}-\Lambda\right)^2-\frac{1}{4}&=0\\
+    \Lambda_1=\frac{3}{2}+\frac{1}{2}=2, \Lambda_2&=\frac{3}{2}-\frac{1}{2}=1\\
+\end{align*}
+Es facíl ver que los valores propios de $a$ son $\Lambda=1$ y $\Lambda=2$. Segundo, se tomará el vector propio asociado a $\Lambda=2$, el cual es $\bm{x_a}=\begin{pmatrix}1&1\end{pmatrix}^T$. Luego, se debe determinar la matriz de Householder que mapee $\bm{x_a}$ a $\sqrt{2}e_1$:
+    \[
+        \bm{w_2}=\frac{\bm{x_a}-\lVert \bm{x_a}\rVert e_1}{\left\lVert \bm{x_a}-\lVert \bm{x_a}\rVert e_1\right\rVert}=\frac{\begin{pmatrix}
+            1\\
+            1
+        \end{pmatrix}-\sqrt{2}\begin{pmatrix}
+            1\\
+            0
+        \end{pmatrix}}{\sqrt{\left(1-\sqrt{2}\right)^2+1^2}}=\frac{1}{\sqrt{4-2\sqrt{2}}}\begin{pmatrix}
+            1-\sqrt{2}\\
+            1
+        \end{pmatrix}
+    \]
+Luego:
+\begin{align*}
+    H(w_2)&=I-2w_2w_2^*=I-\frac{2}{\left(\sqrt{4-2\sqrt{2}}\right)^2}\begin{pmatrix}
+        1-\sqrt{2}\\
+        1\\
+    \end{pmatrix}\begin{pmatrix}
+        1-\sqrt{2} & 1
+    \end{pmatrix}\\
+    &=I-\begin{pmatrix}
+        1-\frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}}\\
+        -\frac{1}{\sqrt{2}} & 1+\frac{1}{\sqrt{2}}
+    \end{pmatrix}=\begin{pmatrix}
+        \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}}\\
+        \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}}
+    \end{pmatrix}
+\end{align*}
+En este punto es posible encontrar la matriz unitaria asociada a $H(w_2)$:
+    \[
+        H_2:=\begin{pmatrix}
+            1 & 0 & 0\\
+            0 & \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}}\\
+            0 & \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}}
+        \end{pmatrix}
+    \]
+Por ultimo,
+\begin{align*}
+    H_2\left(H(w_1)AH(w_1)\right)H_2&=\begin{pmatrix}
+        1 & 0 & 0\\
+        0 & \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}}\\
+        0 & \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}}
+    \end{pmatrix}\begin{pmatrix}
+        3 & 0 & 0\\
+        0 & \frac{3}{2} & \frac{1}{2}\\
+        0 & \frac{1}{2} & \frac{3}{2}
+    \end{pmatrix}\begin{pmatrix}
+        1 & 0 & 0\\
+        0 & \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}}\\
+        0 & \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}}
+    \end{pmatrix}\\
+    &=\begin{pmatrix}
+        3 & 0 & 0\\
+        0 & 2 & 0\\
+        0 & 0 & 1
+    \end{pmatrix}
+\end{align*}
+\end{solucion}
+
+\eje Para la matriz $A$
+    \[
+        A=\begin{pmatrix}
+            \frac{3}{2} & 0 & \frac{1}{2}\\
+            0 & 3 & 0 \\
+            \frac{1}{2} & 0 & \frac{3}{2}
+        \end{pmatrix},
+    \]
+encontrar una matriz ortogonal S tal que
+    \[
+        S^{-1}AS=\begin{pmatrix}
+            \lambda_1 & 0 & 0 \\
+            0 & \lambda_2 & 0 \\
+            0 & 0 & \lambda_3
+        \end{pmatrix},
+    \]
+con $\lambda_1\geq\lambda_2\geq\lambda_3$. Verificar que tu matriz $S$ es ortogonal. Verificar que la igualdad anterior es verdadera, efectuando la multiplicación.
+
+\begin{solucion}
+El primer paso es calcular los valores propios y vectores propios para $A$, pero este procedimiento ya se realizó en el \textbf{Ejercicio 19}, es decir, en la solución de este ejercicio se utilizarán esos resultados, por lo que los valores y vectores propios de $A$ son $\lambda_1=3$, $\lambda_2=2$ y $\lambda_3=1$ y $\bm{x}=(0,1,0)^t$, $\bm{y}=(1,0,1)^t$, y $\bm{z}=(-1,0,1)^t$ respectivamente. Luego en necesario normalizar los vectores propios, $\bm{x}=(0,1,0)^t$, $\bm{y}=(\sfrac{1}{\sqrt{2}},0,\sfrac{1}{\sqrt{2}})^t$ y $\bm{z}=(-\sfrac{1}{\sqrt{2}},0,\sfrac{1}{\sqrt{2}})^t$, entonces
+    \[
+        S=\begin{pmatrix}
+            0 & \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}} \\
+            1 & 0 & 0 \\
+            0 & \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}}
+        \end{pmatrix},\quad S^{-1}=\begin{pmatrix}
+            0 & 1 & 0 \\
+            \frac{1}{\sqrt{2}} & 0 & \frac{1}{\sqrt{2}} \\
+            -\frac{1}{\sqrt{2}} & 0 & \frac{1}{\sqrt{2}}
+        \end{pmatrix}
+    \]
+Luego:
+    \begin{align*}
+        S^{-1}AS&=\begin{pmatrix}
+            0 & 1 & 0 \\
+            \frac{1}{\sqrt{2}} & 0 & \frac{1}{\sqrt{2}} \\
+            -\frac{1}{\sqrt{2}} & 0 & \frac{1}{\sqrt{2}}
+        \end{pmatrix}\begin{pmatrix}
+            \frac{3}{2} & 0 & \frac{1}{2}\\
+            0 & 3 & 0 \\
+            \frac{1}{2} & 0 & \frac{3}{2}
+        \end{pmatrix}\begin{pmatrix}
+            0 & \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}} \\
+            1 & 0 & 0 \\
+            0 & \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}}
+        \end{pmatrix}\\
+        &=\begin{pmatrix}
+            3 & 0 & 0 \\
+            0 & 2 & 0 \\
+            0 & 0 & 1
+        \end{pmatrix}=\begin{pmatrix}
+            \lambda_1 & 0 & 0 \\
+            0 & \lambda_2 & 0 \\
+            0 & 0 & \lambda_3
+        \end{pmatrix}
+    \end{align*}  
+ 
+
+\end{solucion}
+
+\eje Sean $A\in\C^{n\times n}$ y $S\in\C^{n\times n}$ una matriz no singular. Mostrar que $traza(S^{-1}AS)=traza(A)$.
+\begin{solucion}
+Para demostrar lo anterior, notese que para $A, S, S^{-1}$, por ser matrices cuadradas la traza del producto de estas tiene la propiedad, 
+    \[
+        traza(S^{-1}AS)=traza(SS^{-1}A)=traza(A)
+    \]
+A esto se le conoce como cíclico, es evidente que:
+    \[
+        traza(SS^{-1}A)=traza(A)
+    \]
+por lo tanto:
+    \[
+        traza(S^{-1}AS)=traza(A)
+    \]
+\end{solucion}
+
+\eje Considérese la matriz real de $2\times2$
+\[A=\begin{pmatrix}
+3&-1\\
+-1&3
+\end{pmatrix}\]
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+    \item Calcular los valores propios $\lambda_1$ y $\lambda_2$ (donde $\lambda_1\geq\lambda_2$) de A.
+    \item Calcular los espacios propios correspondientes a los valores propios de $(a)$.
+\end{enumerate}
+
+\begin{solucion}
+\begin{enumerate}
+    \item Se procede a calcular los valores propios de $A$
+        \[
+            det(A-\lambda I)=\begin{vmatrix}
+                3-\lambda & -1 \\
+                -1 & 3-\lambda
+            \end{vmatrix}=(3-\lambda)^2-1=0
+        \]
+    Entonces: $\lambda_1=4$ y $\lambda_2=2$ donde $\lambda_1\geq\lambda_2$
+    \item Para darle solución a este inciso, se parte del hecho de que: $(A-\lambda I)v=0$, $v=(v_1,v_2)^T$.
+        \begin{itemize}
+            \item Para $\lambda=4$ tenemos que
+                \[\begin{pmatrix}
+                -1 & -1\\
+                -1 & -1
+                \end{pmatrix}\begin{pmatrix}
+                v_1\\
+                v_2
+                \end{pmatrix}=0\]
+                
+                El cual representa el sistema de ecuaciones:
+                
+                \[-v_1-v_2=0\]
+                \[-v_1-v_2=0\]
+                
+                Su se toma  $v_1=1$, entonces $v_2=-1$, por lo que 
+                \[v=\begin{pmatrix}
+                1\\
+                -1
+                \end{pmatrix}\]
+            \item De forma análoga se repite el proceso para $\lambda=2$, pero ahora el resultado es:
+                \[
+                    v=\begin{pmatrix} 1\\ 1\end{pmatrix}
+                \]
+        \end{itemize}
+    \end{enumerate}
+\end{solucion}
+\section{Matrices superiores y sustitución hacia atrás}
+\eje Resolver el siguiente sistema lineal a mano con el algoritmo de sustitución hacía atrás:
+    \[
+        \begin{pmatrix}
+            1&1&1\\
+            0&2&2\\
+            0&0&3
+        \end{pmatrix}\begin{pmatrix}
+            x_1\\
+            x_2\\
+            x_3
+        \end{pmatrix}=\begin{pmatrix}
+            -1\\
+            3\\6
+        \end{pmatrix}.
+    \]
+\begin{solucion}    
+El sistema lineal puede ser representado como el siguiente sistema de ecuaciones:
+    \[
+        \begin{cases}
+            x_1+x_2+x_3=-1\\
+            2x_2+2x_3=3\\
+            3x_3=6
+        \end{cases}
+    \]
+Ahora, aplicando el algoritmo solicitado:
+\begin{itemize}
+    \item Se despeja $x_3$ de la tercera ecuación:
+        \begin{align*}
+            3x_3&=6 \\ 
+            x_3&=2
+        \end{align*}
+    \item Se sustituye en la segunda ecuación y se despeja $x_2$:
+        \begin{align*}
+            2x_2+2(2)&=3\\
+            x_2&=-\frac{1}{2}
+        \end{align*}
+    \item Se sustituye $x_1$ y $x_2$ en la primera ecuación y se resuelve para $x_1$:
+        \begin{align*}
+            x_1+(-\frac{1}{2})+(2)&=-1\\
+            x_1&=-\frac{5}{2}
+        \end{align*}
+\end{itemize}
+
+\end{solucion}
+
+
+\eje Resolver el siguiente sistema lineal a mano usando el algoritmo de sustitución hacía atrás:
+    \[
+        \begin{pmatrix}
+            2 & -1 & 3 & 1\\
+            0 & 1 & 2 & -1\\
+            0 & 0 & -2 & 1\\
+            0 & 0 & 0 & 3\\
+        \end{pmatrix}\begin{pmatrix}
+            x_1\\
+            x_2\\
+            x_3\\
+            x_4
+        \end{pmatrix}=\begin{pmatrix}
+            12\\
+            -3\\
+            1\\
+            9
+        \end{pmatrix}
+    \]
+\begin{solucion}
+El sistema lineal puede ser representado como el siguiente sistema de ecuaciones:
+    \[
+        \begin{cases}
+            2x_1-x_2+3x_3+x_4=12\\
+            x_2+2x_3-x_4=-3\\
+            -x_3+x_4=1\\
+            3x_4=9
+        \end{cases}
+    \]
+Ahora, aplicando el algoritmo solicitado:
+\begin{itemize}
+    \item Se despeja $x_4$ de la cuarta ecuación:
+        \begin{align*}
+            3x_4&=9 \\ 
+            x_4&=3
+        \end{align*}
+    \item Se despeja $x_3$ de la tercera ecuación, sustituyendo el valor de $x_4$ encontrado:
+        \begin{align*}
+            -x_3+(3)&=1 \\ 
+            x_3&=2
+        \end{align*}
+    \item Se despeja $x_2$ de la segunda ecuación, sustituyendo los valores de $x_4$ y $x_3$ encontrados:
+        \begin{align*}
+            x_2+2(2)-(3)&=-3\\
+            x_2&=-4
+        \end{align*}
+    \item Se despeja $x_1$ de la primera ecuación, sustituyendo los valores de $x_4$, $x_3$ y $x_2$ encontrados:
+        \begin{align*}
+            2x_1-(-4)+3(2)+(3)&=-1\\
+            x_1&=-\frac{1}{2}
+        \end{align*}
+\end{itemize}
+\end{solucion}
+
+\eje Mostrar que las matrices triangulares superiores con todos los elementos de sus diagonales diferentes de cero, con la multiplicación de matrices usual, forman un grupo multiplicativo.
+\begin{solucion}
+A continuación se procede con la solución, demostrando que el conjunto descrito, es un grupo y además es multiplicativo.
+\begin{itemize}
+    \item Lo primero es considerar que la multiplicación de matrices es asociativa.
+    \item Por la naturaleza de las matrices mencionadas es evidente que elegida una matriz $U$ que pertenezca al conjunto existe $I$ $U\times I=U$ donde I es el elemento neutro, esta es la matriz identidad.
+    \newpage
+    \item Para ser un grupo debe cumplir con la propiedad del inverso. Considerando que las matrices descritas son invertibles porque su determinante es diferente de cero, se procederá a calcular su inversa y determinar si el inverso esta en el conjunto.
+        \begin{align*}
+            \begin{pmatrix}
+                a_{1,1}&a_{1,2}&\cdots&a_{1,n}&|&1&0&\cdots&\cdots&0\\
+                0&a_{2,2}&\cdots&a_{2,n}&|&0&1&0&\cdots&0\\
+                \vdots&\ddots&\ddots&\vdots&|&\vdots&\ddots&\ddots&\ddots&\vdots\\
+                0&\cdots&0&a_{n,n}&|&0&\cdots&\cdots&0&1
+            \end{pmatrix}\\
+            \begin{pmatrix}
+                1&\frac{a_{1,2}}{a_{1,1}}&\cdots&\frac{a_{1,n}}{a_{1,1}}&|&\frac{1}{a_{1,1}}&0&\cdots&\cdots&0\\
+                0&1&\cdots&\frac{a_{2,n}}{a_{2,2}}&|&0&\frac{1}{a_{2,2}}&0&\cdots&0\\
+                \vdots&\ddots&\ddots&\vdots&|&\vdots&\ddots&\ddots&\ddots&\vdots\\
+                0&\cdots&0&1&|&0&\cdots&\cdots&0&\frac{1}{a_{n,n}}
+            \end{pmatrix}\\
+            \begin{pmatrix}
+                1&\frac{a_{1,2}}{a_{1,1}}&\cdots&0&|&\frac{1}{a_{1,1}}&0&\cdots&\cdots&-\frac{a_{1,n}}{a_{1,1}}\cdot\frac{1}{a_{n,n}}\\
+                0&1&\cdots&0&|&0&\frac{1}{a_{2,2}}&0&\cdots&-\frac{a_{2,n}}{a_{2,2}}\cdot\frac{1}{a_{n,n}}\\
+                \vdots&\ddots&\ddots&\vdots&|&\vdots&\ddots&\ddots&\ddots&\vdots\\
+                0&\cdots&0&1&|&0&\cdots&\cdots&0&\frac{1}{a_{n,n}}
+            \end{pmatrix}\\
+            \vdots
+        \end{align*}
+    Ergo. la inversa de una matriz triangular superior es triangular superior.
+    \item Las multiplicación de dos matrices del conjunto, debe ser parte del conjunto:
+        \begin{align*}
+            \begin{pmatrix}
+            a_{1,1}&a_{1,2}&\cdots&a_{1,n}\\
+            0&a_{2,2}&\cdots&a_{2,n}\\
+            \vdots&\ddots&\ddots&\vdots\\
+            0&\cdots&0&a_{n,n}
+            \end{pmatrix}\begin{pmatrix}
+            b_{1,1}&b_{1,2}&\cdots&b_{1,n}\\
+            0&b_{2,2}&\cdots&b_{2,n}\\
+            \vdots&\ddots&\ddots&\vdots\\
+            0&\cdots&0&b_{n,n}
+            \end{pmatrix}\\\begin{pmatrix}
+            a_{1,1}b_{1,1}&a_{1,1}b_{1,2}+a_{1,2}b_{2,2}&\cdots&\sum_{i=1}^na_{1,i}b_{i,n}\\
+            0&a_{2,2}b_{2,2}&\cdots&\sum_{i=2}^na_{2,i}b_{i,n}\\
+            \vdots&\ddots&\ddots&\vdots\\
+            0&\cdots&0&a_{n,n}b_{n,n}
+            \end{pmatrix}
+        \end{align*}
+        
+    \end{itemize}
+\end{solucion}
+
+\eje Forward substitution: considérese un sistema lineal $Ax=b$, donde $A\in\R^{n\times n}$ es una matriz triangular inferios, $b\in\R^n$ el lado derecho dado, y $x\in\R^n$ la solución desconocida. Análogamente al algoritmo de back substition podemos formular un algoritmo de forward substitution para calcular $x_j$, $j=1,2,\dots,n-1,n$. Derivar el algoritmo de forward sustitution.
+\begin{solucion}
+Sea $A \in \R^{n\times n}$ una matriz triangular inferior, $b\in \R$ el lado derecho dado y $x \in \R^n$ el vector solución desconocido.\\
+\begin{lstlisting}[language=Java]
+for( int j =n-1; j>=0; j--) {
+    float sum = x[j];
+    for( int k = j+1; k <n; k++ ) {
+        sum -= A[k*n+j]* b[k];
+    }
+    x[j] = sum/A[j*n+j];
+}
+\end{lstlisting}
+\end{solucion}
+\section{Factorización de Schur, forma canónica trangular}
+\eje Construir una matriz Householder que mapee el vector $(2,0,1)^T$ en el vector $(\sqrt{5},0,0)^T$.
+\begin{solucion}
+Sea $x=(2,0,1)^T$ y $y=(\sqrt{5},0,0)^T$, $v=x-y$ y $w=\frac{v}{|v|}$.
+\begin{align*}
+    w=\frac{(2-\sqrt{5},0,1)^T}{\sqrt{(2-\sqrt{5})^2+0^2+1^2}}=\frac{(2-\sqrt{5},0,1)^T}{\sqrt{2(5-2\sqrt{5})}}
+\end{align*}
+Entonces:
+\begin{align*}
+    H(w)&=I-2ww^*=I-\frac{2}{2(5-2\sqrt{5})}\begin{pmatrix}
+        2-\sqrt{5}\\
+        0\\
+        1
+    \end{pmatrix}\begin{pmatrix}
+        2-\sqrt{5} &0&1
+    \end{pmatrix}\\
+    H(w)&=\begin{pmatrix}
+        1&0&0\\
+        0&1&0\\
+        0&0&1
+    \end{pmatrix}-\frac{1}{5-2\sqrt{5}}\begin{pmatrix}
+        9-4\sqrt{5}&0&2-\sqrt{5}\\
+        0&0&0\\
+        2-\sqrt{5}&0&1
+    \end{pmatrix}=\begin{pmatrix}
+        1-\frac{9-4\sqrt{5}}{5-2\sqrt{5}}&0&-\frac{2-\sqrt{5}}{5-2\sqrt{5}}\\
+        0&1&0\\
+        -\frac{2-\sqrt{5}}{5-2\sqrt{5}}&0&1-\frac{1}{5-2\sqrt{5}}
+    \end{pmatrix}\\
+\end{align*}
+
+\end{solucion}
+
+\eje Sea $A\in\C^{n\times n}$ una matriz hermitiana, esto es, $A^*=\Bar{A}^T=A$. Sin usar resultados conocidos, solo explorando la definición de matriz hermitiana, demostrar que $A$ solo tiene valores propios reales.
+\begin{solucion}
+Por definición, una matriz Hermitiana $A$ cumple con lo siguiente: 
+\begin{align*}
+    det(A)&=det(A^*)\\
+    &= det (\overline{A^T})\\
+    &= \overline{det(A^T)}
+\end{align*}
+Pero para cualquier matriz $A\in\C^{n\times n}$, sin importar que sea Hermitiana se cumple que: $det(A^T)=det(A)$, entonces:
+\begin{align*}
+    \overline{det(A^T)}=\overline{det(A)}
+\end{align*}
+Esto demuestra que $det(A)\in \R$ y por definición, el determinante de una matriz es el producto de los valores propios, la única forma en la que esto se cumpla es que todo valor propio $\lambda$ de $A$ pertenezca a $\R$
+\end{solucion}
+
+\eje Sea $A$ una matriz hermitiana.
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+    \item Usando la factorización de Schur, muestre que existe una matriz unitaria $S$ tal que $S^*AS=U$, donde $U$ es una matriz diagonal real. 
+    \item Use la factorización de Schur para mostrar que $\C^n$ tiene una base ortonormal de eigenvectores de $A$.
+    \item Mostrar que $A$ es definida positiva si y solo si todos los valores propios son positivos.
+    \item Mostrar que si $A$ es difinida positiva, entonces $det(A)>0$.
+    \item Mostrar que $A$ es definida positiva si y solo si $A=Q^*Q$, con alguna matriz $Q$ que satisface $det(Q)\neq0$
+\end{enumerate}
+\begin{solucion}
+Sea $\lambda$ un valor propio de $A$ y $\bm{x}$ el vector propio asociado a $\lambda$.
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+    \item Existe una matriz unitaria $S$ tal que $S^*AS=D$, donde D es una matriz diagonal. Sea $\bm{x}$ un vector arbitrario en $\C^n$, como $A=SDS^*$ entonces:
+        \begin{align*}
+            \bm{x}^*A\bm{x}&=\bm{x}^*SDS^*\bm{x}\\
+            \bm{x}^*A\bm{x}&=\bm{y}^*D\bm{y},
+        \end{align*}
+        donde $\bm{y}=S^*\bm{x}$ y $\bm{y}=\begin{pmatrix} y_1& y_2& \dots& y_n\end{pmatrix}^T$ \\
+        Partiendo del ultimo resultado se tiene
+        \begin{align*}
+            \bm{x}^*A\bm{x}&=\bm{y}^*D\bm{y}\\
+            &=\begin{pmatrix}
+            \overline{y_1}&\overline{y_2}&\cdots&\overline{y_n}
+            \end{pmatrix}\begin{pmatrix}
+            \lambda_1&0&0&0\\
+            0&\lambda_2&0&0\\
+            \vdots&\cdots&\ddots&\vdots\\
+            0&0&\cdots&\lambda_n
+            \end{pmatrix}\begin{pmatrix}
+            y_1\\
+            y_2\\
+            \vdots\\
+            y_n
+           \end{pmatrix}\\
+           &=\lambda_1\norm{y_1}^2+\lambda_2\norm{y_2}^2+\dots+\lambda_n\norm{y_n}^2
+        \end{align*}
+        Por hipótesis los valores propios $\lambda_i$ son reales positivos. Además como $\bm{x}\neq0$ y $S$ es invertible, $\bm{y}=Q^*\bm{x}$ no es el vector nulo. 
+    \item Utilizando los resultados del $Ejercicio 31$ y el caso especial del teorema de la factorización de Schur, tenemos que una matriz Hermitiana tiene asociado un conjunto de $n$ eigenvectores orthonormales. 
+    \item 
+        \begin{itemize}
+            \item Primero la ``ida'' $(\Rightarrow)$
+                Por definición de vector propio:
+                \begin{align*}
+                    A\bm{x}&=\lambda \bm{x}\\
+                \end{align*}
+                Si se multiplica ambos lados de la ecuación por $\bm{x}^*$, entonces:
+                \begin{align*}
+                    \bm{x}^*A\bm{x}&=\bm{x}^*\lambda \bm{x}\\
+                    \bm{x}^*A\bm{x}&=\lambda \bm{x}^*\bm{x}\\
+                    &=\lambda\norm{\bm{x}}^2>0
+                \end{align*}
+                Ya que $\norm{\bm{x}}^2>0$, entonces $\lambda>0$.
+            \item Ahora la ``vuelta'' $(\Leftarrow)$
+                Se demostró en (a), por lo tanto $A$ es definida positiva.
+        \end{itemize}
+    \item Si $A$ es definida positiva, todos sus valores propios $\lambda>0$ son positivos, luego, el determinante de una matriz $A$ es el producto de sus valores propios, por lo que es evidente que $det(A)>0$ por su definición.
+    \item Este inciso es implicación de los incisos anteriores, si ser realiza la factorización Schur en A, pero la matriz unitaria es la matriz identidad, entonces ya que el $det(A)>0$ entonces $det(Q)\neq 0$ y viceversa.
+\end{enumerate}
+\end{solucion}
+
+\section{Normas de vectores}
+
+\eje Mostrar que $\norm{\cdot}_1$ y $\norm{\cdot}_\infty$ son normas para $\C^n$.
+\begin{solucion}
+Por definición: 
+\begin{align*}
+    \norm{\cdot}_1=\sum_{j=1}^n\lvert x_j\rvert\geq0    
+\end{align*}
+es evidente que la única forma de que $\norm{\cdot}_1$ sea cero, es que cada $x_j$ lo sea.\\
+Luego, 
+\begin{align*}
+    \norm{\alpha x}_1=\sum_{j=1}^n\lvert\alpha x_j\rvert=\sum_{j=1}^n\lvert\alpha\rvert\lvert x_j\rvert=\lvert\alpha\rvert\sum_{j=1}^n\lvert x_j\rvert=\lvert\alpha\rvert\norm{x}_1    
+\end{align*}
+
+Considerando que el valor absoluto como norma cumple con la desigualdad triangular, entonces:
+\[
+    \norm{x+y}_1=\sum_{j=1}^n\lvert x_j+y_j\rvert\leq\sum_{j=1}^n\lvert x_j\rvert+\sum_{j=1}^n\lvert y_j\rvert=\norm{x}_1+\norm{y}_1.
+\]
+q.e.d que $\norm{\cdot}_1$ es norma para $\C^n$. Lo siguiente es evaluar $\norm{x}_\infty$, por lo que:
+\begin{align*}
+    \norm{x}_\infty=\max_{1\leq j\leq n}\lvert x_j\rvert\geq0    
+\end{align*}
+Esto es cierto porque valor absoluto es no negativo. Si el máximo del valor absoluto de las componentes es cero, entonces el máximo es cero. Por lo que $\norm{x}_\infty=0$ si y solo si $x=0$.\\
+Luego:
+\[
+    \norm{\alpha x}_\infty=\max_{1\leq j\leq n}\lvert\alpha x_j\rvert=\max_{1\leq j\leq n}\lvert\alpha\rvert\lvert x_j\rvert=\lvert\alpha\rvert\max_{1\leq j\leq n}\lvert x_j\rvert=\lvert\alpha\rvert\norm{x}_\infty.
+\]
+Considerando que el máximo cumple con la desigualdad triangular, se tiene que: 
+\begin{align*}
+    \norm{x+y}_\infty\leq\norm{x}+\norm{y}
+\end{align*} 
+q.e.d. $\norm{\cdot}_\infty$ también es una norma en $\C^n$.
+\end{solucion}
+
+\eje Considerando la desigualdad
+\[
+    0\leq(\alpha x+\beta y)^T(\alpha x+\beta y)
+\]
+y escogiendo $\alpha,\beta\in\R$ aproximadamente, para $x,y\in\R^n$, probar la desigualdad de Cauchy-Schwarz.
+\newpage
+\begin{solucion}
+Ya que $(\alpha x+\beta y)^t(\alpha x+\beta y)=\langle\alpha x+\beta y,\alpha x+\beta y\rangle$, entonces:
+\begin{align*}
+    0&\leq\langle\alpha x+\beta y,\alpha x+\beta y\rangle\\
+    &\leq\alpha^2\langle x,x\rangle+2\alpha\beta\langle x,y\rangle+\beta^2\langle y,y\rangle\\
+    &\leq\alpha^2\norm{x}^2+2\alpha\beta\langle x,y\rangle+\beta^2\norm{y}^2
+\end{align*}
+Por construcción, sea $\alpha=1$ y $\beta=-\frac{|\langle x,y\rangle|}{\norm{y}^2}$ tenemos que:
+\begin{align*}
+    0\leq\norm{x}^2-\frac{|\langle x,y\rangle|}{\norm{y}^2}\\
+    \frac{|\langle x,y\rangle|^2}{\norm{y}^2}\leq\norm{x}^2\\
+    |\langle x,y\rangle|^2\leq\norm{x}^2 \norm{y}^2\\
+    |\langle x,y\rangle|^2\leq\langle x,x\rangle \langle y,y\rangle\\
+    \end{align*}
+\end{solucion}
+
+\eje Probar la desigualdad triangular inferior: si $\norm{\cdot}$ es una norma para un espacio vectorial $V$, entonces
+\[\abs{\norm{x}-\norm{y}}\leq\norm{x-y}\]
+para todo $x,y\in V$.
+\begin{solucion}
+Por construcción, se aplicará la desigualdad del triangulo a $y= x + (y-x)$ y $x= y + (x-y)$:\\
+\begin{align*}
+    \norm{y}=\norm{x+(y-x)}\leq \norm{x}+\norm{y-x}\\
+    \norm{x}=\norm{y+(x-y)}\leq \norm{y}+\norm{x-y}
+\end{align*}
+
+Luego,
+\begin{align*}
+    \norm{y}-\norm{x}\leq \norm{y-x}\\
+    \norm{x}-\norm{y}\leq \norm{x-y}
+\end{align*}
+De esto ultimo se infiere que:
+\begin{align*}
+    \abs{\norm{x}-\norm{y}}\leq \norm{x-y}
+\end{align*}
+\end{solucion}
+
+\eje Mostrar las desigualdades:
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+    \item $\norm{x}_2\leq\norm{x}_1\leq\sqrt{n}\norm{x}_2$
+    \item$\norm{x}_\infty\leq\norm{x}_2\leq\sqrt{n}\norm{x}_\infty$
+    \item$\norm{x}_\infty\leq\norm{x}_1\leq n\norm{x}_\infty$
+\end{enumerate}
+\begin{solucion}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+    \item Se sabe que $\left(\sum_{j=1}^n\lvert x_j\rvert\right)^2\geq\sum_{j=1}^n\lvert x_j\rvert^2$, con esto se prueba que:
+    \[
+        \sum_{j=1}^n\lvert x_j\rvert\geq\sqrt{\sum_{j=1}^n\lvert x_j\rvert^2}
+    \]
+    Lo restante se prueba con la desigualdad de Cauchy-Schwarz:
+    \[
+        \left(\sum_{k=1}^na_kb_k\right)^2\leq\left(\sum_{k=1}^na_k^2\right)\left(\sum_{k=1}^nb_{k}^2\right)
+    \]
+    Sea $a_k=1$ y $b_k=\abs{x_k}$ entonces:
+    \begin{align*}
+        \left(\sum_{k=1}^n\abs{x_k}\right)^2&\leq\left(\sum_{k=1}^n1^2\right)\left(\sum_{k=1}^n\abs{x_{k}^2}\right)=n\sum_{k=1}^n\abs{x_{k}^2}\\
+        \Rightarrow\sum_{k=1}^n\abs{x_k}&\leq\sqrt{n}\sum_{k=1}^n\abs{x_{k}^2}\\
+        \norm{x}_1&\leq\sqrt{n}\norm{x}_2
+    \end{align*}
+    \item Se inicia con:
+    \[
+    \norm{x}_\infty=\max_{1\leq i\leq n}\abs{x_i}=\max_{1\leq i\leq n}\sqrt{\sum_{i=1}^n\abs{x_i}^2}=\norm{x}_2
+    \]
+    \newpage
+    Luego, por la definición de máximo, $\max_{i}\abs{x_i}$ es mayor o igual a cada valor absoluto de cada una de las componentes de $x$, $\abs{x_i}$:
+    \begin{align*}
+        \abs{x_1}^2&\leq\left(\max_{1\leq i\leq n}\abs{x_i}\right)^2\\
+        \abs{x_2}^2&\leq\left(\max_{1\leq i\leq n}\abs{x_i}\right)^2\\
+        &\vdots\\
+        \abs{x_n}^2&\leq\left(\max_{1\leq i\leq n}\abs{x_i}\right)^2\\
+    \end{align*}
+    Si se procede a sumar las desigualdades anteriores, entonces:
+    \begin{align*}
+        \abs{x_1}^2+\dots+\abs{x_n}^2&\leq n \left(\max_{1\leq i\leq n}\abs{x_i}\right)^2\\
+        \sqrt{\abs{x_1}^2+\dots+\abs{x_n}^2}&\leq \sqrt{n}\max_{1\leq i\leq n}\abs{x_i}\\
+        \norm{x}_2&\leq\sqrt{n}\norm{x}_\infty
+    \end{align*}
+    \item Ya que $\norm{x}_2\leq\norm{x}_1$ y $\norm{x}_\infty\leq\norm{x}_2$, por transitividad:
+    \[
+        \norm{x}_\infty\leq\norm{x}_1.
+    \]
+    Para cada $i=1,\dots,n$, $\abs{x_i}\leq\max_{1\leq i\leq n}\abs{x_i}$. Por lo que tenemos:
+    \begin{align*}
+    \abs{x_1}&\leq\max_{1\leq i\leq n}\abs{x_i}\\
+    \abs{x_2}&\leq\max_{1\leq i\leq n}\abs{x_i}\\
+    &\vdots\\
+    \abs{x_n}&\leq\max_{1\leq i\leq n}\abs{x_i}\\
+    \end{align*}
+    Si se procede a sumar las desigualdades anteriores, entonces:
+    \begin{align*}
+        \abs{x_1}+\dots\abs{x_n}\leq n\max_{1\leq i\leq n}\abs{x_i}\\
+        \norm{x}_1\leq n\norm{x}_\infty
+    \end{align*}
+\end{enumerate}
+\end{solucion}
+\section{Normas de matrices}
+\eje Sean $\norm{\cdot}_{(m)}$ y $\norm{\cdot}_{(n)}$ normas para $\C^m$ y $\C^n$, respectivamente, y sea $A\in\C^{m\times n}$. Mostrar que la norma inducida $\norm{\cdot}_{m,n}$ satisface las propiedades de norma.
+\begin{solucion}
+Se evaluaran las propiedades que no son evidentes. El supremo de $\norm{Ax}_{(m)}$ es cero si y solo si $A=0$, porque $\norm{x}_{(n)}=1$. También 
+\begin{align*}
+    \norm{\alpha A}_{(m,n)}&=\sup_{\norm{x}_{(n)}=1}\norm{\alpha Ax}_{(m)}\\
+    &=\sup_{\norm{x}_{(n)}=1}\alpha\norm{ Ax}_{(m)}\\
+    &=\alpha\sup_{\norm{x}_{(n)}=1}\norm{ Ax}_{(m)}
+\end{align*}
+Por último, como $\norm{(A+B)x}_{m}\leq\norm{Ax}_{m}+\norm{Bx}_{m}$, entonces:
+\[\sup_{\norm{x}_{(n)}=1}\norm{(A+B)x}_{m}\leq\sup_{\norm{x}_{(n)}=1}\norm{Ax}_{m}+\sup_{\norm{x}_{(n)}=1}\norm{Bx}_{m}\]
+Entonces $\norm{A+B}_{(m,n)}\leq\norm{A}_{(m,n)}+\norm{B}_{(m,n)}$.\\
+\end{solucion}
+
+\eje Para la matriz $A$
+\[
+    A=\begin{pmatrix}
+        \frac{3}{2}&0&\frac{1}{2}\\
+        0&3&0\\
+        \frac{1}{2}&0&\frac{3}{2}
+    \end{pmatrix}
+\]
+calcular las normas p inducidas para $p\in\{1,2.\infty\}$ y la norma de Frobenius.
+
+\begin{solucion}
+\[
+    \norm{A}_1=3,\quad \norm{A}_2=\sqrt{3},\quad \norm{A}_\infty=3,\quad \norm{A}_F=\sqrt{14}
+\]
+\end{solucion}
+
+\eje Sea $B=(b_{i,j}$ en $\C^{m\times n}$. Mostrar que $\norm{B}_F=\sqrt{traza(B^*B)}$. Concluir que para $B$ en $\R^{m\times n}$ se tiene $\norm{B}_F=\sqrt{traza(B^TB)}$.
+\begin{solucion}
+Sea $B=\begin{pmatrix}
+b_{11} & \dots & b_{1n}\\
+\vdots & \ddots & \vdots\\
+b_{m1} & \dots & b_{mn}
+\end{pmatrix}$\\
+Se sabe que:
+\begin{equation*}
+    \left\Vert B \right\Vert_F = \left\Vert \begin{pmatrix}
+        b_{11} & \dots & b_{1n}\\
+        \vdots & \ddots & \vdots\\
+        b_{m1} & \dots & b_{mn}
+    \end{pmatrix}\right\Vert_F = \sqrt{\left( \mathop{\sum_{i=1}^{m}\sum_{j=1}^{n}} \mid b_{i,j} \mid ^2 \right)}
+\end{equation*} \\
+\begin{equation*}
+    B^* = \begin{pmatrix}
+        b_{11} & \dots & b_{1n}\\
+        \vdots & \ddots & \vdots\\
+        b_{m1} & \dots & b_{mn}
+    \end{pmatrix}^\ast= \begin{pmatrix}
+        \overline{b_{11}} & \dots & \overline{b_{m1}}\\
+        \vdots & \ddots & \vdots\\
+        \overline{b_{1n}} & \dots & \overline{b_{mn}}
+    \end{pmatrix}
+\end{equation*}
+Entonces:
+\begin{align*}
+    B^* \times B &= \begin{pmatrix}
+        \overline{b_{11}} & \overline{b_{21}} & \dots & \overline{b_{m1}}\\
+        \overline{b_{12}} & \overline{b_{22}}& \dots & \overline{b_{m2}}\\
+        \vdots & \vdots & \ddots & \vdots \\
+        \overline{b_{1n}} & \overline{b_{2n}} & \dots & \overline{b_{mn}}
+    \end{pmatrix} \times \begin{pmatrix}
+        b_{11} & b_{12} & \dots & b_{1n}\\
+        b_{21} & b_{22}& \dots & b_{2n}\\
+        \vdots & \vdots & \ddots & \vdots\\
+        b_{m1} &b_{m2}& \dots & b_{mn}
+    \end{pmatrix} \\
+    B^* \times B &= \begin{pmatrix}
+        b_{11}\overline{b_{11}} + \dots + b_{m1}\overline{b_{m1}} & \dots & \dots & \dots \\
+        \dots & b_{12}\overline{b_{12}}+\dots + b_{m2}\overline{b_{m2}}& \dots & \dots \\
+        \vdots & \vdots & \ddots & \vdots\\
+        \dots & \dots & \dots & b_{1n}\overline{b_{1n}} + \dots + b_{mn}\overline{b_{mn}}
+    \end{pmatrix} \\
+        B^* \times B &= \begin{pmatrix}
+        \mid b_{11}\mid ^2 + \dots + \mid b_{m1} \mid ^2  & \dots & \dots & \dots \\
+        \dots & \mid b_{12}\mid ^2+\dots + \mid b_{m2}\mid ^2& \dots & \dots \\
+        \vdots & \vdots & \ddots & \vdots\\
+        \dots & \dots & \dots & \mid b_{1n}\mid ^2 + \dots + \mid b_{mn}\mid ^2
+    \end{pmatrix} 
+\end{align*}
+Por lo tanto:
+    \[\norm{B}_F = \sqrt{traza(B^*B)}\]
+\end{solucion}
+
+\eje Considerar la matriz $A:=\bm{u}\bm{v}^*$, donde $\bm{u}\in\C^m$ y $\bm{v}\in\C^n$. Mostrar que la norma 2 matricial inducida satisface
+\[
+    \norm{A}_2=\norm{\bm{u}}_2\norm{\bm{v}}_2
+\]
+\begin{solucion}
+    Por la desigualdad de Cauchy-Schwarz, se tiene que:
+    \begin{align*}
+        \norm{A\bm{x}}_2=\norm{\bm{u}\bm{v}^*\bm{x}}=\norm{\bm{v}^*\bm{x}\norm{\bm{u}}}\leq \norm{\bm{u}}_2\norm{\bm{v}}_2\norm{\bm{x}}_2
+    \end{align*}
+    Si se toma el supremo para el conjunto de toda $\bm{x}\in \C^n$ de norma 1, se tiene que: $\norm{A}_2\leq \norm{\bm{u}}_2\norm{\bm{v}}_2$, para demostrar que la igualdad se cumple, se debe demostrar que $\norm{A}_2\geq \norm{\bm{u}}_2\norm{\bm{v}}_2$, para lo cual, sea $\bm{x}=\bm{v}$, entonces:
+    \begin{align*}
+        \norm{A}_2\geq \frac{\norm{A\bm{v}}_2}{\norm{\bm{v}}_2}=\frac{\norm{\bm{u}\bm{v}^*\bm{v}}_2}{\norm{\bm{v}}_2}=\frac{\norm{\bm{u}}_2\norm{\bm{v}}^2_2}{\norm{\bm{v}}_2}=\norm{\bm{u}}_2\norm{\bm{v}}_2
+    \end{align*}
+\end{solucion}
+\eje Defínase la norma matricial $\norm{\cdot}:\R^{n\times n}\rightarrow\R$ por
+\begin{align*}
+    \norm{A}&:=7\sum_{i=1}^n\sum_{j=1}^n\abs{a_{i,j}}, & A&=(a_{i,j}\in\R^{n\times n}.
+\end{align*}
+ Mostrar que $\norm{\cdot}$ define una norma matricial para $\R^{n\times n}$ verificando las propiedades de norma.
+
+\begin{solucion}
+A continuación, se procede a dar solución a cada inciso.
+    \renewcommand{\labelenumii}{\roman{enumii}.}
+    \begin{enumerate}
+        \item La norma aquí definida es la suma de valores absolutos, por lo que $\norm{A}\geq0$. Como solo se suman valores no negativos, la única forma en la que $\norm{A}=0$, es si cada entrada de $A$ es cero; esto es $\norm{A}=0$ si y solo si $A=0$.
+        \item Sea $\alpha\in\R$,
+        \begin{align*}
+            \norm{\alpha A}&=7\sum_{i=1}^n\sum_{j=1}^n\abs{\alpha a_{i,j}}\\
+            &=7\sum_{i=1}^n\sum_{j=1}^n\abs{\alpha}\abs{a_{i,j}}\\
+            &=7\sum_{i=1}^n\abs{\alpha}\sum_{j=1}^n\abs{a_{i,j}}\\
+            &=7\abs{\alpha}\sum_{i=1}^n\sum_{j=1}^n\abs{a_{i,j}}\\
+            &=\abs{\alpha}7\sum_{i=1}^n\sum_{j=1}^n\abs{a_{i,j}}\\
+            &=\abs{\alpha}\norm{A}
+        \end{align*}
+        \item Se sabe que $\abs{a+b}\leq\abs{a}+\abs{b}$, así que
+        \begin{align*}
+            \abs{a_{1,1}+b_{1,1}}+\dots+\abs{a_{1,n}+b_{1,n}}&\leq\abs{a_{1,1}}+\abs{b_{1,1}}+\dots+\abs{a_{1,n}}+\abs{b_{1,n}}\\
+            \abs{a_{2,1}+b_{2,1}}+\dots+\abs{a_{2,n}+b_{2,n}}&\leq\abs{a_{2,1}}+\abs{b_{2,1}}+\dots+\abs{a_{2,n}}+\abs{b_{2,n}}\\
+            &\vdots\\
+            \abs{a_{n,1}+b_{n,1}}+\dots+\abs{a_{n,n}+b_{n,n}}&\leq\abs{a_{n,1}}+\abs{b_{n,1}}+\dots+\abs{a_{n,n}}+\abs{b_{n,n}}
+        \end{align*}
+        Escrito de otra forma:
+        \begin{align*}
+            \sum_{j=1}^n\abs{a_{1,j}+b_{1,j}}&\leq\sum_{j=1}^n\abs{a_{1,j}}+\sum_{j=1}^n\abs{b_{1,j}}\\
+            \sum_{j=1}^n\abs{a_{2,j}+b_{2,j}}&\leq\sum_{j=1}^n\abs{a_{2,j}}+\sum_{j=2}^n\abs{b_{2,j}}\\
+            &\vdots\\
+            \sum_{j=1}^n\abs{a_{n,j}+b_{n,j}}&\leq\sum_{j=1}^n\abs{a_{n,j}}+\sum_{j=n}^n\abs{b_{n,j}}
+        \end{align*}
+        Si se suman todas las desigualdades:
+        \[\sum_{i=1}^n\sum_{j=1}^n\abs{a_{i,j}+b_{i,j}}\leq\sum_{i=1}^n\sum_{j=1}^n\abs{a_{i,j}}+\sum_{i=1}^n\sum_{j=1}^n\abs{a_{i,j}}.\]
+        Se multiplica ambos lados de la desigualdad por 7,
+        \[7\sum_{i=1}^n\sum_{j=1}^n\abs{a_{i,j}+b_{i,j}}\leq7\sum_{i=1}^n\sum_{j=1}^n\abs{a_{i,j}}+7\sum_{i=1}^n\sum_{j=1}^n\abs{a_{i,j}}.\]
+        Luego,
+        \[\norm{A+B}\leq\norm{A}+\norm{B}.\]
+    \end{enumerate}
+\end{solucion}
+\section{Radio espectral  de una matriz}
+\eje Para la matriz $A$
+\[
+A=\begin{pmatrix}
+\frac{3}{2} & 0 &\frac{1}{2}\\
+0 & 3 & 0\\
+\frac{1}{2} & 0 & \frac{3}{2}
+\end{pmatrix}
+\]
+determinar el radio espectral.
+\begin{solucion}
+El primer paso es calcular los valores propios  para $A$, pero este procedimiento ya se realizó en el \textbf{Ejercicio 19}, es decir, se obviará el calculo para evitar redundancia, por lo tanto,los valores propios de $A$ son $\lambda_1=3$,  $\lambda_2=2, \lambda_3=1$. Entonces $\rho(A)=\max_{1\leq j\leq3}\abs{\lambda_j}=3$.
+\end{solucion}
+
+\eje Calcular las normas p matriciales inducidas $\norm{A}_1$, $\norm{A}_2$, $\norm{A}_\infty$, y el radio espectral de las matrices
+\begin{align*}
+    B:=\begin{pmatrix}
+    0 & 0\\
+    1 & -2
+    \end{pmatrix} && y && A=\begin{pmatrix}
+    \frac{5}{4} & -\frac{1}{2\sqrt{2}} & -\frac{1}{4}\\[8pt]
+    -\frac{1}{2\sqrt{2}} & \frac{3}{2} & \frac{1}{2\sqrt{2}}\\[8pt]
+    -\frac{1}{4} & \frac{1}{2\sqrt{2}} & \frac{5}{4}
+    \end{pmatrix}
+\end{align*}
+\begin{solucion}
+Se procede a realizar los cálculos solicitados:
+\begin{align*}
+    \norm{B}_1&=\max_{1\leq j\leq 2}\norm{a_j}_1=\max\left\{\abs{0}+\abs{1}, \abs{0}+\abs{-2}\right\}=2\\
+    \norm{B}_2&=\sqrt{\max_{1\leq j\leq2}\abs{\Lambda_j}}=\sqrt{\max\left\{0,\abs{-2}\right\}}=\sqrt{2}\\
+    \norm{B}_\infty&=\max_{1\leq j\leq 2}\left(\sum_{j=1}^n\abs{a_{i,j}}\right)=\max\{\abs{0}+\abs{0}, \abs{1}+\abs{-2}\}=3\\
+    \rho(B)&=\max_{1\leq i\leq2}\abs{\Lambda_j}=\max\left\{0,\abs{-2}\right\}=2
+\end{align*}
+
+\begin{align*}
+    \norm{A}_1&=\max_{1\leq j\leq 3}\norm{a_j}_1\\
+    &=\max\left\{\abs{\frac{5}{4}}+\abs{-\frac{1}{2\sqrt{2}}}+\abs{-\frac{1}{4}}, \abs{-\frac{1}{2\sqrt{2}}}+\abs{\frac{3}{2}}+\abs{\frac{1}{2\sqrt{2}}}, \abs{-\frac{1}{4}}+\abs{\frac{1}{2\sqrt{2}}}+\abs{\frac{5}{4}}\right\}\\
+    &=\max\left\{\frac{6+\sqrt{2}}{4},\frac{3+\sqrt{2}}{2},\frac{6+\sqrt{2}}{4}\right\}=\frac{3+\sqrt{2}}{2}\\
+    \norm{A}_\infty&=\max_{1\leq j\leq 3}\left(\sum_{i=1}^n\abs{a_{i,j}}\right)=\norm{A^T}_1=\norm{A}_1=\frac{3+\sqrt{2}}{2}\\
+\end{align*}
+
+Se tiene que:
+\[A^TA=\begin{pmatrix}
+\frac{7}{4} & -\frac{3}{2\sqrt{2}} & -\frac{3}{4}\\[8pt]
+-\frac{3}{2\sqrt{2}} & \frac{5}{2} & \frac{3}{2\sqrt{2}}\\[8pt]
+-\frac{3}{4} & \frac{3}{2\sqrt{2}} & \frac{7}{4}
+\end{pmatrix}.\]
+A partir de esto es posible determinar los valores propios:
+\begin{align*}
+    det(A^TA-\Lambda I)&=0\\
+    \begin{vmatrix}
+        \frac{7}{4}-\Lambda & -\frac{3}{2\sqrt{2}} & -\frac{3}{4}\\[8pt]
+        -\frac{3}{2\sqrt{2}} & \frac{5}{2}-\Lambda & \frac{3}{2\sqrt{2}}\\[8pt]
+        -\frac{3}{4} & \frac{3}{2\sqrt{2}} & \frac{7}{4}-\Lambda
+    \end{vmatrix}&=0\\
+\left(\frac{7}{4}-\Lambda\right)^2\left(\frac{5}{2}-\Lambda\right)+2\cdot\frac{27}{32}-\frac{9}{16}\left(\frac{5}{2}-\Lambda\right)-2\cdot\frac{9}{8}\left(\frac{7}{4}-\Lambda\right)&=0\\
+-\Lambda^3+6\Lambda^2-9\Lambda+4&=0
+\end{align*}
+Así que los valores propios de $A^TA$ son $\Lambda_1=1$ y $\Lambda_2=4$. Entonces,
+\[ \norm{A}_2=\sqrt{\max_{1\leq j\leq3}\abs{\Lambda_j}}=\sqrt{\max\{1,4\}}=\sqrt{4}=2\]
+Ahora se procederá a calcular los valores propios de $A$.
+\begin{align*}
+    det(A-\lambda I)&=0\\
+    \begin{vmatrix}
+    \frac{5}{4}-\lambda & -\frac{1}{2\sqrt{2}} & -\frac{1}{4}\\
+    -\frac{1}{2\sqrt{2}} & \frac{3}{2}-\lambda & \frac{1}{2\sqrt{2}}\\
+    -\frac{1}{4} & \frac{1}{2\sqrt{2}} & \frac{5}{4}-\lambda
+\end{vmatrix} &=0\\
+\left(\frac{3}{2}-\lambda\right)\left(\frac{5}{4}-\lambda\right)^2+\frac{2}{32}-\frac{1}{16}\left(\frac{3}{2}-\lambda\right)-\frac{2}{8}\left(\frac{5}{4}-\lambda\right)&=0\\
+\left(\frac{3}{2}-\lambda\right)\left(\frac{5}{4}-\lambda\right)^2-\frac{1}{16}\left(\frac{3}{2}-\lambda\right)-\frac{1}{4}\left(\frac{5}{4}-\lambda\right)+\frac{1}{16}=0\\
+-16(\lambda-1)^2(\lambda-2)&=0
+\end{align*}
+Así que $\lambda_1=1$ y $\lambda_2=2$. Entonces,
+\[
+    \rho(A)=\max_{1\leq j\leq2}\abs{\lambda_j}=\max\left\{\abs{1},\abs{2}\right\}=2
+\]
+\end{solucion}
+
+\eje Calcular las normas p inducidas $\norm{A}_1$, $\norm{A}_2$, $\norm{A}_\infty$, la norma de Frobenius y el radio espectral para la matriz
+\[A=\begin{pmatrix}
+1&-1&0\\
+-1&2&1\\
+0&1&3
+\end{pmatrix}.\]
+
+\begin{solucion}
+Lo primero es calcular los valores propios:
+\begin{align*}
+    det(A-\lambda I)&=0\\
+    \begin{vmatrix}
+     1-\lambda  &     -1            &0\\
+    -1          &      2-\lambda    &1\\
+     0          &      1            &3-\lambda
+\end{vmatrix} &=0\\
+-\lambda^3+6\lambda^2-9\lambda+2=0\\
+\lambda_1=2\\
+\lambda_1=2-\sqrt{3}\\
+\lambda_1=2+\sqrt{3}
+\end{align*}
+
+\[\norm{A}_1=4,\quad \norm{A}_2=\sqrt{2+\sqrt{3}}\]
+\[\norm{A}_\infty=4,\quad \norm{A}_F=3\sqrt{2}\]
+\[\rho(A)=2+\sqrt{3}\]
+\end{solucion}
+
+\eje Para $A\in\R^{m\times n}$ mostrar que
+\[ \norm{A}_2\leq\sqrt{\norm{A}_\infty\norm{A}_1}\]
+\begin{solucion}
+Se sabe que $\norm{A}_2$ es el máximo de los valores propios de $A^TA$, entonces
+\begin{align*}
+    \norm{A}_2^2&\leq\norm{A^TA}_1\leq\norm{A^T}_1\norm{A}_1=\norm{A}_\infty\norm{A}_1\\
+    \norm{A}_2&\leq\sqrt{\norm{A}_\infty\norm{A}_1}
+\end{align*}
+\end{solucion}
+
+\eje Sea $S\in\C^{n\times n}$ una matriz invertible. Mostrar que $\norm{x}:=\norm{S^{-1}x}_\infty$ define una norma para $\C^n$. Mostrar que esta norma induce la norma matricial
+\begin{align*}
+    \norm{A}&:=\norm{S^{-1}AS}_\infty, & A&\in\C^{n\times n}
+\end{align*}
+\begin{solucion}
+    Lo primero es demostrar que $\norm{x}:=\norm{S^{-1}x}_\infty$ define una norma para $\C^n$, para esto hay que verificar que esta cumpla con las propiedades de de norma:
+    \begin{itemize}
+        \item No negatividad y definición:
+            \begin{align*}
+                \norm{\bm{x}}\geq 0 \textrm{ y } \norm{\bm{x}}=0 \ssi \bm{x}=\bm{0}
+            \end{align*}
+            Para verificar lo primero, basta con ir a la definición de norma infinito, es el máximo de valores absolutos, es evidente la no negatividad.
+            Luego, ya que $S^{-1}$ es invertible, entonces $S^{-1}\neq 0$ por lo tanto  $\norm{\bm{x}}=0 \ssi \bm{x}=0$
+        \item Homogeneidad
+            \begin{align*}
+                \norm{c\bm{x}}&=c\norm{\bm{x}}\\
+                \norm{cS^{-1}x}_\infty&=c\norm{S^{-1}x}_\infty
+            \end{align*}
+        \item Desigualdad triangular
+            \begin{align*}
+                \norm{\bm{x}+\bm{y}}_\infty&\leq\norm{\bm{x}}_\infty+\norm{\bm{y}}_\infty
+            \end{align*}
+            Multiplicando por $\norm{S^{-1}}_\infty$ se tiene que:
+            \begin{align*}
+                \norm{S^{-1}\bm{x}+S^{-1}\bm{y}}_\infty&\leq\norm{S^{-1}\bm{x}}_\infty+\norm{S^{-1}\bm{y}}_\infty\\
+           \end{align*}
+           \item Submultiplicabilidad
+           \begin{align*}
+                \norm{AB}_\infty&=\norm{SABS^{-1}}_\infty=\norm{(SAS^{-1})(SBS^{-1})}_\infty \\
+                &\leq\norm{SAS^{-1}}_\infty \norm{(SBS^{-1})}_\infty =\norm{A}_\infty\norm{B}_\infty
+            \end{align*}
+    \end{itemize}
+    
+
+    
+    \begin{align*}
+        \norm{A}&:=\norm{S^{-1}AS}_\infty, & A&\in\C^{n\times n}
+\end{align*}
+\end{solucion}
+\eje Mostrar que la siguiente serie de matrices converge y calcular su límite:
+\begin{align*}
+    &\sum_{k=0}^\infty A^k, & &donde & A&=\begin{pmatrix}
+    \frac{1}{2}&-2&-1\\
+    0&\frac{1}{3}&0\\
+    0&0&-\frac{1}{2}
+    \end{pmatrix}.
+\end{align*}
+
+\begin{solucion}
+Una serie converge si $\rho(A)<1$. Como $A$ es una matriz triangular, los valores de la diagonal son sus valores propios: $\frac{1}{2},\frac{1}{3},-\frac{1}{2}$. Es evidente que $\rho(A)<1$, por lo que la serie converge.\\
+Ahora, el límite de la sucesión, $X$:
+\begin{align*}
+    X=\sum_{k=0}^\infty A^k &=(I-A)^{-1}\\
+    &=\begin{pmatrix}
+    \frac{1}{2} & -2 & -1\\
+    0 & \frac{2}{3} & 0\\
+    0 & 0 & \frac{3}{2}
+    \end{pmatrix}^{-1}\\
+\end{align*}
+Calculando la inversa:
+\begin{align*}
+    \begin{pmatrix}
+    \frac{1}{2} & -2 & -1 & | & 1 & 0 & 0\\
+    0 & \frac{2}{3} & 0 & | & 0 & 1 & 0\\
+    0 & 0 & \frac{3}{2} & | & 0 & 0 & 1
+    \end{pmatrix}& & \rightarrow & & \begin{pmatrix}
+    1 & -4 & -2 &   | & 2 & 0 & 0\\
+    0 & 1 & 0 &     | & 0 & \frac{3}{2} & 0\\
+    0 & 0 & 1 &     | & 0 & 0 & \frac{2}{3}
+    \end{pmatrix}\\[8pt]
+    \begin{pmatrix}
+    1 & 0 & -2 &    | & 2 & 6 & 0\\
+    0 & 1 & 0 &     | & 0 & \frac{3}{2} & 0\\
+    0 & 0 & 1 &     | & 0 & 0 & \frac{2}{3}
+    \end{pmatrix} & &\rightarrow & & \begin{pmatrix}
+    1 & 0 & 0 &     | & 2 & 6 & \frac{4}{3}\\
+    0 & 1 & 0 &     | & 0 & \frac{3}{2} & 0\\
+    0 & 0 & 1 &     | & 0 & 0 & \frac{2}{3}
+    \end{pmatrix}\\
+     & & & &
+\end{align*}
+Entonces, la sucesión converge a:
+\[
+X=\begin{pmatrix}
+    2 & 6 & \frac{4}{3}\\
+    0 & \frac{3}{2} & 0\\
+    0 & 0 & \frac{2}{3}
+    \end{pmatrix}.
+\]
+\end{solucion}
+
+\eje Mostrar que la siguiente serie de matrices converge y calcular su límite:
+\begin{align*}
+    \sum_{k=0}^\infty A^k,& & donde & & A&=\begin{pmatrix}
+    \frac{1}{4} & 0 & 0\\
+    1 & -\frac{1}{2} & 0\\
+    -1 & -2 & \frac{1}{3}
+    \end{pmatrix}.
+\end{align*}
+\begin{solucion}
+Una serie converge si $\rho(A)<1$. Como $A$ es una matriz triangular, los valores de la diagonal son sus valores propios: $\frac{1}{4},-\frac{1}{2},\frac{1}{3}$. Es evidente que $\rho(A)<1$, por lo que la serie converge.\\
+Ahora, se procede a calcular el límite de la sucesión, $X$:
+\begin{align*}
+    X=\sum_{k=0}^\infty A^k &=(I-A)^{-1}\\
+    &=\begin{pmatrix}
+    \frac{3}{4} & 0 & 0\\
+    -1 & \frac{3}{2} & 0\\
+    1 & 2 & \frac{2}{3}
+    \end{pmatrix}^{-1}\\
+\end{align*}
+Calculando la inversa:
+\begin{align*}
+    \begin{pmatrix}
+    \frac{3}{4} & 0 & 0 & | & 1 & 0 & 0\\
+    -1 & \frac{3}{2} & 0 & | & 0 & 1 & 0\\
+    1 & 2 & \frac{2}{3} & | & 0 & 0 & 1
+    \end{pmatrix}& & \rightarrow & & \begin{pmatrix}
+    1 & 0 & 0 & | & \frac{4}{3} & 0 & 0\\
+    -1 & \frac{3}{2} & 0 & | & 0 & 1 & 0\\
+    1 & 2 & \frac{2}{3} & | & 0 & 0 & 1
+    \end{pmatrix}\\[8pt]
+    \begin{pmatrix}
+    1 & 0 & 0 & | & \frac{4}{3} & 0 & 0\\
+    0 & \frac{3}{2} & 0 & | & \frac{4}{3} & 1 & 0\\
+    1 & 2 & \frac{2}{3} & | & 0 & 0 & 1
+    \end{pmatrix} & &\rightarrow & & \begin{pmatrix}
+    1 & 0 & 0 & | & \frac{4}{3} & 0 & 0\\
+    0 & \frac{3}{2} & 0 & | & \frac{4}{3} & 1 & 0\\
+    0 & 2 & \frac{2}{3} & | & -\frac{4}{3} & 0 & 1
+    \end{pmatrix}\\[8pt]
+    \begin{pmatrix}
+    1 & 0 & 0 & | & \frac{4}{3} & 0 & 0\\
+    0 & 1 & 0 & | & \frac{8}{9} & \frac{2}{3} & 0\\
+    0 & 2 & \frac{2}{3} & | & -\frac{4}{3} & 0 & 1
+    \end{pmatrix}& &\rightarrow & &\begin{pmatrix}
+    1 & 0 & 0 & | & \frac{4}{3} & 0 & 0\\
+    0 & 1 & 0 & | & \frac{8}{9} & \frac{2}{3} & 0\\
+    0 & 0 & \frac{2}{3} & | & -\frac{28}{9} & -\frac{4}{3} & 1\\
+    \end{pmatrix}
+\end{align*}
+Por último:
+\begin{align*}
+    \begin{pmatrix}
+        1 & 0 & 0 & | & \frac{4}{3} & 0 & 0\\
+        0 & 1 & 0 & | & \frac{8}{9} & \frac{2}{3} & 0\\
+        0 & 0 & 1 & | & -\frac{14}{3} & -2 & \frac{3}{2}
+    \end{pmatrix} & & & &
+\end{align*}
+Entonces, la sucesión converge a:
+\[
+X=\begin{pmatrix}
+    \frac{4}{3} & 0 & 0\\
+    \frac{8}{9} & \frac{2}{3} & 0\\
+    -\frac{14}{3} & -2 & \frac{3}{2}
+    \end{pmatrix}.
+\]
+\end{solucion}
+
+\eje Sea $A\in\C^{n\times n}$, y asumiendo que los $n$ valores propios complejos $\lambda_1,\lambda_2,\dots,\lambda_n$ de $A$ satisfacen $\abs{\lambda_j}>1$ para toda $j=1,2,\dots,n$. ¿Es invertible la matriz $I-A$? Dar un demostración de la respuesta.
+\begin{solucion}
+    Si $\lambda_1,\lambda_2,\dots,\lambda_n$ son los valores propios de $A$ entonces $1-\lambda_1,1-\lambda_2,\dots,1-\lambda_n$ son los valores propios de $I-A$. Considerando que $A$ es invertible si y solo si $det(A)\neq0$. Es decir que:
+    \begin{align*}
+        det(I-A)=(1-\lambda_1)(1-\lambda_2)\dots(1-\lambda_n)\neq0
+    \end{align*}
+    Esto es evidente ya que cada resta $1-\lambda_n$ es diferente de cero, debido a que $\abs{\lambda_j}>1$.
+\end{solucion}
+\eje Sea $A\in\C^{n\times n}$ que satisface $\rho(A)<1$, y sea $S\in\C^{n\times n}$ una matriz unitaria (esto es $S^*=\Bar{S}^T=S^{-1}$). Mostrar que $I-S^*AS$ es invertible y encontrar su inversa de dos maneras diferentes.
+\begin{solucion}
+    Considerando que una matriz unitaria es invertible y A por definición es invertible, así como el resultado de que el producto de dos matrices invertibles es invertible, se tiene que: $S^*AS$, luego, por el resultado del ejercicio anterior, es evidente que también $I-S^*AS$ lo es.
+\end{solucion}
+
+\chapter{Aritmética de punto flotante y estabilidad}
+\section{Números condicionales de las matrices}
+\section{Aritmética de punto flotante}
+\section{Condicionando}
+\section{Estabilidad}
+\section{Un algoritmo de sustitución hacía atrás estable}
+\eje Para la matriz A
+
+\[
+A=  \begin{pmatrix}
+        \frac{3}{2} & 0 & \frac{1}{2}\\
+        0 & 3 & 0\\
+        \frac{1}{2} & 0 & \frac{3}{2}
+    \end{pmatrix}.
+\]
+Calcule los números condicionales respecto a las $p-normas$ inducidas para $p\in$ \{1,2,$\infty$\}
+
+\eje Calcule los números condicionales respecto a las $p-normas$ inducidas para $p\in$ \{1,2,$\infty$\}, de la matriz
+
+\[
+A=  \begin{pmatrix}
+        1 & -1 & 0\\
+        -1 & 2 & 1\\
+        0 & 0 & 3
+    \end{pmatrix}.
+\]
+
+
+\eje Sea $A=(a_{i,j})\in \R^{n \times n}$ una matriz invertible que satisface:
+\[\sum_{j=1}^n\abs{a_{i,k}}=1\]
+para  $i\geq i\geq n$.
+
+
+
+\chapter{Métodos directos para sistemas lineales}
+\section{Eliminación Gaussiana}
+\eje Resolver el siguiente sistema lineal con eliminación de Gauss:
+\begin{align*}
+    Ax&=b. & A&=\begin{pmatrix}
+        1&2&1\\
+        -1&1&2\\
+        2&2&4
+    \end{pmatrix}, & b&=\begin{pmatrix} 1\\ 8\\ 4\end{pmatrix}
+\end{align*}
+\begin{solucion}
+Previo a realizar el procedimiento, se nombrará cada una de las filas de la siguiente forma:
+\begin{align*}
+    \begin{matrix}
+        F_1 :\\
+        F_2: \\
+        F_3:
+    \end{matrix} \begin{pmatrix}
+         1 & 2 & 1 & | 1\\
+        -1 & 1 & 2 & | 8 \\
+         2 & 2 & 4 & | 4
+    \end{pmatrix} \hspace{0.8cm} F_2 \rightarrow F_2 + F_1 \\[8pt]
+    \begin{pmatrix}
+        1 & 2 & 1 & | 1\\
+        0 & 3 & 3 & | 9\\
+        2 & 2 & 4 & | 4
+    \end{pmatrix} \hspace{0.8cm} F_3 \rightarrow F_3 - 2F_1    
+\end{align*}
+\begin{align*}
+    &\begin{pmatrix}
+    1 & 2 & 1 & | 1 \\
+    0 & 3 & 3 & | 9 \\
+    0 & -2 & 2 & | 2
+    \end{pmatrix} \hspace{0.8cm} F_3 \rightarrow 3F_3 + 2F_2 \\[8pt]
+    &\begin{pmatrix}
+    1 & 2 & 1 & | 1  \\
+    0 & 3 & 3 & | 9  \\
+    0 & 0 & 12 & | 24 
+    \end{pmatrix}    
+\end{align*}
+Luego, con la ultima matriz aumentada, es posible escribirlo como un sistema de ecuaciones:
+\begin{align*}
+    \begin{cases}
+    x_1 + 2 x_2 + x_ 3&=1\\
+        3x_2+3x_3&=9\\
+        12x_3&=24
+    \end{cases}\Rightarrow \begin{matrix}
+        x_1&=-3\\
+        x_2&=1\\
+        x_3&=2
+    \end{matrix}
+\end{align*}
+\end{solucion}
+
+\eje Escribir tres matrices elementales inferiores de $4\times4$ y explicar para cada matriz qué hace la multiplicación por la izquierda. Verificar las propiedades $(i)$ y $(ii)$ del Lema 4.4 explícitamente para cada matriz triangular inferior.
+\begin{solucion}
+Sea $x_1=\begin{pmatrix}0&1&-3&5\end{pmatrix}^T$. Luego se construye $L_1(x_1)$:
+\begin{align*}
+    L_1(x_1)&=I-xe_1^T\\[8pt]
+    &=I-\begin{pmatrix}
+    0\\
+    1\\
+    -3\\
+    5
+    \end{pmatrix}\begin{pmatrix}
+    1 & 0 & 0 & 0
+    \end{pmatrix}\\[8pt]
+    &= I-\begin{pmatrix}
+    0 & 0 & 0 & 0\\
+    1 & 0 & 0 & 0\\
+    -3 & 0 & 0 & 0\\
+    5 & 0 & 0 & 0\\
+    \end{pmatrix}\\[8pt]
+    &=\begin{pmatrix}
+    1 & 0 & 0 & 0\\
+    -1 & 1 & 0 & 0\\
+    3 & 0 & 1 & 0\\
+    -5 & 0 & 0 & 1\\
+    \end{pmatrix}
+\end{align*}
+Se sabe que para cualquier matriz $A\in\C^{4\times4}$:
+\begin{align*}
+    L_1(x_1)A&=\begin{pmatrix}
+    1 & 0 & 0 & 0\\
+    -1 & 1 & 0 & 0\\
+    3 & 0 & 1 & 0\\
+    -5 & 0 & 0 & 1\\
+    \end{pmatrix}\begin{pmatrix}
+    a_{1,1} & a_{1,2} & a_{1,3} & a_{1,4}\\
+    a_{2,1} & a_{2,2} & a_{2,3} & a_{2,4}\\
+    a_{3,1} & a_{3,2} & a_{3,3} & a_{3,4}\\
+    a_{4,1} & a_{4,2} & a_{4,3} & a_{4,4}
+    \end{pmatrix}\\[8pt]
+    &=\begin{pmatrix}
+    a_{1,1} & a_{1,2} & a_{1,3} & a_{1,4}\\
+    a_{2,1}-a_{1,1} & a_{2,2}-a_{1,2} & a_{2,3}-a_{1,3} & a_{2,4}-a_{1,4}\\
+    a_{3,1}+3a_{1,1} & a_{3,2}+3a_{1,2} & a_{3,3}+3a_{1,3} & a_{3,4}+3a_{1,4}\\
+    a_{4,1}-5a_{1,1} & a_{4,2}-5a_{1,2} & a_{4,3}-a_{1,3} & a_{4,4}-a_{1,4}
+    \end{pmatrix}.
+\end{align*}
+Como $L_1(x_1)$ es triangular inferior, todos los componentes de su diagonal principal son sus valores propios, por lo que $det\left(L_1(x_1)\right)=1$.\\
+Ahora, se procede a calcular $L_1(-x_1)$:
+\begin{align*}
+    L_1(-x_1)&=I-(-x)xe_1^T\\[8pt]
+    &=I-\begin{pmatrix}
+    0\\
+    -1\\
+    3\\
+    -5
+    \end{pmatrix}\begin{pmatrix}
+    1 & 0 & 0 & 0
+    \end{pmatrix}\\[8pt]
+    &= I-\begin{pmatrix}
+    0 & 0 & 0 & 0\\
+    -1 & 0 & 0 & 0\\
+    3 & 0 & 0 & 0\\
+    -5 & 0 & 0 & 0\\
+    \end{pmatrix}\\[8pt]
+    &=\begin{pmatrix}
+    1 & 0 & 0 & 0\\
+    1 & 1 & 0 & 0\\
+    -3 & 0 & 1 & 0\\
+    5 & 0 & 0 & 1\\
+    \end{pmatrix}
+\end{align*}
+Luego,
+\begin{align*}
+    L_1(x_1)L_1(-x_1)&=\begin{pmatrix}
+    1 & 0 & 0 & 0\\
+    -1 & 1 & 0 & 0\\
+    3 & 0 & 1 & 0\\
+    -5 & 0 & 0 & 1
+    \end{pmatrix}\begin{pmatrix}
+    1 & 0 & 0 & 0\\
+    1 & 1 & 0 & 0\\
+    -3 & 0 & 1 & 0\\
+    5 & 0 & 0 & 1
+    \end{pmatrix}\\[8pt]
+    &=\begin{pmatrix}
+    1 & 0 & 0 & 0\\
+    0 & 1 & 0 & 0\\
+    0 & 0 & 1 & 0\\
+    0 & 0 & 0 & 1
+    \end{pmatrix}\\[8pt]
+    &=I
+\end{align*}
+\begin{align*}
+    L_1(-x_1)L_1(x_1)&=\begin{pmatrix}
+    1 & 0 & 0 & 0\\
+    1 & 1 & 0 & 0\\
+    -3 & 0 & 1 & 0\\
+    5 & 0 & 0 & 1
+    \end{pmatrix}\begin{pmatrix}
+    1 & 0 & 0 & 0\\
+    -1 & 1 & 0 & 0\\
+    3 & 0 & 1 & 0\\
+    -5 & 0 & 0 & 1
+    \end{pmatrix}\\[8pt]
+    &=\begin{pmatrix}
+    1 & 0 & 0 & 0\\
+    0 & 1 & 0 & 0\\
+    0 & 0 & 1 & 0\\
+    0 & 0 & 0 & 1
+    \end{pmatrix}\\
+    &=I
+\end{align*}
+Así que $L_1(-x_1)=\left(L_1(x_1)\right)^{-1}$.\\
+
+Ahora, sea $x_2=\begin{pmatrix}0&0&-7&2\end{pmatrix}^T$. Ahora se procede a construir $L_1(x_1)$:
+\begin{align*}
+    L_2(x_2)&=I-xe_2^T\\[8pt]
+    &=I-\begin{pmatrix}
+    0\\
+    0\\
+    -7\\
+    2
+    \end{pmatrix}\begin{pmatrix}
+    0 & 1 & 0 & 0
+    \end{pmatrix}
+\end{align*}
+\begin{align*}
+    &= I-\begin{pmatrix}
+    0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0\\
+    0 & -7 & 0 & 0\\
+    0 & 2 & 0 & 0
+    \end{pmatrix}\\[8pt]
+    &=\begin{pmatrix}
+    1 & 0 & 0 & 0\\
+    0 & 1 & 0 & 0\\
+    0 & 7 & 1 & 0\\
+    0 & -2 & 0 & 1
+    \end{pmatrix}
+\end{align*}
+Se sabe que para cualquier matriz $A\in\C^{4\times4}$:
+\begin{align*}
+    L_2(x_2)A&=\begin{pmatrix}
+    1 & 0 & 0 & 0\\
+    0 & 1 & 0 & 0\\
+    0 & 7 & 1 & 0\\
+    0 & -2 & 0 & 1
+    \end{pmatrix}\begin{pmatrix}
+    a_{1,1} & a_{1,2} & a_{1,3} & a_{1,4}\\
+    a_{2,1} & a_{2,2} & a_{2,3} & a_{2,4}\\
+    a_{3,1} & a_{3,2} & a_{3,3} & a_{3,4}\\
+    a_{4,1} & a_{4,2} & a_{4,3} & a_{4,4}
+    \end{pmatrix}\\[8pt]
+    &=\begin{pmatrix}
+    a_{1,1} & a_{1,2} & a_{1,3} & a_{1,4}\\
+    a_{2,1} & a_{2,2} & a_{2,3} & a_{2,4}\\
+    a_{3,1}+7a_{2,1} & a_{3,2}+7a_{2,2} & a_{3,3}+7a_{2,3} & a_{3,4}+7a_{2,4}\\
+    a_{4,1}-2a_{2,1} & a_{4,2}-2a_{2,2} & a_{4,3}-2a_{2,3} & a_{4,4}-2a_{2,4}
+    \end{pmatrix}.
+\end{align*}
+Como $L_2(x_2)$ es triangular inferior, todos los componentes de su diagonal principal son sus valores propios, por lo que: $det\left(L_2(x_2)\right)=1$.\\
+Ahora, se procede a calcular $L_2(-x_2)$:
+\begin{align*}
+    L_2(-x_2)&=I-(-x)xe_2^T\\[8pt]
+    &=I-\begin{pmatrix}
+    0\\
+    0\\
+    7\\
+    -2
+    \end{pmatrix}\begin{pmatrix}
+    0 & 1 & 0 & 0
+    \end{pmatrix}
+\end{align*}
+\begin{align*}
+    &= I-\begin{pmatrix}
+    0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0\\
+    0 & -7 & 0 & 0\\
+    0 & 2 & 0 & 0\\
+    \end{pmatrix}\\[8pt]
+    &=\begin{pmatrix}
+    1 & 0 & 0 & 0\\
+    0 & 1 & 0 & 0\\
+    0 & -7 & 1 & 0\\
+    0 & 2 & 0 & 1\\
+    \end{pmatrix}
+\end{align*}
+Luego,
+\begin{align*}
+    L_2(x_2)L_2(-x_2)&=\begin{pmatrix}
+    1 & 0 & 0 & 0\\
+    0 & 1 & 0 & 0\\
+    0 & 7 & 1 & 0\\
+    0 & -2 & 0 & 1
+    \end{pmatrix}\begin{pmatrix}
+    1 & 0 & 0 & 0\\
+    1 & 1 & 0 & 0\\
+    0 & -7 & 1 & 0\\
+    0 & 2 & 0 & 1
+    \end{pmatrix}\\[8pt]
+    &=\begin{pmatrix}
+    1 & 0 & 0 & 0\\
+    0 & 1 & 0 & 0\\
+    0 & 0 & 1 & 0\\
+    0 & 0 & 0 & 1
+    \end{pmatrix}\\[8pt]
+    L_2(-x_2)L_2(x_2)&=\begin{pmatrix}
+    1 & 0 & 0 & 0\\
+    0 & 1 & 0 & 0\\
+    0 & -7 & 1 & 0\\
+    0 & 2 & 0 & 1
+    \end{pmatrix}\begin{pmatrix}
+    1 & 0 & 0 & 0\\
+    0 & 1 & 0 & 0\\
+    0 & 7 & 1 & 0\\
+    0 & -2 & 0 & 1
+    \end{pmatrix}\\[8pt]
+    &=\begin{pmatrix}
+    1 & 0 & 0 & 0\\
+    0 & 1 & 0 & 0\\
+    0 & 0 & 1 & 0\\
+    0 & 0 & 0 & 1
+    \end{pmatrix}\\
+    &=I
+\end{align*}
+Así que $L_2(-x_2)=\left(L_2(x_2)\right)^{-1}$.\\
+
+Elijamos $x_3=\begin{pmatrix}0&0&0&11\end{pmatrix}^T$. Ahora se procede a construir $L_3(x_3)$:
+\begin{align*}
+    L_2(x_2)&=I-xe_2^T\\
+    &=I-\begin{pmatrix}
+    0\\
+    0\\
+    0\\
+    11
+    \end{pmatrix}\begin{pmatrix}
+    0 & 0 & 1 & 0
+    \end{pmatrix}\\[8pt]
+    &= I-\begin{pmatrix}
+    0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0\\
+    0 & 0 & 11 & 0\\
+    \end{pmatrix}\\[8pt]
+    &=\begin{pmatrix}
+    1 & 0 & 0 & 0\\
+    0 & 1 & 0 & 0\\
+    0 & 0 & 1 & 0\\
+    0 & 0 & -11 & 1\\
+    \end{pmatrix}
+\end{align*}
+Se sabe que para cualquier matriz $A\in\C^{4\times4}$:
+\begin{align*}
+    L_3(x_3)A&=\begin{pmatrix}
+    1 & 0 & 0 & 0\\
+    0 & 1 & 0 & 0\\
+    0 & 0 & 1 & 0\\
+    0 & 0 & -11 & 1
+    \end{pmatrix}\begin{pmatrix}
+    a_{1,1} & a_{1,2} & a_{1,3} & a_{1,4}\\
+    a_{2,1} & a_{2,2} & a_{2,3} & a_{2,4}\\
+    a_{3,1} & a_{3,2} & a_{3,3} & a_{3,4}\\
+    a_{4,1} & a_{4,2} & a_{4,3} & a_{4,4}
+    \end{pmatrix}\\[8pt]
+    &=\begin{pmatrix}
+    a_{1,1} & a_{1,2} & a_{1,3} & a_{1,4}\\
+    a_{2,1} & a_{2,2} & a_{2,3} & a_{2,4}\\
+    a_{3,1} & a_{3,2} & a_{3,3} & a_{3,4}\\
+    a_{4,1}-11a_{3,1} & a_{4,2}-11a_{3,2} & a_{4,3}-11a_{3,3} & a_{4,4}-11a_{3,4}
+    \end{pmatrix}.
+\end{align*}
+Como $L_3(x_3)$ es triangular inferior, todos los componentes de su diagonal principal son sus valores propios, por lo que $det\left(L_3(x_3)\right)=1$.\\
+Ahora, se procede a calcular $L_3(-x_3)$:
+\begin{align*}
+    L_3(-x_3)&=I-(-x)xe_3^T\\
+    &=I-\begin{pmatrix}
+    0\\
+    0\\
+    0\\
+    -11
+    \end{pmatrix}\begin{pmatrix}
+    0 & 1 & 0 & 0
+    \end{pmatrix}\\[8pt]
+    &= I-\begin{pmatrix}
+    0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0\\
+    0 & 0 & -11 & 0\\
+    \end{pmatrix}\\[8pt]
+    &=\begin{pmatrix}
+    1 & 0 & 0 & 0\\
+    0 & 1 & 0 & 0\\
+    0 & 0 & 1 & 0\\
+    0 & 0 & -11 & 1\\
+    \end{pmatrix}
+\end{align*}
+Luego,
+\begin{align*}
+    L_3(x_3)L_3(-x_3)&=\begin{pmatrix}
+    1 & 0 & 0 & 0\\
+    0 & 1 & 0 & 0\\
+    0 & 0 & 1 & 0\\
+    0 & 0 & -11 & 1
+    \end{pmatrix}\begin{pmatrix}
+    1 & 0 & 0 & 0\\
+    1 & 1 & 0 & 0\\
+    0 & 0 & 1 & 0\\
+    0 & 0 & -11 & 1
+    \end{pmatrix}\\[8pt]
+    &=\begin{pmatrix}
+    1 & 0 & 0 & 0\\
+    0 & 1 & 0 & 0\\
+    0 & 0 & 1 & 0\\
+    0 & 0 & 0 & 1
+    \end{pmatrix}
+\end{align*}
+\begin{align*}
+    L_3(-x_3)L_3(x_3)&=\begin{pmatrix}
+    1 & 0 & 0 & 0\\
+    0 & 1 & 0 & 0\\
+    0 & 0 & 1 & 0\\
+    0 & 0 & 11 & 1
+    \end{pmatrix}\begin{pmatrix}
+    1 & 0 & 0 & 0\\
+    0 & 1 & 0 & 0\\
+    0 & 0 & 1 & 0\\
+    0 & 0 & -11 & 1
+    \end{pmatrix}\\[8pt]
+    &=\begin{pmatrix}
+    1 & 0 & 0 & 0\\
+    0 & 1 & 0 & 0\\
+    0 & 0 & 1 & 0\\
+    0 & 0 & 0 & 1
+    \end{pmatrix}\\
+    &=I
+\end{align*}
+Así que $L_3(-x_3)=\left(L_3(x_3)\right)^{-1}$.\\
+\end{solucion}
+
+\eje Encontrar las matrices elementales triangulares $L_1(m_1)$ y $L_2(m_2)$ que describen la eliminación guassiana para convertir el sistema lineal del ejercicio 54 en la forma $Ux=b'$ con una matriz triangular $U$.
+
+\begin{solucion}
+\[L_1(m_1)=\begin{pmatrix}
+1 & 0 & 0\\
+1 & 1 & 0\\
+-2 & 0 & 1
+\end{pmatrix}\]
+
+\[L_2(m_2)=\begin{pmatrix}
+1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 2/3 & 1
+\end{pmatrix}\]
+\end{solucion}
+
+\eje Demostrar el lema 4.4.
+\renewcommand{\labelenumii}{\roman{enumii}.}
+\begin{enumerate}
+    \item Las matrices elementales triangulares superiores poseen en su diagonal, únicamente entradas con el número 1. Como es triangular estos son sus valores propios la multiplicación de ellos es 1. Así que $det\left(L_i(x)\right)=1$,
+    \item Veamos que:
+    \begin{align*}
+        L_i(x)L_i(-x)&=\left(I-xe_i^T\right)\left(I-(-x)e_i^T\right)\\
+        &=I-(-x)e_i^T-xe_i^T+xe_i^T(-x)e_i^T\\
+        &=I+xe_i^T(-x)e_i^T;
+    \end{align*}
+    Se sabe que $e_j^Tx=0$ para $j\leq i$, entonces $L_i(x)L_i(-x)=I$.
+\end{enumerate}
+
+\section{La factorizacón $LU$}
+\eje Para la matriz $A$
+\[A=\begin{pmatrix}
+1&2&1\\
+-1&1&2\\
+2&2&4
+\end{pmatrix}\]
+encontrar la factorización única de $A$.
+
+\begin{solucion}
+\[L_1=\begin{pmatrix}
+1 & 0 & 0\\
+1 & 1 & 0\\
+-2 & 0 & 1
+\end{pmatrix},\quad
+L_2=\begin{pmatrix}
+1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 2/3 & 1
+\end{pmatrix}\]
+
+\[U=L_2L_1A=\begin{pmatrix}
+1 & 2 & 1\\
+0 & 3 & 3\\
+0 & 0 & 4
+\end{pmatrix},\quad
+L=L_1^{-1}L_2^{-1}=\begin{pmatrix}
+1 & 0 & 0\\
+-1 & 1 & 0\\
+2 & -2/3 & 1
+\end{pmatrix}\]
+Entonces
+\[A=\begin{pmatrix}
+1 & 0 & 0\\
+-1 & 1 & 0\\
+2 & -2/3 & 1
+\end{pmatrix}
+\begin{pmatrix}
+1 & 2 & 1\\
+0 & 3 & 3\\
+0 & 0 & 4
+\end{pmatrix}\]
+\end{solucion}
+
+\eje Una matriz $A\in\C^{n\times n}$ es llamada estrictamente diagonal dominante si
+\begin{align*}
+    \sum_{k=1,k\neq 1}^n\abs{a_{i,k}}\abs{a_{i,j}},\todo i=1,2,\dots,n
+\end{align*}
+
+Muestre que la matriz estrictamente diagonal dominante es invertible y posee una descomposición $LU$.
+\begin{solucion}
+    Por hipótesis cada elemento de la diagonal es diferente de cero. Sea $D=diag(a_{11},\dots,a_{nn})$ y verifica que $D^{-1}A$ tiene únicamente elementos 1 en su diagonal, $B=[b_{ij}]=I-D^{-1}A$ posee unicamente elementos 0 en su diagonal principal y $b_{ij}=-a_{ij}/a_{ii}$ si $i\neq j$. Entonces $\norm{B}_\infty<1$ y considerando que una matriz $Z$ es no singular si existe una norma tal que $\norm{I-Z}<1$ entonces: $I-B=D^{-1}A$ es no singular y por lo tanto, $A$ es no singular y seguido $A$ es invertible. $A$ posee una descomposición $LU$ porque el determinante de toda submatriz es diferente de cero.
+\end{solucion}
+\eje Sea $A\in\R^{n\times n}$ una matriz tridiagonal, esto es, una matriz de la forma
+\[A=\begin{pmatrix}
+a_1&c_1&&&0\\
+b_1&a_2&c_2\\
+&\ddots&\ddots&\ddots&\\
+&&\ddots&c_{n-1}\\
+0&&&b_n&a_n
+\end{pmatrix}\]
+con
+\begin{align*}
+    \abs{a_1}&>\abs{c_1}>0,\\
+    \abs{a_i}&\leq\abs{b_i}+\abs{c_i}, & b_i,c_i\neq 0, & & 2\leq i\leq n-1\\
+    \abs{a_n}&\geq\abs{b_n}> 0,\\
+\end{align*}
+Muestre que $A$ es invertible y tiene una descomposición $LU$ de la forma:
+\begin{align*}
+    A=\begin{pmatrix}
+    1   &   &   & 0\\
+    l_2 & 1 &   &  \\
+        &\ddots &\ddots   &  \\
+    0   &   &l_n& 1\\
+    \end{pmatrix}\begin{pmatrix}
+    r_1   & c_1  &   & 0\\
+        & r_2 & \ddots  &  \\
+        &       &\ddots   &c_{n-1}  \\
+    0   &   &   & r_n\\
+    \end{pmatrix}
+\end{align*}
+donde los vectores $\bm{l}=(l_2,l_3,\dots,l_n)^T\in \R^{n-1}$ y $\bm{r}=(r_1,r_2,\dots,r_n)^T\in \R^n$ pueden ser calculados mediante $r_1=a_1$ y $l_i=b_i/r_{i-1}$ y $r_i=a_i-l_ic_{i-1}$ para $2\leq i \leq n$. 
+
+\begin{solucion}
+    Por simplicidad, se define la secuencia:
+    \begin{align*}
+        \delta_0=1,& &\delta_1=b_1,& &\delta_k=b_k\delta_{k-1}-a_k\delta_{k-2},& &2\leq k \leq n. 
+    \end{align*}
+    \begin{align*}
+        A=\begin{pmatrix}
+        1   &   &   & 0\\
+        a_2\frac{\delta_0}{\delta_1} & 1 &   &  \\
+            &\ddots &\ddots   &  \\
+        0   &   &a_n\frac{\delta_{n-2}}{\delta_{n-1}}& 1\\
+        \end{pmatrix}\begin{pmatrix}
+        \frac{\delta_1}{\delta_0}   & c_1  &   & 0\\
+            & \frac{\delta_2}{\delta_1} & \ddots  &  \\
+            &       &\ddots   &c_{n-1}  \\
+        0   &   &   & \frac{\delta_n}{\delta_{n-1}}\\
+        \end{pmatrix}
+    \end{align*}
+    Dado a que $\delta_k=det(A[1\dots k,1\dots k])\neq 0$ para $k=1,\dots,n$, A posee una única factorización ya que por hipótesis es invertible. Se procede a verificar si la factorización propuesta funciona:
+    \begin{align*}
+        (LU)_{k,k+1}&=c_k, & & 1\leq k\leq n-1\\
+        (LU)_{k,k-1}&=a_k, & & 2\leq k\leq n\\
+        (LU)_{k,l}&=0, & &  \abs{k-l}\geq 2\\
+        (LU)_{1,1}&=\frac{\delta_1}{\delta_0}=b_1, \\
+        (LU)_{k,k}&=\frac{a_kc_{k-1}\delta_{k-2}+\delta_k}{\delta_{k-1}}=b_k, & & 2\leq k\leq n\\
+    \end{align*}
+    
+\end{solucion}
+
+\eje Usar la eliminación gaussiana para encontrar la factorización LU de la siguiente matriz
+\[A=\begin{pmatrix}
+2&-2&0&0\\
+2&-4&2&0\\
+0&-2&4&-2\\
+0&0&2&-4
+\end{pmatrix}\]
+¿Por qué la factorización LU es única?
+
+\begin{solucion}
+\[L_1=\begin{pmatrix}
+1 & 0 & 0 & 0\\
+-1 & 1 & 0 & 0\\
+0 & 0 & 1 & 0\\
+0 & 0 & 0 & 1
+\end{pmatrix}\]
+\[L_2=\begin{pmatrix}
+1 & 0 & 0 & 0\\
+0 & 1 & 0 & 0\\
+0 & -1 & 1 & 0\\
+0 & 0 & 0 & 1
+\end{pmatrix}\]
+\[L_3=\begin{pmatrix}
+1 & 0 & 0 & 0\\
+0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0\\
+0 & 0 & -1 & 1
+\end{pmatrix}\]
+
+\[U=L_3L_2L_1A,\quad L=L_1^{-1}L_2^{-1}L_3^{-1}\]
+
+Y la factorización es única pues la matriz $A$ es invertible.
+\end{solucion}
+\section{Pivoteo}
+\eje Demostrar el lema 4.14.
+\begin{solucion}
+A continuación, se procede a resolver cada uno de los ejercicios:
+\renewcommand{\labelenumii}{\roman{enumii}.}
+\begin{enumerate}
+    \item Una matriz elemental de permutación $P_{i,j}$ es la matriz obtenida al intercambiar las filas $i$ y $j$ de la matriz identidad. Así que si intercambiamos las filas $i$ y $j$ de $P_{i,j}$ se obtiene la identidad. Por lo tanto $P_{i,j}^{-1}=P_{i,j}$. Es decir, que intercambiar las filas $i$ y $j$, y las filas $j$ e $i$ de la matriz identidad es exactamente lo mismo, entonces $P_{i,j}=P_{j,i}$. Por definición:
+    \begin{align*}
+        P_{i,j}^T&=\left[I-(e_i-e_j)(e_i-e_j)^T\right]^T\\
+        &=I^T-\left[(e_i-e_j)(e_i-e_j)^T\right]^T\\
+        &=I-\left[(e_i-e_j)^T\right]^T(e_i-e_j)^T\\
+        &=I-(e_i-e_j)(e_i-e_j)^T\\
+        &=P_{i,j}
+    \end{align*}
+    \item Al intercambiar dos filas en una matriz cambia el signo del determinante, entonces, $det(P_{i.j})=-1$. La matriz de permutación $P_{i,i}$ indica que la matriz identidad se deben intercambiar las filas $i$ e $i$, es decir $P_{i,i}=I$.
+    \item Al multiplicar una matriz de permutación por la izquierda se hace una combinación lineal de sus filas con las casillas de la otra matriz; entonces se intercambian las filas $i$ y $j$. También, cuando se multiplica la matriz de permutación por la derecha se hace una combinación lineal de sus columnas y se intercambian las columnas $i$ y $j$ de la matriz que no es de permutación.
+\end{enumerate}
+\end{solucion}
+\section{Factorización de Cholesky}
+\eje Calcular la factorización de Cholesky para la siguiente matriz:
+\[A=\begin{pmatrix}
+1&2&3\\
+2&5&8\\
+3&8&14
+\end{pmatrix}.\]
+\begin{solucion}
+A continuación, se emplea el algoritmo para la factorización de Cholesky:
+\begin{align*}
+    l_{11}&=\sqrt{a_{11}}= 1\\
+    l_{21}&= \frac{a_{21}}{l_{11}}= \frac{2}{1}=2\\
+    l_{22}&= \sqrt{a_{22}-{l_{21}}^2}= \sqrt{5-2^2}=1\\
+    l_{31}&= \frac{a_{31}}{l_{11}}=\frac{3}{1}=3\\
+    l_{32}&= \frac{a_{32}-l_{31}l_{21}}{l_{22}}=\frac{8-3*2}{1}=2\\
+    l_{33}&= \sqrt{a_{33}-{l_{31}}^2-{l_{32}}^2}=\sqrt{14-3^2-2^2}=1\\ 
+\end{align*}
+Luego,
+\begin{align*}
+    L=\begin{pmatrix}
+        1&0&0\\
+        2&1&0\\
+        3&2&1
+    \end{pmatrix}
+\end{align*} 
+Por lo tanto:
+\begin{align*}
+    A = LL^*=\begin{pmatrix}
+        1&0&0\\
+        2&1&0\\
+        3&2&1
+    \end{pmatrix}\begin{pmatrix}
+        1&2&3\\
+        0&1&2\\
+        0&0&1
+    \end{pmatrix}
+\end{align*}
+
+\end{solucion}
+
+\eje Mostrar que el costo computacional de la factorización de Cholesky es aproximadamente $n^3/6+\mathcal{O}(n^2)$ operaciones elementales, donde contamos una multiplicación más una suma como operación elemental.
+\begin{solucion}
+Para una matriz de $n\times n$ se efectuan:\\
+$n$ raíces cuadradas, $\frac{n(n-1)}{2}$ divisiones,  $\frac{n^3-n}{6}$ multiplicaciones y $\frac{n^3-n}{6}$ sumas/restas. Por lo tanto el costo computacional es $n+\frac{n^2}{2}-\frac{n}{2}+\frac{n^3}{6}-\frac{n}{6}+\frac{n^3}{6}-\frac{n}{6}= \frac{n^3}{6}+\frac{n^2}{2}+\frac{n}{6} \sim n^3/6 + \mathcal{O}(n^2) $.
+\end{solucion}
+
+\eje ¿Es la factorización de Cholesky de una matriz definida positiva de $nxn$ única? De una demostración de su respuesta.
+
+\begin{solucion}
+Suponga que la factorización de Cholesky de $A$ no es única, entonces:
+\[A=LL^*=\hat{L}\hat{L}^*\]
+entonces, para $x\ne 0$, $x\in\mathbb{C}^n$, se tiene que
+\[x^*Ax=x^*LL^*x=x^*\hat{L}\hat{L}^*x>0\]
+luego,
+\[x^*LL^*x=x^*\hat{L}\hat{L}^*x\]
+\[(L^*x)^*(L^*x)=(\hat{L}^*x)^*(\hat{L}^*x)\]
+\[||L^*x||^2=||\hat{L}^*x||^2\]
+\[L^*x=\hat{L}^*x\]
+\[L^*=\hat{L}^*\]
+\[L=\hat{L}\]
+Por lo tanto la factorización de una matriz definida positiva es única.
+\end{solucion}
+
+\eje
+Calcule la factorización de Cholesky de la siguiente matriz a mano:
+\begin{align*}
+    A=\begin{pmatrix}
+        4&2&6\\
+        2&5&5\\
+        6&5&14
+    \end{pmatrix}
+\end{align*}
+Una vez calculada la factorización de Cholesky, úsela para concluir si la matriz es definida positiva.
+\begin{solucion}
+    Se procederá a calcular los elementos de la matriz $L$ por columna.
+    \begin{center}
+        $l_{1,1}=\sqrt{a_{1,1}}=\sqrt{4}=2$, 
+        $l_{2,1}=\frac{1}{l_{1,1}}a_{2,1}=\frac{1}{2}2=1$, 
+        $l_{3,1}=\frac{1}{l_{1,1}}a_{3,1}=\frac{1}{2}6=3$
+    \end{center}
+    Luego, los elementos de la segunda columna:
+    \begin{center}
+        $l_{2,2}=\sqrt{a_{2,2}-(l_{2,1})^2}=\sqrt{5-1^2}=2$, 
+        $l_{3,2}=\frac{1}{l_{2,2}}(a_{3,2}-l_{3,1}*l_{2,1})=\frac{1}{2}(2)=1$
+    \end{center}
+     Por ultimo, el elemento de la tercer columna:
+    \begin{center}
+        $l_{3,3}=\sqrt{a_{3,3}-(l_{3,1})^2-(l_{3,2})^2}=\sqrt{14-3^2-1^2}=2$
+    \end{center}
+    Por lo tanto, la matriz triangular inferior $L$ está dada por:
+    \begin{align*}
+    L=\begin{pmatrix}
+        2&0&0\\
+        1&2&0\\
+        3&1&2
+    \end{pmatrix}
+\end{align*}
+   
+    
+\end{solucion}
+\section{Factorización QR}
+\eje Calcular la factorización $QR$ de la siguiente matriz:
+\[A=\begin{pmatrix}
+1&0&3\\
+2&-6&3\\
+-2&3&-3
+\end{pmatrix}.\]
+\begin{solucion}
+La norma del primer vector columna de $A$ es 3. Entonces sea $w_1:=\frac{z}{\norm{z}_2}$, con
+\begin{align*}
+    z&=\begin{pmatrix}
+    1\\
+    2\\
+    -2
+    \end{pmatrix}-3\begin{pmatrix}
+    1\\
+    0\\
+    0
+    \end{pmatrix}=\begin{pmatrix}
+    -2\\
+    2\\
+    -2
+    \end{pmatrix}, & \norm{z}_2=2\sqrt{3}.
+\end{align*}
+luego:
+\[w_1=\frac{1}{2\sqrt{3}}\begin{pmatrix}
+-2\\
+2\\
+-2
+\end{pmatrix},\]
+y la primera matriz de Householder está dada por:
+\[H_1=H(w_1)=I-2w_1w_1^T=\begin{pmatrix}
+-7&8&-8\\
+8&-7&8\\
+-8&8&-7
+\end{pmatrix}.\]
+luego,
+\[H_1A=\begin{pmatrix}
+\frac{1}{3}&\frac{2}{3}&-\frac{2}{3}\\
+\frac{2}{3}&\frac{1}{3}&\frac{}{3}\\
+-\frac{2}{3}&\frac{2}{3}&\frac{1}{3}
+\end{pmatrix}\begin{pmatrix}
+1&0&3\\
+2&-6&3\\
+-2&3&-3
+\end{pmatrix}=\begin{pmatrix}
+3&-6&5\\
+0&0&1\\
+0&-3&-1
+\end{pmatrix}.\]
+sea la submatriz
+\[A_1=\begin{pmatrix}
+0&1\\
+-3&-1
+\end{pmatrix},\]
+y para esta $A_1$ sea $w_2=\frac{v}{\norm{v}_2}$ con
+\begin{align*}
+    v&=\begin{pmatrix}
+0\\
+-3
+\end{pmatrix}-3\begin{pmatrix}
+1\\
+0
+\end{pmatrix}=\begin{pmatrix}
+-3\\
+-3
+\end{pmatrix}, & \norm{v}_2&=3\sqrt{2}.
+\end{align*}
+Así que
+\[w_2=\frac{1}{\sqrt{2}}\begin{pmatrix}
+-1\\
+-1
+\end{pmatrix},\]
+y la matriz de Householder dada es
+\[H(w_2)=I-\begin{pmatrix}
+-1\\
+-1
+\end{pmatrix}\begin{pmatrix}
+-1&-1
+\end{pmatrix}=\begin{pmatrix}
+0&-1\\
+-1&0
+\end{pmatrix}.\]
+De esta forma, la matriz $H_2$ está dada por
+\[H_2=\begin{pmatrix}
+1&0&0\\
+0&0&-1\\
+0&-1&0
+\end{pmatrix}.\]
+Tenemos que la matriz unitaria $Q$ está definida por:
+\[Q=H_1H_2=\begin{pmatrix}
+1&-3&0\\
+2&-3&6\\
+-2&3&-3
+\end{pmatrix}\]
+\end{solucion}
+
+\eje Calcule la factorización $QR$ de la siguiente matriz:
+\[A=\begin{pmatrix}
+2 & 5 & 3\\
+4 & 4 & -3\\
+-4 & 2 & 3
+\end{pmatrix}\]
+
+\begin{solucion}
+Primero se encontrarán las matrices de Householder
+\[H_1=\begin{pmatrix}
+-1/3 & -2/3 & 2/3\\
+-2/3 & 2/3 & 1/3\\
+2/3 & 1/3 & 2/3
+\end{pmatrix},\quad
+H_2=\begin{pmatrix}
+1 & 0 & 0\\
+0 & 0 & 1\\
+0 & 1 & 0
+\end{pmatrix},\quad
+L_3=\begin{pmatrix}
+1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & -1
+\end{pmatrix}\]
+Luego,
+\[R=H_3H_2H_1A=\begin{pmatrix}
+-6 & -3 & 3\\
+0 & 6 & 3\\
+0 & 0 & 3
+\end{pmatrix}\]
+\[Q=H_1H_2H_3=\begin{pmatrix}
+-1/3 & 2/3 & 2/3\\
+-2/3 & 1/3 & -2/3\\
+2/3 & 2/3 & -1/3
+\end{pmatrix}\]
+\end{solucion}
+
+\eje Sea $A\in\R^{m\times n}$, con $m>n$, y asumiendo que $A$ tiene imagen completo. Sea $b\in\R^m$. Considérese el siguiene funcional lineal
+\begin{align*}
+    f(x)&=\norm{Ax-b}_2^2, & x&\in\R^n.
+\end{align*}
+Mostrar que existe un vector único $x^*\in\R$ que minimiza el funcional $f$ y que este vector $x^*$ es la única solución de las llamadas ecuaciones normales
+\[ A^TAx^*=A^Tb.\]
+\begin{solucion}
+Como $A$ no es una matriz cuadrada, entonces $A$ puede escribirse como $A=QR$ donde $Q$ es una matriz ortogonal y $R\in\R^{m\times n}$ tiene la forma:
+\[ R= \begin{pmatrix}
+* & \cdots & *\\
+& \ddots & \vdots\\
+& & *\\
+& 0 &
+\end{pmatrix}=\begin{pmatrix}
+R_1\\
+0
+\end{pmatrix}\]
+con una matriz triangular superior $R_1\in\R^{n\times n}$. Con esto y el hecho de que $Q^T=Q^{-1}$, entonces
+\begin{align*}
+    \norm{Ax-b}2^2&=\norm{QRx-b}_2^2=\norm{Q(Rx-Q^Tb)}^2_2\\
+    &=(Rx-Q^Tb)^TQ^TQ\left(Rx-Q^TB\right)=\norm{Rx-Q^Tb}_2^2\\
+    \norm{\begin{pmatrix}
+    R_1x\\
+    0
+    \end{pmatrix}-\begin{pmatrix}
+    c\\
+    d
+    \end{pmatrix}}_2^2&=\norm{R_1x-c}_2^2+\norm{d}_2^2
+\end{align*}
+luego, se procede a dividir el vector $Q^Tb$ en dos componentes $\left(c^T,d^T\right)$, con $c\in\R^n$ y $d\in\R^{m-n}$.
+La última ecuación posee un error: $\norm{d}_2^2$. Sin embargo, es posible minimizar el error eligiendo $x$ como la solución de $R_1x=c$. Como $R_1$ es una matriz invertible porque se asume que $A$ tiene imagen completa. Entonces, el vector que minimiza $f(x)$ es $R^{-1}c\in\R^n$. Se sabe que las matrices inversas son únicas, por lo que este último vector también lo es.\\
+Ahora, con la sustitución $x=R_1^{-1}c$ en la ecuación normal:
+\begin{align*}
+    A^TAx&=A^Tb\\
+    (QR)^T(QR)\left(R_1^{-1}c\right)&=(QR)^Tb\\
+    R^TQ^TQRR_1^{-1}c&=R^TQ^Tb\\
+    R^TRR_1^{-1}c&=R^T\begin{pmatrix}
+    c\\
+    d
+    \end{pmatrix}\\
+    R^T\begin{pmatrix}
+    R_1\\
+    0
+    \end{pmatrix}R_1^{-1}c&=\begin{pmatrix}
+    R_1 & 0
+    \end{pmatrix}\begin{pmatrix}
+    c\\
+    d
+    \end{pmatrix}\\
+    R^T\begin{pmatrix}
+    R_1R_1^{-1}c\\
+    0
+    \end{pmatrix}&=R_1c\\
+    \begin{pmatrix}
+    R_1 & 0
+    \end{pmatrix}\begin{pmatrix}
+    c & 0
+    \end{pmatrix}&=R_1c\\
+    R_1c&=R_1c
+\end{align*}
+Este el único que satisface esta ecuación.
+\end{solucion}
+
+\eje Sea $A\in\R^{m\times n}$ con $m\geq n$. Asuma que $A=U\Sigma V^T$ con $U\in\R^{m\times m}$ y $V\in\R^{n\times n}$ matrices ortogonales y la matriz diagonal $\Sigma \in \R^{m\times n}$ con entradas unicamente no negativas. Use la descomposición $A=U\Sigma V^T$ para calcular la solución a:
+\begin{align*}
+    \min_{x\in \R^n}{\norm{A\bm{x}-\bm{b}}_2}
+\end{align*}
+\begin{solucion}
+    Se parte del hecho que el objetivo es encontrar $\bm{x}$ tal que minimize, por simplicidad, el cuadrado:
+    \begin{align*}
+        \norm{A\bm{x}-b}^2_2&=\norm{A\bm{x}-b}^2_2\\
+        &=\norm{U\Sigma V^T\bm{x}-b}^2_2\\
+        &=\norm{U^T(U\Sigma V^T\bm{x}-b)}^2_2\\
+        &=\norm{\Sigma (V^T\bm{x})-U^Tb}^2_2\\
+        &=\norm{\Sigma y-U^Tb}^2_2
+    \end{align*}
+    Lo siguiente es determinar qué $\bm{y}$ minimiza:
+    \begin{align*}
+        \norm{\Sigma y-U^Tb}^2_2=\norm{
+            \begin{pmatrix}
+                \sigma_1 & & & &\\
+                 &      \ddots   & & &\\
+                 & &\sigma_k & &\\
+                 & & &0&\\
+                 & & & &0\\
+            \end{pmatrix}\bm{y}-\bm{z}
+        }_2^2
+    \end{align*}
+    Elija:
+    \begin{align*}
+        y_i=\begin{cases}
+            z_i/\sigma_i, \textrm{   si }\sigma_i\neq 0\\
+            0, \textrm{   si }\sigma_i= 0\\
+        \end{cases}
+    \end{align*}
+    Entonces, la solución: $\bm{x}=V\bm{y}$.
+\end{solucion}
+\chapter{Métodos iterativos para sistemas lineales}
+\section{Introducción}
+\section{Iteraciones de punto fijo}
+\eje Sea $C\in\R^{n\times n}$ y sea $\textbf{c}\in\R^{n}$. Muestre que la función $F:\R^n\rightarrow \R^n$, definida por:
+
+\begin{center}
+    $F(\textbf{x}):=C\textbf{x}+\textbf{c}$, $\textbf{x}\in\R^{n} $
+\end{center}
+ es continua en $\R^{n}$
+ \begin{solucion}
+    Es evidente que la aplicación es lineal, también que el rango de la matriz es $n$, por lo tanto, la función $f$ es continua.
+ \end{solucion}
+\eje \textbf{Teorema del Punto Fijo de Banach.} Consideremos un espacio métrico $X=(X,d)$, donde $X\ne\emptyset$. Supongamos que $X$ es completo y sea $T:X\to X$ una contracción en $X$. Entonces $T$ tiene un punto fijo exactamente.
+
+\begin{solucion}
+Construiremos una sucesión $(x_n)$ y mostraremos que es de Cauchy, y luego mostraremos que su limite $x$ es punto fijo único de $T$.
+
+Sea $x_0\in X$ y la sucesión
+\[x_0,\quad x_1=Tx_0,\quad x_2=Tx_1=T^2x_0,\cdots,\quad x_n=T^nx_0,\cdots\]
+Entonces,
+\begin{align*}
+    d(x_{m+1},x_m)&=d(Tx_m,Tx_{m-1})\\
+    &\leq\alpha d(x_m,x_{m-1})\\
+    &=\alpha d(Tx_{m-1},Tx_{m-2})\\
+    &\leq\alpha^2d(x_{m-1},x_{m-2})\\
+    \cdots&\leq\alpha^md(x_1,x_0)
+\end{align*}
+Por la desigualdad triangular se tiene que
+\[d(x_m,x_n)\leq\alpha^m\frac{1-\alpha^{n-m}}{1-\alpha}d(x_0,x_1)\]
+\[d(x_m,x_n)\leq\frac{\alpha^m}{1-\alpha}d(x_0,x_1)\]
+Y como $0<\alpha<1$ y $d(x_0,x_1$ es fijo, $m$ puede ser tan grande como se quiera y el lado derecho se vuelve cada vez más pequeño. Por lo tanto $(x_n)$ es de Cauchy y que $x_n\to x$. Entonces
+\begin{align*}
+    d(x,Tx)&\leq d(x,x_m)+d(x_m,Tx)\\
+    &\leq d(x,x_m)+\alpha d(x_{m-1},x)
+\end{align*}
+Es posible hacer la última suma más pequeña que cualquier $\epsilon>0$. Se concluye que $d(x,Tx)=0$, entonces $x=Tx$, $x$ es punto fijo de $T$.
+
+Sea $Tx=x$ y $T\Bar{x}=\Bar{x}$, entonces
+\[d(x,\Bar{x}=d(Tx,T\Bar{x})\leq\alpha d(x,\Bar{x})\]
+por lo que $x=\Bar{x}$.
+\end{solucion}
+\eje Encuentre los puntos fijos (si tienen alguno) de cada una de las siguientes funciones $f:\R\to\R$, $g:\R^3\to\R^3$ y $h:\R\to\R$, definidas por:
+\begin{align*}
+    (a)\textrm{  }f(x)=x^3, & & (b)\textrm{  }g(\bm{x})=\begin{pmatrix}
+    3&2&1\\
+    2&3&2\\
+    1&2&3
+    \end{pmatrix}\bm{x}+\begin{pmatrix}
+    -1\\-2\\-1
+    \end{pmatrix},& & (c)\textrm{  }h(x)=e^x
+\end{align*}
+
+\begin{solucion}
+Se procederá a resolver cada uno de los incisos:
+\renewcommand{\labelenumii}{\roman{enumii}.}
+\begin{enumerate}
+    \item Para $f$:
+        \begin{align*}
+            f(x)=x^3=x\\
+            x^3-x=0 \\
+            x(x^2-1)=0 \\
+            x_1 = 0,&& x_2= 1,&& x_3= -1
+        \end{align*}
+        Por lo tanto 0, 1 y -1 son sus puntos fijos.
+    \item Para $g$:
+        \begin{align*}
+            \begin{pmatrix}
+                3&2&1\\
+                2&3&2\\
+                1&2&3
+            \end{pmatrix}\bm{x}+\begin{pmatrix}
+             -1\\-2\\-1
+            \end{pmatrix}&=\bm{x}
+        \end{align*}
+        Sea $\bm{x}=(x_1,x_2,x_3)^T$ entonces:
+        \begin{align*}
+            g(\bm{x})&=\bm{x}\\
+            \begin{pmatrix}
+                3&2&1\\
+                2&3&2\\
+                1&2&3
+            \end{pmatrix}\begin{pmatrix}
+                x_1\\x_2\\x_3
+            \end{pmatrix}+\begin{pmatrix}
+                -1\\-2\\-1
+            \end{pmatrix}&=\begin{pmatrix}
+                x_1\\x_2\\x_3
+            \end{pmatrix}
+        \end{align*}
+        simplificando:
+        \begin{align*}
+            \begin{cases}
+                3x_1+2x_2+x_3-1=x_1\\
+                2x_1+3x_2+2x_3-2=x_2\\
+                x_1+2x_2+3x_3-1=x_3
+            \end{cases}\\
+            \begin{cases}
+                2x_1+2x_2+x_3=1\\
+                2x_1+2x_2+2x_3=2\\
+                x_1+2x_2+2x_3=1
+            \end{cases}
+            \begin{cases}
+                x_1=1\\
+                x_2=-1\\
+                x_3=1
+            \end{cases}
+        \end{align*}
+        Por lo tanto: $\bm{x}=(1,-1,1)^T$ es un punto fijo de $g$
+        \item Para $h(x)=e^x = x$, pero $e^x = x$ no tiene soluciones reales, por lo tanto $h$ no tiene puntos fijos.\\
+\end{enumerate}
+\end{solucion}
+
+ \eje Considerar la función lineal afín $f:\R^3\rightarrow\R^3$ definida por
+\[ f(\bm{x})=C\bm{x}+c=\begin{pmatrix}
+\frac{1}{2} & -1&0\\
+0 & \frac{1}{2}&0\\
+1&1&\frac{1}{2}
+\end{pmatrix} \bm{x} + \begin{pmatrix}
+-1\\
+1\\
+2
+\end{pmatrix}\]
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+    \item ¿El método del punto fijo de Banach converge para la función $f$ dada? Dar una prueba de la respuesta.
+    \item Encontrar el punto fijo único de $f$. Mostrar el trabajo.
+\end{enumerate}
+\begin{solucion}
+A continuación, se procede a resolver cada inciso:
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+    \item Lo primero es determinar los valores propios de la matriz, al ser diagonal, $\lambda_{1,2,3}=\frac{1}{2}$.
+Entonces, $\rho(C)=\frac{1}{2}<1$. Por lo tanto, el método del punto fijo converge.
+\item Si $\hat{x}$ es un punto $f$, entonces $f(\hat{x})=C\hat{x}+c=\hat{x}$ o equivalentemente $(I-C)\hat{x}=c$. Se resuelve el siguiente sistema lineal:
+\begin{align*}
+    \begin{pmatrix}
+    \frac{3}{2} & 1 & 0& | & -1\\
+    0 & \frac{1}{2} &0& | & 1\\
+    -1&-1&\frac{1}{2}&|&2
+    \end{pmatrix} && \Rightarrow & & \begin{pmatrix}
+    1 & 0 & 0& | & \frac{2}{3}\\
+    0 & 1 &0& | & 2\\
+    0&0&1&|&4
+    \end{pmatrix}
+\end{align*}
+Entonces, el punto fijo $\hat{x}$ de $f$ es $\begin{pmatrix}
+\frac{2}{3}&
+2&
+4
+\end{pmatrix}^T$.
+\end{enumerate}
+\end{solucion}
+
+
+\eje  Encuentre los puntos fijos de las siguientes funciones:
+\begin{align*}
+    (a)\textrm{  }f(x)= sen(x), & & (b)\textrm{  } g(\bm{x})= \begin{pmatrix}
+        1&1\\
+        -1&2
+    \end{pmatrix}\bm{x} + \begin{pmatrix}
+        0\\
+        1
+    \end{pmatrix}
+\end{align*} 
+\begin{solucion}
+A continuación, se procede a resolver cada inciso:
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+    \item Si $sen(x)=x$ entonces $x=0$. Por lo tanto $0$ es punto fijo de $f$ y el único.
+    \item Partiendo de:
+    \begin{align*}
+        g(\bm{x})= \begin{pmatrix}
+            1&1\\
+            -1&2
+        \end{pmatrix}\bm{x} + \begin{pmatrix}
+            0\\
+            1
+        \end{pmatrix}
+    \end{align*}
+\end{enumerate}
+
+ Sea $x= \begin{pmatrix}
+ x_1&
+ x_2
+ \end{pmatrix}^T$, entonces:
+ \begin{align*}
+     \begin{pmatrix}
+         1&1\\
+         -1&2
+     \end{pmatrix}\begin{pmatrix}
+         x_1\\
+         x_2
+     \end{pmatrix} + \begin{pmatrix}
+         0\\
+         1
+     \end{pmatrix} = \begin{pmatrix}
+         x_1\\
+         x_2
+     \end{pmatrix}
+ \end{align*}
+Simplificando:
+\begin{align*}
+    \begin{cases}
+         x_1 + x_2 &= x_1\\
+         -x_1 + 2x_2 + 1 &= x_2
+     \end{cases}\Rightarrow \begin{cases}
+         x_2&=0\\
+         x_1&=1
+     \end{cases}
+\end{align*}
+ Por lo tanto el único punto fijo de $g(x)$ es $x=\begin{pmatrix}
+ 1&
+ 0
+ \end{pmatrix}^T$
+\end{solucion}
+
+\eje Considerar la función lineal afín $f:\R^2\rightarrow\R^2$ definida por
+\[ f(x)=Cx+c=\begin{pmatrix}
+\frac{1}{2} & \frac{1}{2}\\
+\frac{1}{2} & -\frac{1}{2}
+\end{pmatrix} x + \begin{pmatrix}
+-1\\
+2
+\end{pmatrix}\]
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+    \item ¿El método del punto fijo de Banach converge para la función $f$ dada? Dar una prueba de la respuesta.
+    \item Encontrar el punto fijo único de $f$. Mostrar el trabajo.
+\end{enumerate}
+\begin{solucion}
+A continuación, se procede a resolver cada inciso:
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+    \item Se procede a calcular los valores propios de $C$:
+    \begin{align*}
+    det(C-\lambda I)&=0\\
+    \begin{vmatrix}
+\frac{1}{2}-\lambda  & \frac{1}{2}\\
+\frac{1}{2} & \frac-{1}{2}-\lambda
+\end{vmatrix} &=0\\
+-\left(\frac{1}{2}-\lambda\right)^2-\frac{1}{4}&=0\\
+\lambda&=\frac{1}{2}\pm\frac{1}{2}i
+\end{align*}
+Entonces, $\rho(C)=\frac{1+i}{2}\cdot\frac{1-i}{2}=\frac{2}{4}=\frac{1}{2}<1$. Por lo tanto, el método del punto fijo converge.
+\item Si $\hat{x}$ es un punto fijo de $f$, entonces $f(\hat{x})=C\hat{x}+c=\hat{x}$ o equivalentemente $(I-C)\hat{x}=c$. Se resuelve este sistema lineal:
+\begin{align*}
+    \begin{pmatrix}
+    \frac{1}{2} & \frac{1}{2} & | & -1\\
+    \frac{1}{2} & \frac{3}{2} & | & 2
+    \end{pmatrix} && \Rightarrow & & \begin{pmatrix}
+    \frac{1}{2} & \frac{1}{2} & | & -1\\
+    0 & 1 & | & 3\\
+    \end{pmatrix}\\[8pt] \begin{pmatrix}
+    1 & 1 & | & -2\\
+    0 & 1 & | & 3\\
+    \end{pmatrix} && \Rightarrow & &\begin{pmatrix}
+    1 & 0 & | & -5\\
+    0 & 1 & | & 3\\
+    \end{pmatrix}
+\end{align*}
+Entonces, el punto fijo $\hat{x}$ de $f$ es $\begin{pmatrix}
+-5&
+3
+\end{pmatrix}^T$.
+\end{enumerate}
+\end{solucion}
+\section{Iteraciones de Jacobi y Gauss-Seidel}
+\eje ¿Cuál de las siguientes matrices son estrictamente fila diagonal dominante?
+\begin{align*}
+    A&=\begin{pmatrix}
+    3 & 1 & -1\\
+    1 & 2 & -1\\
+    0 & -1 & 5
+    \end{pmatrix} , & B&=\begin{pmatrix}
+    5 & 2 & -2\\
+    0 & 3 & -2\\
+   -1 & 1 & 3
+   \end{pmatrix}, & C&=\begin{pmatrix}
+   2 & \frac{1}{2} & -1\\
+  -1 & \frac{5}{2} & 1\\
+  \frac{3}{2} & -1 & \frac{1}{2}
+  \end{pmatrix}
+\end{align*}
+
+\begin{solucion}
+Se procede a realizar una validación fila por fila
+
+\begin{align*}
+    A=\begin{pmatrix}
+    3 & 1 & -1\\
+    1 & 2 & -1\\
+    0 & -1 & 5
+    \end{pmatrix}
+\end{align*}
+No cumple ya que para la fila 2 
+
+\begin{align*}
+    |2|\not{>} |1| + |-1|
+\end{align*}
+Por lo tanto, no es estrictamente diagonal dominante.
+
+
+\begin{align*}
+    B=\begin{pmatrix}
+    5 & 2 & -2\\
+    0 & 3 & -2\\
+   -1 & 1 & 3
+   \end{pmatrix}
+\end{align*}
+Si cumple 
+\begin{align*}
+   |5|>|2|+|-2|\\
+   |3|>|0|+|-2|\\
+   |3|>|-1|+|1|
+\end{align*}
+Por lo tanto, es estrictamente diagonal dominante.
+
+\begin{align*}
+C=\begin{pmatrix}
+   2 & \frac{1}{2} & -1\\
+  -1 & \frac{5}{2} & 1\\
+  \frac{3}{2} & -1 & \frac{1}{2}
+  \end{pmatrix}
+\end{align*}
+No cumple
+
+\begin{align*}
+    |2|>|\frac{1}{2}| + |-1|=1.5\\
+    |2.5|>|-1|+|1|=2\\
+    |0.5|\not{>}|\frac{3}{2}|+|-1|=1.5
+\end{align*}
+Por lo tanto, no es estrictamente diagonal dominante.
+\end{solucion}
+
+\eje  Dado el sistema lineal:
+\begin{align*}
+    Ax=b, & & A= \begin{pmatrix}
+        2&0&-1\\
+        0&-2&1\\
+        1&1&3
+    \end{pmatrix},& & b= \begin{pmatrix}
+        1\\
+        -1\\
+        5
+    \end{pmatrix}
+\end{align*}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+    \item Calcule la solución del sistema.
+    \item Verifique que la matriz $A$ es estrictamente diagonal dominante.
+\end{enumerate}
+ 
+ \begin{solucion}
+ A continuación, se procede a resolver cada inciso:
+ \begin{enumerate}
+    \item Calculando la solución del sistema:
+    \begin{align*}
+        \begin{matrix}
+            F_1 :\\
+            F_2: \\
+            F_3:
+        \end{matrix} \begin{pmatrix}
+            2 & 0 & -1 |& 1 \\
+            0 & -2 & 1 |& -1 \\
+            1 & 1 & 3  |& 5 
+        \end{pmatrix}& & F_3 \rightarrow F_3 - \frac{1}{2} F_1 
+    \end{align*}
+    Luego,
+    \begin{align*}
+        \begin{pmatrix}
+            2 & 0 & -1 |& 1 \\
+            0 & -2 & 1 |& -1\\
+            0 & 1 & \frac{7}{2} |& \frac{9}{2}
+        \end{pmatrix}  & & F_3 \rightarrow F_3 + \frac{1}{2} F_2 
+    \end{align*}
+    Simplificando,
+    \begin{align*}
+        \begin{pmatrix}
+            2 & 0 & -1 |& 1 \\
+            0 & -2 & 1 |& -1 \\
+            0 & 0 & 4 |& 4
+        \end{pmatrix} & & F_3 \rightarrow F_3 + \frac{1}{2} F_2 
+    \end{align*}
+    Por ultimo,
+    \begin{align*}
+        \begin{cases}
+            x_1&=1\\
+            x_2&=1\\
+            x_3&=1
+        \end{cases}
+    \end{align*}
+    Por lo tanto, $\bm{x}=(1,1,1)^T$ es la solución al sistema.
+    \item Verificando que la matriz $A$ es estrictamente diagonal dominante:
+    \begin{align*}
+        \abs{a_{11}} = \abs{2 } = 2 &> \abs{0 } + \abs{-1 } = 1\\
+        \abs{a_{22}} = \abs{-2 } = 2 &> \abs{0 } + \abs{1 } = 1 \\
+        \abs{a_{33}} = \abs{3 } =3 &> \abs{1 } + \abs{1 } = 2
+    \end{align*}
+    Por lo tanto $A$ es estrictamente diagonal dominante.
+\end{enumerate}
+
+
+ \end{solucion}
+
+\eje Considerar el sistema lineal
+\begin{align*}
+    Ax=b, && donde && A=\begin{pmatrix}
+    2 & 0 & 0\\
+    0 & 2 & -1\\
+    0 & -1 & 2
+    \end{pmatrix}, && b=\begin{pmatrix}
+    2\\
+    1\\
+    1
+    \end{pmatrix}
+\end{align*}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+    \item Verificar que la matriz $A$ es estrictamente diagonal dominante por filas.
+    \item Para el vector inicial $x^{(0)}=0=(0,0,0)^T$, calcular las primeras cuatro aproximaciones $x^{(j)}$, para $j=1,2,3,4$, del método de Jacobi.
+\end{enumerate}
+\begin{solucion}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+    \item Verificando que la matriz $A$ es estrictamente diagonal dominante por filas.
+    \begin{align*}
+        \abs{a_{1,1}}=2>\abs{0}+\abs{0}=0\\
+        \abs{a_{2,2}}=2>\abs{0}+\abs{-1}=1\\
+        \abs{a_{3,3}}=2>\abs{0}+\abs{-1}=1
+    \end{align*}
+     así que $A$ es estrictamente diagonal dominante por filas.
+    \item Sea $x=\begin{pmatrix}
+    x_1&
+    x_2&
+    x_3
+    \end{pmatrix}^T$:
+    \[\begin{cases*}
+        2x_1=2\\
+        2x_2-x_3=1\\
+        -x_2+2x_3=1
+    \end{cases*}\Rightarrow\begin{cases*}
+    x_1=1\\
+    x_2=\frac{1}{2}+\frac{1}{2}x_3\\
+    x_3=\frac{1}{2}+\frac{1}{2}x_2
+    \end{cases*}\]
+    Entonces, la primera aproximación es:
+    \begin{align*}
+        \begin{rcases*}
+        x_1^{(1)}=1\\
+    x_2^{(1)}=\frac{1}{2}+\frac{1}{2}(0)=\frac{1}{2}\\
+    x_3^{(1)}=\frac{1}{2}+\frac{1}{2}(0)=\frac{1}{2}\end{rcases*} && \Rightarrow && x^{(1)}=\begin{pmatrix}
+    1\\
+    \frac{1}{2}\\
+    \frac{1}{2}
+    \end{pmatrix}.
+    \end{align*}
+    La segunda aproximación es:
+    \begin{align*}
+        \begin{rcases*}
+        x_1^{(2)}=1\\
+    x_2^{(2)}=\frac{1}{2}+\frac{1}{2}\left(\frac{1}{2}\right)=\frac{3}{4}\\
+    x_3^{(2)}=\frac{1}{2}+\frac{1}{2}\left(\frac{1}{2}\right)=\frac{3}{4}\end{rcases*} && \Rightarrow && x^{(2)}=\begin{pmatrix}
+    1\\
+    \frac{3}{4}\\
+    \frac{3}{4}
+    \end{pmatrix}.
+    \end{align*}
+    La tercera aproximación es:
+    \begin{align*}
+        \begin{rcases*}
+        x_1^{(3)}=1\\
+    x_2^{(3)}=\frac{1}{2}+\frac{1}{2}\left(\frac{3}{4}\right)=\frac{7}{8}\\
+    x_3^{(3)}=\frac{1}{2}+\frac{1}{2}\left(\frac{3}{4}\right)=\frac{7}{8}\end{rcases*} && \Rightarrow && x^{(3)}=\begin{pmatrix}
+    1\\
+    \frac{7}{8}\\
+    \frac{7}{8}
+    \end{pmatrix}.
+    \end{align*}
+    La cuarta aproximación es:
+    \begin{align*}
+        \begin{rcases*}
+        x_1^{(4)}=1\\
+    x_2^{(4)}=\frac{1}{2}+\frac{1}{2}\left(\frac{7}{8}\right)=\frac{15}{16}\\
+    x_3^{(4)}=\frac{1}{2}+\frac{1}{2}\left(\frac{7}{8}\right)=\frac{15}{16}\end{rcases*} && \Rightarrow && x^{(4)}=\begin{pmatrix}
+    1\\
+    \frac{15}{16}\\
+    \frac{15}{16}
+    \end{pmatrix}.
+    \end{align*}
+\end{enumerate}
+\end{solucion}
+
+\eje Considere el sistema lineal
+\[Ax=b,\quad
+A=\begin{pmatrix}
+2 & 0 & 1\\
+0 & 1 & 0\\
+1 & 0 & 2
+\end{pmatrix},\quad
+b=\begin{pmatrix}
+1\\
+1\\
+-1
+\end{pmatrix}\]
+\begin{enumerate}
+    \item Muestre que $A$ es definida positiva
+    \item Calcule la solución $\hat{x}$ de $Ax=b$
+\end{enumerate}
+
+\begin{solucion}
+\begin{enumerate}
+    \item Para mostrar que $A$ es definida positiva, unicamente es necesario determinar sus valores propios, es fácil determinar que son: $\lambda_1=1$ y $\lambda_2=2$, ya que son no negativos, $A$ es definida positiva.
+    \item Se tiene el sistema de ecuaciones
+    \begin{align*}
+        \begin{cases}
+             2x_1+x_3=1\\
+             x_2=1\\
+             x_1+2x_3=-1
+        \end{cases}
+    \end{align*}
+    luego, las soluciones son
+    \[x_1=1,\quad x_2=1,\quad x_3=-1\]
+    
+\end{enumerate}
+\end{solucion}
+
+\eje Considerar el sistema lineal
+\begin{align*}
+    A\bm{x}=b, && donde && A=\begin{pmatrix}
+    2 & 0 & 0\\
+    0 & 2 & -1\\
+    0 & -1 & 2
+    \end{pmatrix}, && \bm{b}=\begin{pmatrix}
+    2\\
+    1\\
+    1
+    \end{pmatrix}
+\end{align*}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+    \item Mostrar que la matriz $A$ es definida positiva.
+    \item Calcular la solución $\bm{\hat{x}}$ de $A\bm{x}=b$.
+\end{enumerate}
+\begin{solucion}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+    \item Lo primero es determinar sus valores propios
+    \begin{align*}
+        det(A-\lambda I)&=0\\
+        \begin{pmatrix}
+        2-\lambda&0&0\\
+        0&2-\lambda&-1\\
+        0&-1&2-\lambda
+        \end{pmatrix}&=0\\
+        -\lambda^3+6\lambda-11\lambda+6&=0
+    \end{align*}
+    Al encontrar las raices del polinomio anterior se tiene que: $\lambda_1=1,\lambda_2=2,\lambda_3=3$. Son positivos, por lo tanto $A$ es definida positiva.
+    \item Calculando la solución $\hat{x}$ de $A\bm{x}=b$:
+    \begin{align*}
+        &\begin{cases*}
+        2x_1=2\\
+        2x_2-x_3=1\\
+        -x_2+2x_3=1
+        \end{cases*}& &\Rightarrow & &\begin{cases*}
+        x_1=1\\
+        4x_2-2x_3=2\\
+        -x_2+2x_3=1
+        \end{cases*}\\&\Rightarrow\begin{cases*}
+        x_1=1\\
+        3x_2=3\\
+        -x_2+2x_3=1
+        \end{cases*} & &\Rightarrow&&\begin{cases*}
+        x_1=1\\
+        x_2=1\\
+        x_3=0
+        \end{cases*}\\
+        && &\Rightarrow\hat{x}=\begin{pmatrix}
+        1\\
+        1\\
+        0
+        \end{pmatrix} &&
+    \end{align*}
+\end{enumerate}
+\end{solucion}
+\section{Relajación}
+\chapter{El método del gradiente conjugado}
+\section{El algoritmo genérico de minimización}
+\section{Minimización con la búsqueda del A-Conjugado}
+\section{Convergencia del método del gradiente conjugado}
+\chapter{Cálculo de Eigenvalores}
+\section{Técnicas básicas de localización}
+\section{El método de la potencia}
+\section{La iteración inversa}
+\section{El método de Jacobi}
+\section{La reducción Householder a la forma Hessenberg}
+\section{El algoritmo QR}
+\begin{thebibliography}{9}
+\bibitem{hesse} 
+Hesse, Kerstin
+\textit{Lecture notes on Numerical Linear Algebra}. 
+The University of Sussex - Departament of Mathematics, 2010.
+
+\bibitem{axler} 
+Axler, Sheldon
+\textit{Linear Algebra Done Right}. 
+Springer
+
+\bibitem{horn} 
+Horn, Roger y Johnson, Charles
+\textit{Matrix Analysis}. 
+Cambridge University Press
+\end{thebibliography}
 
 \end{document}
